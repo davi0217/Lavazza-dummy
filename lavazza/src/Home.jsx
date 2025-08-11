@@ -40,7 +40,7 @@ export  function Home() {
   return <>
 
       <div className=" absolute  bg-[url('./assets/home_img/home-background.avif')] text-center bg-no-repeat w-full bg-size-[auto_800px] bg-right lg:bg-size-[auto_800px] lg:bg-center h-200">
-        <div className={`flex fixed ${scrolled?"bg-white text-blue-900":"text-white"} transition-colors ease-in flex-nowrap w-full items-center h-20 z-20 top-0`}>
+        <div className={`flex fixed ${scrolled?"bg-white text-blue-900":"text-white"} transition-colors ease-in flex-nowrap w-full items-center h-20 z-[30] top-0`}>
           {!scrolled && <div className={`  left-2 sm:left-4 absolute h-auto`}>
 
             <img className=" w-20  sm:min-w-35 sm:max-w-35  z-10  " src={lavazza} alt="" />
@@ -227,27 +227,6 @@ export  function Home() {
      <section className="lg:hidden w-full flex justify-center h-auto">
 
       <article className="w-8/10  h-100 relative">
-         {/*  <div className=" w-8/10 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20  bg-no-repeat bg-cover bg-center bg-stone-500 bg-blend-multiply bg-[url(./assets/home_img/coffee-pot.png)] text-white flex flex-col p-5 h-4/5  rounded-xl">
-          <p className="font-[Corinthia] text-4xl font-bold">Blend for better</p>
-          <p className="text-xl font-extrabold mb-6">Descubre nuestras iniciativas sociales y medioambientales</p>
-          <a className="self-end font-bold tracking-widest hover:underline underline-offset-4 " href="">DESCUBRIR MÁS &gt;</a>
-          </div>
-          <div className=" z-10 w-6/10   absolute left-2/5 top-1/2 -translate-x-3/5 -translate-y-1/2  bg-no-repeat bg-cover bg-center bg-stone-500 bg-blend-multiply bg-[url(./assets/home_img/coffe-plant.jpg)] text-white flex flex-col p-5 h-8/12  rounded-xl">
-          <p className="font-[Corinthia] text-4xl font-bold">Blend for better</p>
-          <p className="text-xl font-extrabold mb-6">Descubre nuestras iniciativas sociales y medioambientales</p>
-          <a className="self-end font-bold tracking-widest hover:underline underline-offset-4 " href="">DESCUBRIR MÁS &gt;</a>
-          </div>
-          <div className=" z-10 w-6/10  absolute left-4/5 top-1/2 -translate-x-12/16 -translate-y-1/2  bg-no-repeat bg-cover bg-center bg-stone-500 bg-blend-multiply bg-[url(./assets/home_img/coffee-shop.jpg)] text-white flex flex-col p-5 h-8/12  rounded-xl">
-          <p className="font-[Corinthia] text-4xl font-bold">Blend for better</p>
-          <p className="text-xl font-extrabold mb-6">Descubre nuestras iniciativas sociales y medioambientales</p>
-          <a className="self-end font-bold tracking-widest hover:underline underline-offset-4 " href="">DESCUBRIR MÁS &gt;</a>
-          </div>
-
-          <div className="text-blue-500 flex gap-10 justify-center absolute bottom-0 w-full text-center">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-          </div> */}
 
           <Slider components={[
               {
@@ -274,22 +253,188 @@ export  function Home() {
      </section>
      </aside>
 
+          <aside className="absolute w-full p-5 top-1370 sm:top-1310 md:top-1050 h-auto ">
 
+            <h1 className=" md:text-4xl text-2xl font-extrabold m-auto md:text-blue-950 w-2/3 mb-10 text-center  ">Explora la experiencia Lavazza</h1>
+
+            <article className=" hidden  lg:grid  lg:grid-cols-3 lg:grid-rows-2 lg:gap-4 lg:w-8/10 lg:h-130 lg:m-auto">
+                        <div className="col-span-2 row-span-2  rounded-3xl bg-no-repeat text-white flex flex-col justify-end pb-5 pr-3 pl-5 bg-stone-500 bg-blend-multiply bg-size-[1500px] bg-right bg-[url(./assets/home_img/home-background.avif)]">
+                        <p className="text-4xl font-extrabold mb-6">El placer nos hace humanos</p>
+                  <a className="self-end text-right  font-bold tracking-widest hover:underline underline-offset-4 " href="">VER EL VÍDEO &gt;</a>
+                        </div>
+                        <div className="col-span-1 row-span-1 rounded-3xl flex flex-col pt-10 pl-2 text-white content-center pr-2  bg-stone-500 bg-blend-multiply bg-[url(./assets/home_img/third-block.jpg)]  bg-size-[400px] bg-no-repeat bg-center ">
+                            <p className="font-[Corinthia] text-3xl font-bold">Calendario 2023</p>
+                  <p className="text-md font-extrabold mb-6">Descubre el calendario de 2023 de Alex Prager</p>
+                  <a className="self-end text-right  font-bold tracking-widest hover:underline underline-offset-4 " href="">VER EL VÍDEO &gt;</a>
+                        </div>
+                        <div className="col-span-1 row-span-1 rounded-3xl flex flex-col pr-2 pl-2 text-white justify-center bg-stone-500 bg-blend-multiply bg-[url(./assets/home_img/second-block.png)]  bg-size-[700px] bg-no-repeat bg-center">
+                              <p className="font-[Corinthia] text-3xl font-bold">Ayuda</p>
+                  <p className="text-md font-extrabold mb-6">Siempre a tu servicio</p>
+                  <a className="self-end text-right  font-bold tracking-widest hover:underline underline-offset-4 " href="">VER EL VÍDEO &gt;</a>
+                        
+                        </div>
+
+            </article>
+            
+            <article className="lg:hidden relative w-full h-130  m-auto">
+            <Slider components={[
+              {
+                "title":" ",
+                "subtitle":"El placer nos hace humanos",
+                "boxUrl":"./assets/home_img/home-background.avif"
+              },
+              {
+                "title":"Calendario 2023",
+                "subtitle":"Descubre el calendario de 2023 de Alex Prager",
+                "boxUrl":"./assets/home_img/third-block.jpg"
+              },
+              {
+                "title":"Ayuda",
+                "subtitle":"Siempre a tu servicio",
+                "boxUrl":"./assets/home_img/second-block.png"
+              },
+            ]} addClasses={
+              {"widthLeft":"w-3/10 -translate-x-3/5",
+              "widthCenter":"w-5/10 -translate-x-1/2",
+              "widthRight":"w-3/10 -translate-x-52",
+              "bgSize":"bg-size-[1000px]",
+              "bgPosition":"bg-right",
+              "textPosition":"justify-end"
+              }
+            }   />
+
+            </article>
+
+          </aside>
+
+        <section className=" absolute text-white flex flex-col justify-center items-center w-full p-5 top-1540 sm:top-1480 md:top-1220 h-150 bg-stone-500 bg-blend-multiply bg-size-[1800px] bg-center bg-[url(./assets/home_img/background-nature.jpg)]">
+        
+          <p className="font-[Corinthia] text-5xl md:text-6xl">Un viaje lleno de sabor</p>
+          <p className="font-extrabold text-center text-3xl mt-10 w-1/3 md:w-2/3 ">Amazonia: la última temporada</p>
+          <p className=" font-semibold text-xl text-center w-1/3 md:w-2/3 mt-10 ">Una declaración de amor del agua a la selva amazónica y un llamamiento a su protección.</p>
+          <button className=" mt-15 rounded-3xl border-1 p-3 w-50 ">Reproducir vídeo</button>
+        </section>
+
+        <section className="absolute overflow-hidden w-full sm:p-5 top-1700 sm:top-1640 md:top-1380 h-auto pt-2">
+
+          <p className="text-blue-950 font-light text-sm mb-3 ">*Lavazza compensa las emisiones provocadas por estos productos para lograr un impacto cero en emisiones de CO₂. </p>
+          <article className="bg-stone-200  w-auto sm:gap-5 gap-5  divide-stone-50  divide-x-2 pt-10 pb-10 flex flex-row justify-center items-center">
+
+            <div className="flex flex-col h-65 sm:h-43  gap-2 min-w-20  w-1/5 ">
+              <div className=" w-full min-h-22 sm:flex sm:gap-3 sm:min-h-15 sm:items-start  sm:w-8/9">
+                <i className="fa-solid fa-headphones text-xl text-blue-950"></i>
+              <p className="text-sm font-extrabold text-blue-950 tracking-wide">SERVICIO AL CLIENTE</p>
+              </div>
+              <p className="text-xs w-7/8 text-blue-950">¿Necesitas ayuda? Consulta nuestras preguntas frecuentes o ponte en contacto con nosotros.</p>
+
+
+            </div>
+            <div className="flex flex-col h-65 sm:h-43 gap-2 min-w-20  w-1/5">
+              <div className="  w-full min-h-22 sm:flex sm:gap-3 sm:items-start sm:min-h-15  sm:w-8/9">
+                            <i class="fa-solid fa-location-dot text-xl text-blue-950"></i>              
+                            <p className="text-sm font-extrabold text-blue-950 tracking-wide">FLAGSHIP STORE</p>
+              </div>
+              <p className="text-xs w-7/8 text-blue-950">Disfruta de la experiencia Lavazza auténtica en nuestras tiendas.</p>
+
+
+            </div>
+
+
+          </article>
+        
+        
+        </section>
+
+
+            <footer className="absolute top-1800 sm:top-1720 md:top-1450 w-full   ">
+
+                <Footer/>
+
+            </footer>
   
   </>
   
 }
 
-function Slider({components}){
+function Footer(){
+
+
+  return <>
+
+     <section className="w-full bg-blue-950 h-auto">
+
+      <div className="h-20 w-full flex items-start text-left pt-3 pl-10">
+        <div className="flex flex-col items-center gap-2">
+        <img className="w-40" src={lavazza} alt="" />
+        <p className="text-xs text-white tracking-widest font-bold">VIGO,SPAGNA,2025</p>
+        </div>
+      </div>
+      <div className="w-full text-white grid grid-cols-5 p-10">
+
+        <div className="col-span-1 pr-8">
+<h1 className=" tracking-widest font-extrabold mb-4 text-sm">PRODUCTOS</h1>
+<p className="font-bold text-[14px] mb-3">Café</p>
+<p className="font-normal text-[12px] mb-2">Granos de café</p>
+<p className="font-normal text-[12px] mb-2">Café molido</p>
+<p className="font-normal text-[12px] mb-2">Cápsulas A Modo Mio</p>
+<p className="font-normal text-[12px] mb-2">Cápsulas Lavazza compatibles con las máquinas Nespresso*</p>
+<p className="font-normal text-[12px] mb-2">Original</p>
+<p className="font-normal text-[12px] mb-3">Nescafè® Dolce Gusto®</p>
+<p className="font-bold text-[14px] mb-3">Máquinas de café</p>
+
+        </div>
+        <div className="col-span-1 ">
+<h1 className=" tracking-widest font-extrabold mb-4  text-sm">LAVAZZA STORIES</h1>
+<h1 className=" tracking-widest font-extrabold mb-4 text-sm">SOSTENIBILIDAD</h1>
+<h1 className=" tracking-widest font-extrabold text-sm">LAVAZZA WORLD</h1>
+
+        </div>
+        <div className="col-span-1 pr-8">
+<h1 className=" tracking-widest font-extrabold mb-4 text-sm">AYUDA</h1>
+<h1 className=" tracking-widest font-extrabold mb-4 text-[12px]">PREGUNTAS FRECUENTES</h1>
+<h1 className=" tracking-widest font-extrabold text-[12px]">Contacto</h1>
+
+        </div>
+        <div className="col-span-1 pr-8">
+<h1 className=" tracking-widest font-extrabold mb-4 text-sm">NOTAS LEGALES</h1>
+<h1 className=" tracking-widest font-extrabold mb-4 text-[12px]">Condiciones legales</h1>
+<h1 className=" tracking-widest font-extrabold text-[12px]">Bases legales y política privacidad sorteo entradas MMO</h1>
+
+        </div>
+        <div className="col-span-1">
+<h1 className=" tracking-widest font-extrabold text-sm">PRODUCTOS</h1>
+
+        </div>
+
+
+
+      </div>
+
+
+
+     </section>
+  
+  
+  </>
+}
+
+
+
+
+//al slider hay que pasarle el width y el translate-x, translate-y y height se quedan igual
+//hay que pasarle el posicionamiento del texto (justify) y el bg-size y bg-position
+//el height se regula en el elemento padre, al que hay que poner como relative
+
+function Slider({components, addClasses={}}){
 
   const [boxes, setBoxes]=useState(components)
   const [positions, setPositions]=useState({
 
-    "left":"z10 w-6/10 h-8/12 left-2/5 top-1/2 -translate-x-3/5 -translate-y-1/2",
+    "left":` ${addClasses.widthLeft?addClasses.widthLeft:"w-6/10 -translate-x-3/5 "}   z10  h-8/12 left-2/5 top-1/2  -translate-y-1/2`,
 
-    "center":"left-1/2 h-4/5  w-8/10 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20",
+    "center":` ${addClasses.widthCenter?addClasses.widthCenter:"w-8/10 -translate-x-1/2"}  left-1/2 h-4/5   top-1/2  -translate-y-1/2 z-20`,
 
-    "right":"z10 left-4/5 h-8/12 w-6/10 top-1/2 -translate-x-12/16 -translate-y-1/2"
+    "right":`${addClasses.widthRight?addClasses.widthRight:"w-6/10 -translate-x-12/16"}  z10 left-4/5 h-8/12  top-1/2  -translate-y-1/2`
 
   })
 
@@ -321,9 +466,9 @@ function Slider({components}){
 
           } className={` ${
             giveClass(0)
-          }    absolute  transition-all ease-in-out duration-500 bg-no-repeat bg-cover bg-center bg-stone-500 bg-blend-multiply bg-[url(${boxes[0].boxUrl})] text-white flex flex-col p-5  rounded-xl`}>
+          }    absolute  transition-all ease-in-out duration-500 bg-no-repeat ${addClasses.bgSize?addClasses.bgSize:"bg-cover"} ${addClasses.bgPosition?addClasses.bgPosition:"bg-center"} bg-stone-500 bg-blend-multiply bg-[url(${boxes[0].boxUrl})] text-white flex flex-col p-5 ${addClasses.textPosition?addClasses.textPosition:" "} rounded-xl`}>
           <p className="font-[Corinthia] text-4xl font-bold">{boxes[0].title}</p>
-          <p className="text-xl font-extrabold mb-6">{boxes[0].subtitle}</p>
+          <p className="text-2xl font-extrabold mb-6">{boxes[0].subtitle}</p>
           <a className="self-end font-bold tracking-widest hover:underline underline-offset-4 " href="">DESCUBRIR MÁS &gt;</a>
           </div>
   
@@ -333,9 +478,9 @@ function Slider({components}){
 
           }  className={`${
           giveClass(1)
-         }  absolute transition-transform ease-in-out duration-500  bg-no-repeat bg-cover bg-center bg-stone-500 bg-blend-multiply bg-[url(${boxes[1].boxUrl})] text-white flex flex-col p-5   rounded-xl`}>
+         }  absolute transition-all ease-in-out duration-500  bg-no-repeat bg-cover bg-center bg-stone-500 bg-blend-multiply bg-[url(${boxes[1].boxUrl})] text-white flex flex-col ${addClasses.textPosition?addClasses.textPosition:" "} p-5   rounded-xl`}>
           <p className="font-[Corinthia] text-4xl font-bold">{boxes[1].title}</p>
-          <p className="text-xl font-extrabold mb-6">{boxes[1].subtitle}</p>
+          <p className="text-2xl font-extrabold mb-6">{boxes[1].subtitle}</p>
           <a className="self-end font-bold tracking-widest hover:underline underline-offset-4 " href="">DESCUBRIR MÁS &gt;</a>
           </div>
          
@@ -346,27 +491,25 @@ function Slider({components}){
 
           }  className={` ${
             giveClass(2)
-          } absolute  transition-transform ease-in-out duration-500  bg-no-repeat bg-cover bg-center bg-stone-500 bg-blend-multiply bg-[url(${boxes[2].boxUrl})] text-white flex flex-col p-5   rounded-xl`}>
+          } absolute  transition-all ease-in-out duration-500  bg-no-repeat bg-cover bg-center bg-stone-500 bg-blend-multiply bg-[url(${boxes[2].boxUrl})] text-white flex flex-col p-5  ${addClasses.textPosition?addClasses.textPosition:" "} rounded-xl`}>
           <p className="font-[Corinthia] text-4xl font-bold">{boxes[2].title}</p>
-          <p className="text-xl font-extrabold mb-6">{boxes[2].subtitle}</p>
+          <p className="text-2xl font-extrabold mb-6">{boxes[2].subtitle}</p>
           <a className="self-end font-bold tracking-widest hover:underline underline-offset-4 " href="">DESCUBRIR MÁS &gt;</a>
           </div>
 
-          <div className="text-blue-500 flex gap-10 justify-center absolute bottom-0 w-full text-center">
+          <div className="flex gap-10 justify-center absolute bottom-0 w-full text-center">
             <button onClick={()=>{
               handleCurrent(0)
-            }}><i className={`fa-solid fa-circle ${current==0?"text-blue-900":"text-blue-500"}`}></i></button>
+            }}><i className={`fa-solid fa-circle text-xs ${current==0?"text-blue-900":"text-blue-500"} cursor-pointer`}></i></button>
             <button onClick={()=>{
               handleCurrent(1)
-            }}><i className={`fa-solid fa-circle ${current==1?"text-blue-900":"text-blue-500"}`}></i></button>
+            }}><i className={`fa-solid fa-circle text-xs cursor-pointer ${current==1?"text-blue-900":"text-blue-500"}`}></i></button>
             <button onClick={()=>{
               handleCurrent(2)
-            }}><i className={`fa-solid fa-circle ${current==2?"text-blue-900":"text-blue-500"}`}></i></button>
+            }}><i className={`fa-solid fa-circle text-xs cursor-pointer ${current==2?"text-blue-900":"text-blue-500"}`}></i></button>
           </div>
 
 
 
 </>
-
-
 }
