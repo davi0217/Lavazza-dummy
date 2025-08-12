@@ -107,90 +107,12 @@ export  function Home() {
      </article>
     </section>
 
+      <section className="absolute top-560 sm:top-500 w-full">
 
-     <section className={`bg-[url("./assets/home_img/background-coffee-1.jpg")] bg-size-[1500px] bg-no-repeat   absolute pt-15 w-full overflow-hidden h-240 top-560 sm:top-500 flex flex-col items-center`}>
-      
-      <div className="p-5 sm:w-auto  w-100 ml-[-10px]  flex justify-around gap-3     sm:flex sm:justify-center sm:gap-4">
-          
-          <div>
-            <img className="w-20 border-1 p-1 rounded-full"src={block3} alt="" />
-            <p className="w-20 text-center mt-2 text-xs font-bold text-white">Qualità Oro</p>
-          </div>
-          <div>
-            <img className="w-20 border-1 p-1 rounded-full"src={block3} alt="" />
-            <p className="w-20 text-center mt-2 text-xs font-bold text-white">Qualità Oro</p>
-          </div>
-          <div>
-            <img className="w-20 border-1 p-1 rounded-full"src={block3} alt="" />
-            <p className="w-20 text-center mt-2 text-xs font-bold text-white">Qualità Oro</p>
-          </div>
-          <div>
-            <img className="w-20 border-1 p-1 rounded-full"src={block3} alt="" />
-            <p className="w-20 text-center mt-2 text-xs font-bold text-white">Qualità Oro</p>
-          </div>
-          <div>
-            <img className="w-20 border-1 p-1 rounded-full"src={block3} alt="" />
-            <p className="w-20 text-center mt-2 text-xs font-bold text-white">Qualità Oro</p>
-          </div>
+        <Collection/>
 
-      </div>
 
-      <p className='font-[Corinthia] mt-5 text-4xl text-white w-1/3 text-center md:text-left  '>Collection</p>
-      <h1 className="text-white mb-4 font-extrabold text-3xl">Qualità Oro</h1>
-      <h2 className="text-white w-2/3 sm:w-1/3 text-center font-semibold ">Descubre cada mañana la excelencia del blend y saborea la sinfonía perfecta en una taza en casa.</h2>
-        <img className="w-100 mt-15" src={coffeeProduct1} alt="" />
-        <button className=" bg-white  text-blue-950  tracking-widest font-extrabold text-sm p-3 w-60 pt-5 pb-5 mt-10 rounded-4xl">DESCUBRIR MÁS</button>
-
-     </section>
-
-    <aside className="overflow-hidden w-full  h-auto md:h-auto absolute top-790 md:pt-20 md:pb-30  sm:top-720 z-10">
-     <div className="w-full md:min-w-300  z-10 md:h-100 h-auto flex md:flex-row flex-col items-center md:justify-center md:gap-3 gap-0 ">
-
-      <div className="w-90 min-w-90 h-130 rounded-md bg-stone-50 flex flex-col items-center p-5 ">
-        <img className="w-50 mt-10"src={coffeeProduct1} alt="" />
-        <p className="text-sm text-blue-950 tracking-widest mb-5">GRANOS DE CAFÉ</p>
-        <p className="text-xl text-blue-950 font-extrabold mb-2">Qualitá Oro en Grano</p>
-        <p className="text-xs text-blue-950 font-semibold">Intensidad 7/10</p>    
-        <div className="w-19/20 bg-amber-100 rounded-xl mt-10 h-27 pt-8 pl-5">
-            <div className="w-1/3 flex items-center gap-2 bg-white rounded-xl h-10 text-blue-950 font-bold text-left pl-2" >
-            <i className="fa-solid fa-box text-blue-950"></i>
-            <span className=" text-blue-950 " value=""> 500g</span>        
-            </div>
-        </div>
-            <button className="w-19/20 bg-blue-950 hover:bg-blue-900 transition-colors ease-in text-white rounded-4xl mt-5 p-2 font-extrabold tracking-widest text-sm">COMPRA ONLINE </button>
-
-      </div>
-      <div className="w-90 min-w-90 h-130 rounded-md bg-stone-50 flex flex-col items-center p-5 ">
-        <img className="w-50 mt-10"src={coffeeProduct1} alt="" />
-        <p className="text-sm text-blue-950 tracking-widest mb-5">GRANOS DE CAFÉ</p>
-        <p className="text-xl text-blue-950 font-extrabold mb-2">Qualitá Oro en Grano</p>
-        <p className="text-xs text-blue-950 font-semibold">Intensidad 7/10</p>    
-        <div className="w-19/20 bg-amber-100 rounded-xl mt-10 h-27 pt-8 pl-5">
-            <div className="w-1/3 flex items-center gap-2 bg-white rounded-xl h-10 text-blue-950 font-bold text-left pl-2" >
-            <i class="fa-solid fa-box text-blue-950"></i>
-            <span className=" text-blue-950 " value=""> 500g</span>        
-            </div>
-        </div>
-            <button className="w-19/20 bg-blue-950 hover:bg-blue-900 transition-colors ease-in text-white rounded-4xl mt-5 p-2 font-extrabold tracking-widest text-sm">COMPRA ONLINE </button>
-
-      </div>
-      <div className="w-90 min-w-90 h-130 rounded-md bg-stone-50 flex flex-col items-center p-5 ">
-        <img className="w-50 mt-10"src={coffeeProduct1} alt="" />
-        <p className="text-sm text-blue-950 tracking-widest mb-5">GRANOS DE CAFÉ</p>
-        <p className="text-xl text-blue-950 font-extrabold mb-2">Qualitá Oro en Grano</p>
-        <p className="text-xs text-blue-950 font-semibold">Intensidad 7/10</p>    
-        <div className="w-19/20 bg-amber-100 rounded-xl mt-10 h-27 pt-8 pl-5">
-            <div className="w-1/3 flex items-center gap-2 bg-white rounded-xl h-10 text-blue-950 font-bold text-left pl-2" >
-            <i class="fa-solid fa-box text-blue-950"></i>
-            <span className=" text-blue-950 " value=""> 500g</span>        
-            </div>
-        </div>
-            <button className="w-19/20 bg-blue-950 hover:bg-blue-900 transition-colors ease-in text-white rounded-4xl mt-5 p-2 font-extrabold tracking-widest text-sm">COMPRA ONLINE </button>
-
-      </div>
-
-     </div>
-     </aside>
+      </section>
 
      <section className='w-full h-130 bg-[url("./assets/home_img/background-inspiring.png")] bg-no-repeat bg-center bg-cover absolute top-1170 sm:top-1090 md:top-840 z-0 flex flex-col items-center justify-center'>
 
@@ -356,12 +278,216 @@ export  function Home() {
   
 }
 
+
+function Collection(){
+
+  const [collections, setCollections]=useState([
+    {"collection":{
+      "active":true,
+      "name":"Qualità Oro",
+      "description":"Descubre cada mañana la excelencia del blend y saborea la sinfonía perfecta en una taza en casa.",
+      "imageUrl":"./assets/home_img/background-coffee-2.jpg",
+      "backgroundSettings":"bg-[url(./assets/home_img/background-coffee-1.jpg)]  bg-size-[1500px] bg-no-repeat",
+      "products":[
+        {
+          "imgUrl":"./assets/home_img/coffee-product-1.png",
+          "category":"GRANOS DE CAFÉ",
+          "name":"Qualità Oro en grano",
+          "intensity":"5",
+          "format":"pack",
+          "quantity":"500g",
+        },
+        {
+          "imgUrl":"./assets/home_img/coffee-product-1.png",
+          "category":"CAPSULAS COMPATIBLES",
+          "name":"Qualità Oro",
+          "intensity":"8",
+          "format":"capsule",
+          "quantity":"10",
+        },
+        {
+          "imgUrl":"./assets/home_img/coffee-product-1.png",
+          "category":"GRANOS DE CAFÉ",
+          "name":"Qualità Oro en grano",
+          "intensity":"5",
+          "format":"pack",
+          "quantity":"1kg",
+        }
+      ]
+    }},
+    {"collection":{
+      "active":true,
+      "name":"Espresso",
+      "description":"El espresso más auténtico. ¡Descubre el ADN auténticamente italiano con Lavazza!",
+      "imageUrl":"./assets/home_img/background-coffee-1.jpg",
+       "backgroundSettings":"bg-[url(./assets/home_img/background-coffee-2.jpg)]  bg-size-[1800px] bg-no-repeat",
+      "products":[
+        {
+          "imgUrl":"./assets/home_img/coffee-product-1.png",
+          "category":"CAFÉ MOLIDO",
+          "name":"Espresso Italiano Classico molido",
+          "intensity":"5",
+          "format":"pack",
+          "quantity":"1kg",
+        },
+        {
+          "imgUrl":"./assets/home_img/coffee-product-1.png",
+          "category":"GRANOS DE CAFÉ",
+          "name":"Espresso Italiano Classico en grano",
+          "intensity":"5",
+          "format":"pack",
+          "quantity":"1kg",
+        }
+      ]
+    }},
+    {"collection":{
+      "active":true,
+      "name":"Tierra",
+      "description":"Disfruta del sabor de cuidar de la naturaleza y de las personas: descubre nuestros blends orgánicos ¡Tierra!",
+      "imageUrl":"./assets/home_img/background-coffee-3.jpg",
+      "backgroundSettings":"bg-[url(./assets/home_img/background-coffee-3.jpg)]  bg-size-[1500px] bg-no-repeat",
+
+      "products":[
+        {
+          "imgUrl":"./assets/home_img/coffee-product-1.png",
+          "category":"GAPSULAS COMPATIBLES",
+          "name":"¡Tierra! For Planet",
+          "intensity":"7",
+          "format":"capsule",
+          "quantity":"10",
+        },
+        {
+          "imgUrl":"./assets/home_img/coffee-product-1.png",
+          "category":"GRANOS DE CAFÉ",
+          "name":"¡Tierra! Bio-Organic for Planet Café en grano ",
+          "intensity":"8",
+          "format":"pack",
+          "quantity":"1kg",
+        }
+      ]
+    }}
+
+  ])
+
+  const [current, setCurrent]=useState(0)
+  
+  let blockCurrent=useRef(false)
+
+ useEffect(()=>{
+  
+   
+   
+   setTimeout(()=>{
+      let newCurrent=current<(collections.length-1)?current+1:0
+        if(!blockCurrent.current){
+      setCurrent(newCurrent)}
+    }, 4000)
+  
+
+  },[current]) 
+
+  const handleStopCurrent = function(num){
+    setCurrent(num)
+
+   blockCurrent.current=true
+  }
+
+
+
+  return <div className="relative">
+
+  <section className={`${collections[current].collection.backgroundSettings} pt-15 w-full overflow-hidden h-240  flex flex-col items-center`}>
+      
+      <div className="p-5 sm:w-auto  w-100 ml-[-10px]  flex justify-around gap-3     sm:flex sm:justify-center sm:gap-4">
+          
+          <div>
+            <img onClick={()=>{
+              handleStopCurrent(0)
+            }} className={`w-20 cursor-pointer  ${current==0?"border-white border-2":""}  p-1 rounded-full`}src={block3} alt="" />
+            <p className="w-20 text-center mt-2 text-xs font-bold text-white">{`${collections[0].collection.name}`}</p>
+          </div>
+          <div>
+            <img onClick={()=>{
+              handleStopCurrent(1)
+            }} className={`w-20 cursor-pointer  ${current==1?"border-white border-2":""} p-1 rounded-full`}src={block3} alt="" />
+            <p className="w-20 text-center mt-2 text-xs font-bold text-white">{`${collections[1].collection.name}`}</p>
+          </div>
+          <div>
+            <img onClick={()=>{
+              handleStopCurrent(2)
+            }} className={`w-20 cursor-pointer ${current==2?"border-white border-2":""} p-1 rounded-full`} src={block3} alt="" />
+            <p className="w-20 text-center mt-2 text-xs font-bold text-white">{`${collections[2].collection.name}`}</p>
+          </div>
+          
+
+      </div>
+
+      <p className='font-[Corinthia] mt-5 text-4xl text-white w-1/3 text-center md:text-left  '>Collection</p>
+      <h1 className="text-white mb-4 font-extrabold text-3xl">{`${collections[current].collection.name}`}</h1>
+      <h2 className="text-white w-2/3 sm:w-1/3 text-center font-semibold ">{`${collections[current].collection.description}`}</h2>
+        <img className="w-100 mt-15" src={coffeeProduct1} alt="" />
+        <button className=" bg-white  text-blue-950  tracking-widest font-extrabold text-sm p-3 w-60 pt-5 pb-5 mt-10 rounded-4xl">DESCUBRIR MÁS</button>
+
+     </section>
+
+    <aside className="overflow-hidden w-full  absolute h-auto md:h-auto  top-230 md:pt-20 md:pb-30  sm:top-220 z-10">
+     <div className="w-full z-10 md:h-100 h-auto flex md:flex-row flex-col items-center md:justify-center md:gap-3 gap-0 ">
+
+        {collections[current] && collections[current].collection.products.map((col)=>{
+
+          return <div className="w-90 min-w-90 h-130 rounded-md bg-stone-50 flex flex-col items-center p-5 ">
+        <img className="w-50 mt-10"src={coffeeProduct1} alt="" />
+        <p className="text-sm text-blue-950 tracking-widest mb-5">{col.category}</p>
+        <p className="text-xl text-blue-950 font-extrabold mb-2">{col.name}</p>
+        <p className="text-xs text-blue-950 font-semibold">Intensidad {col.intensity}/10</p>    
+        <div className="w-19/20 bg-amber-100 rounded-xl mt-10 h-27 pt-8 pl-5">
+            <div className="w-1/3 flex items-center gap-2 bg-white rounded-xl h-10 text-blue-950 font-bold text-left pl-2" >
+            <i className="fa-solid fa-box text-blue-950"></i>
+            <span className=" text-blue-950 " value=""> {col.quantity}</span>        
+            </div>
+        </div>
+            <button className="w-19/20 bg-blue-950 hover:bg-blue-900 transition-colors ease-in text-white rounded-4xl mt-5 p-2 font-extrabold tracking-widest text-sm">COMPRA ONLINE </button>
+
+      </div>
+        })}
+
+     </div>
+     </aside>
+  
+  
+  </div>
+}
+
 function Footer(){
+
+  const [visible, setVisible]=useState({
+    "productos":false,
+    "ayuda":false,
+    "notasLegales":false
+  })
+
+  const handleVisible=function(n){
+
+    let newVisibles=visible
+
+    for(let v in newVisibles){
+      console.log(v)
+      console.log(newVisibles[v])
+      v==n && !newVisibles[v]?newVisibles[v]=true:newVisibles[v]=false
+    }
+
+    //Hacemos este paso porque al quedar registrado newVisibles en la memoria, no vuelve a hacer el cambio de estado más de una vez. 
+    //Con el spread operator salvamos este paso
+
+    newVisibles={...newVisibles} 
+
+    setVisible(newVisibles)
+  }
 
 
   return <>
 
-     <section className="w-full bg-blue-950 h-auto">
+     <section className="hidden md:inline-block md:w-full md:pb-6 md:bg-blue-950 md:h-auto">
 
       <div className="h-20 w-full flex items-start text-left pt-3 pl-10">
         <div className="flex flex-col items-center gap-2">
@@ -401,15 +527,154 @@ function Footer(){
 <h1 className=" tracking-widest font-extrabold text-[12px]">Bases legales y política privacidad sorteo entradas MMO</h1>
 
         </div>
-        <div className="col-span-1">
-<h1 className=" tracking-widest font-extrabold text-sm">PRODUCTOS</h1>
+        <div>
+        <div className="col-span-1 mb-4 flex justify-left gap-3 pr-8"> 
+          
+
+          <i class="fa-brands fa-facebook-f text-blue-950 bg-stone-200 rounded-full pt-2 h-9 pr-3 pl-3 text-center items-center "></i>
+          <i class="fa-brands fa-youtube text-blue-950  bg-stone-200 rounded-full pt-2 h-9 pr-2 pl-2 text-center items-center"></i>
+          <i class="fa-brands fa-instagram text-blue-950 bg-stone-200 rounded-full pt-2 h-9 pr-3 pl-3 text-center items-center"></i>
+        </div>
+
+        <div>
+
+          <p className=" text-sm mb-3">ELIJA SU PAÍS</p>
+          <select className="p-0 text-sm font-bold tracking-widest"  name="country" id="country">
+            <option className="text-blue-950" value="España">ESPAÑA</option>
+            <option className="text-blue-950" value="Otros países">OTROS PAÍSES</option>
+          </select>
+        </div>
 
         </div>
 
 
+      </div>
+
+      <div className="mt-5 mb-5 w-full text-white flex justify-center divide-white divide-x-1 h-auto">
+
+        <p className="text-[12px] pr-2 pl-2 font-light">Política de privacidad</p>
+        <p className="text-[12px] pr-2 pl-2 font-light">Política de cookies</p>
+        <p className="text-[12px] pr-2 pl-2 font-light">Configuración de cookies</p>
+        <p className="text-[12px] pr-2 pl-2 font-light">Accessibility Statement</p>
+
+
+      </div>
+      <div className="mt-5 mb-5 w-full text-white flex justify-center h-auto">
+
+        <p className="text-[10px] pr-2 pl-2 font-light">©2022 Luigi Lavazza SPA. Todos los derechos reservados. IVA n.º 00470550013 - Registro Mercantil n.º 257143 - capital social 25 090 000 EUR íntegramente desembolsado</p>
+
 
       </div>
 
+
+
+     </section>
+
+     <section className="md:hidden pb-8 w-full bg-blue-950 h-auto">
+
+            <div className="h-20 w-full flex items-start text-left pt-3 pl-5">
+        <div className="flex flex-col items-center gap-2">
+        <img className="w-30" src={lavazza} alt="" />
+        
+        </div>
+      </div>
+
+      <div className="pl-3 pr-3 flex flex-col divide-y-1 divide-white w-full ">
+       <div className="flex flex-col h-auto w-full">
+          <div className="w-full flex justify-between h-12 items-center ">
+       
+        <h1 className='text-white text-sm  tracking-widest font-bold'>PRODUCTOS</h1>
+        <i className="fa-solid fa-caret-down text-white cursor-pointer " onClick={()=>{
+
+          handleVisible("productos")
+        }}></i>
+        </div>
+
+        <div className={` ${visible.productos?" ":"hidden"} cursor-pointer transition-all ease-in text-white text-[12px] font-normal`}>
+
+          <p className="mb-2 font-bold">Café</p>
+          <p className="mb-3">Granos de café</p>
+          <p className="mb-3">Café molido</p>
+          <p className="mb-3">Cápsulas A Modo Mio</p>
+          <p className="mb-3">Cápsulas Lavazza compatibles con las máquinas Nespresso* Original</p>
+          <p className="mb-3">Nescafè® Dolce Gusto® cápsulas compatibles**</p>
+          <p className="font-bold mb-3">Máquinas de Café</p>
+
+
+        </div>
+          </div>  
+
+
+          <div className="w-full flex justify-between h-12 items-center ">
+        <h1 className='text-white text-sm  tracking-widest font-bold'>LAVAZZA STORIES</h1>
+          </div>  
+          <div className="w-full flex justify-between h-12 items-center ">
+        <h1 className='text-white text-sm  tracking-widest font-bold'>SOSTENIBILIDAD</h1>
+          </div>  
+          <div className="w-full flex justify-between h-12 items-center ">
+        <h1 className='text-white text-sm  tracking-widest font-bold'>LAVAZZA WORLD</h1>
+
+          </div>  
+       <div className="text-white">
+          <div className="w-full flex justify-between h-12 items-center ">
+        <h1 className='text-white w-full text-sm  tracking-widest font-bold'>AYUDA</h1>
+        <i className="fa-solid fa-caret-down text-white cursor-pointer" onClick={()=>{
+
+          handleVisible("ayuda")
+        }}></i>
+         </div>
+         <div className={` ${visible.ayuda?"":"hidden"} transition-all duration-75 ease-in-out`}>
+          <p className="w-full text-xs font-bold mb-3">PREGUNTAS FRECUENTES</p>
+          <p className=" text-[11px] mb-3">Contacto</p>
+         </div>
+          </div>  
+       <div className="text-white">
+          <div className="w-full flex justify-between h-12 items-center ">
+        <h1 className='text-white w-full text-sm  tracking-widest font-bold'>NOTAS LEGALES</h1>
+        <i className="fa-solid fa-caret-down text-white cursor-pointer" onClick={()=>{
+
+          handleVisible("notasLegales")
+        }}></i>
+         </div>
+         <div className={` ${visible.notasLegales?"":"hidden"} transition-all duration-75 ease-in-out`}>
+          <p className="w-full text-xs font-bold mb-3">Condiciones de uso</p>
+          <p className=" text-[11px] font-bold mb-3">Bases Legales y Política Privacidad Sorteo Entradas MMO</p>
+         </div>
+          </div>   
+      </div>
+
+       <div className="w-1/2 mb-4 flex mt-5 justify-left gap-3  pl-3 pr-8"> 
+          
+
+          <i class="fa-brands fa-facebook-f text-blue-950 bg-stone-200 rounded-full pt-2 h-9 pr-3 pl-3 text-center items-center "></i>
+          <i class="fa-brands fa-youtube text-blue-950  bg-stone-200 rounded-full pt-2 h-9 pr-2 pl-2 text-center items-center"></i>
+          <i class="fa-brands fa-instagram text-blue-950 bg-stone-200 rounded-full pt-2 h-9 pr-3 pl-3 text-center items-center"></i>
+        </div>
+
+        <div>
+
+          <p className=" text-white pl-3 text-sm mb-3">ELIJA SU PAÍS</p>
+          <select className="p-0 pl-3 mb-5 text-white text-sm font-bold tracking-widest"  name="country" id="country">
+            <option className="text-blue-950" value="España">ESPAÑA</option>
+            <option className="text-blue-950" value="Otros países">OTROS PAÍSES</option>
+          </select>
+        </div>
+
+        <div className="mt-5 mb-5 w-full text-white flex justify-start divide-white divide-x-1 h-auto">
+
+        <p className="text-[12px] pr-2 pl-2 font-light">Política de privacidad</p>
+        <p className="text-[12px] pr-2 pl-2 font-light">Política de cookies</p>
+        <p className="text-[12px] pr-2 pl-2 font-light">Configuración de cookies</p>
+        <p className="text-[12px] pr-2 pl-2 font-light">Accessibility Statement</p>
+
+
+      </div>
+      <div className="mt-5 mb-5 w-full text-white flex justify-start h-auto">
+
+        <p className="text-[10px] pr-2 pl-2 font-light">©2022 Luigi Lavazza SPA. Todos los derechos reservados. IVA n.º 00470550013 - Registro Mercantil n.º 257143 - capital social 25 090 000 EUR íntegramente desembolsado</p>
+
+
+      </div>
 
 
      </section>
