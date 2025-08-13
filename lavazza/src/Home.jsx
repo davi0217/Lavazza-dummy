@@ -14,6 +14,8 @@ import backgroundCoffee3 from './assets/home_img/background-coffee-3.jpg'
 import coffeeProduct1 from './assets/home_img/coffee-product-1.png'
 import backgroundInspiring from './assets/home_img/background-inspiring.png'
 
+import {Menu} from './Products.jsx'
+
 export  function Home() {
 
     const [scrolled, setScrolled]=useState(false)
@@ -35,7 +37,34 @@ export  function Home() {
 
 
     },[])
+    
+    const [menuActive, setMenuActive]=useState(false)
 
+    useEffect(()=>{
+
+        let x=window.scrollX
+        let y=window.scrollY
+        const disableScroll=function(){
+            window.scrollTo(x,y)
+        }
+        if(menuActive){
+
+
+        window.addEventListener("scroll", disableScroll)
+
+    }
+
+        return ()=>window.removeEventListener("scroll", disableScroll)
+
+    },[menuActive])
+
+    const handleMenuActive=function(state){
+      setMenuActive(state)
+    }
+
+    useEffect(()=>{
+      setMenuActive(false)
+    },[])
 
   return <>
 
@@ -53,20 +82,37 @@ export  function Home() {
             </div>
         }
           <nav className="hidden  text-sm font-bold  lg:flex gap-8 tracking-widest  md:flex-none absolute left-0 right-0 justify-center z-11">
-            <a href="" className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`}>PRODUCTOS</a>
-            <a href=""className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`}>LAVAZZA STORE</a>
-            <a href=""className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`}>SOSTENIBILIDAD</a>
-            <a href=""className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`}>CONTACTO</a>
+            <a href="" className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`} onClick={(e)=>{
+                    e.preventDefault()
+                    handleMenuActive(true)
+                }}>PRODUCTOS</a>
+            <a href=""className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`} onClick={(e)=>{
+                    e.preventDefault()
+                    handleMenuActive(true)
+                }}>LAVAZZA STORE</a>
+            <a href=""className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`} onClick={(e)=>{
+                    e.preventDefault()
+                    handleMenuActive(true)
+                }}>SOSTENIBILIDAD</a>
+            <a href=""className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`} onClick={(e)=>{
+                    e.preventDefault()
+                    handleMenuActive(true)
+                }}>CONTACTO</a>
           </nav>
           <i className={`fa-solid fa-magnifying-glass flex-none basis-10 text-center text-2xl ${scrolled?"text-blue-900":"text-stone-50"} absolute right-40 lg:right-5  z-10`}></i>
-          <i className={`fa-solid fa-bars-staggered flex  ${scrolled?"text-blue-900":"text-stone-50"} absolute right-12 lg:!hidden`}></i>
+          <i className={`fa-solid fa-bars-staggered flex  ${scrolled?"text-blue-900":"text-stone-50"} absolute right-12 lg:!hidden`} onClick={(e)=>{
+                    e.preventDefault()
+                    handleMenuActive(true)
+                }}></i>
         </div>
 
         <p className="text-white font-extrabold w-2xs text-4xl mt-40 mb-30 lg:text-7xl  text-center lg:w-3xl m-auto lg:mt-45">EL PLACER NOS HACE HUMANOS</p>
         <button className=" w-2xs font-semibold  lg:my-0 text-white tracking-widest border-1 p-3 rounded-4xl m-auto text-center">Descubre la campaña</button>
     </div>
 
-    <section className={`flex flex-col w-full gap-15  pr-2 pl-2 pt-20 pb-15 h-auto absolute top-200`}>
+    {menuActive && <Menu handleMenuActive={handleMenuActive}/>}
+<article className="absolute top-200">
+    <section className={`flex flex-col w-full gap-15  pr-2 pl-2 pt-20 pb-15 h-auto `}>
 
      <article className="bg-blue-950 relative w-80 h-90 sm:w-full m-auto sm:h-auto flex flex-col text-center sm:flex-row sm:justify-between">
         <div className="text-white relative z-10  pt-5  sm:w-1/3  sm:pl-5 sm:pt-7 sm:pb-5   sm:h-70">
@@ -107,21 +153,21 @@ export  function Home() {
      </article>
     </section>
 
-      <section className="absolute top-560 sm:top-500 w-full">
+      <section className="w-full  ">
 
         <Collection/>
 
 
       </section>
 
-     <section className='w-full h-130 bg-[url("./assets/home_img/background-inspiring.png")] bg-no-repeat bg-center bg-cover absolute top-1170 sm:top-1090 md:top-840 z-0 flex flex-col items-center justify-center'>
+     <section className='w-full h-130 bg-[url("./assets/home_img/background-inspiring.png")] bg-no-repeat bg-center bg-cover z-0 flex flex-col items-center justify-center'>
 
           <h1 className=' text-center text-white font-extrabold  text-xl mt-[-30px] sm:mt-0 sm:text-3xl md:w-3/5 w-2/3 font-[Meddon]'>Cada taza es una experiencia que hay que compartir. Deja que nuestras historias te inspiren.</h1>
            <button className=" bg-white   sm:left-3 sm:bottom-5 text-blue-950  tracking-widest font-extrabold text-sm p-3 w-60 rounded-4xl  mt-5 sm:mt-20">DESCUBRIR MÁS</button>
 
      </section>
 
-     <section className=" hidden lg:absolute lg:top-940 w-full  h-75 lg:flex justify-center gap-2 pl-2 pr-3">
+     <section className=" hidden mt-[-50px] w-full  h-75 lg:flex justify-center gap-2 pl-2 pr-3">
         <div className="w-1/3 h-full  flex  items-start">
           <div className="w-full bg-no-repeat bg-cover bg-center bg-stone-500 bg-blend-multiply bg-[url(./assets/home_img/coffee-pot.png)] text-white flex flex-col p-5 h-4/5  rounded-xl">
           <p className="font-[Corinthia] text-4xl font-bold">Blend for better</p>
@@ -145,7 +191,7 @@ export  function Home() {
         </div>
      </section>
 
-  <aside className=" absolute  w-full top-1270 sm:top-1200 md:top-940 ">
+  <aside className="  w-full mt-20  ">
      <section className="lg:hidden w-full flex justify-center h-auto">
 
       <article className="w-8/10  h-100 relative">
@@ -175,7 +221,7 @@ export  function Home() {
      </section>
      </aside>
 
-          <aside className="absolute w-full p-5 top-1370 sm:top-1310 md:top-1050 h-auto ">
+          <aside className=" w-full p-5  h-auto ">
 
             <h1 className=" md:text-4xl text-2xl font-extrabold m-auto md:text-blue-950 w-2/3 mb-10 text-center  ">Explora la experiencia Lavazza</h1>
 
@@ -229,7 +275,7 @@ export  function Home() {
 
           </aside>
 
-        <section className=" absolute text-white flex flex-col justify-center items-center w-full p-5 top-1540 sm:top-1480 md:top-1220 h-150 bg-stone-500 bg-blend-multiply bg-size-[1800px] bg-center bg-[url(./assets/home_img/background-nature.jpg)]">
+        <section className=" text-white flex flex-col justify-center items-center w-full p-5  h-150 bg-stone-500 bg-blend-multiply bg-size-[1800px] bg-center bg-[url(./assets/home_img/background-nature.jpg)]">
         
           <p className="font-[Corinthia] text-5xl md:text-6xl">Un viaje lleno de sabor</p>
           <p className="font-extrabold text-center text-3xl mt-10 w-1/3 md:w-2/3 ">Amazonia: la última temporada</p>
@@ -237,42 +283,13 @@ export  function Home() {
           <button className=" mt-15 rounded-3xl border-1 p-3 w-50 ">Reproducir vídeo</button>
         </section>
 
-        <section className="absolute overflow-hidden w-full sm:p-5 top-1700 sm:top-1640 md:top-1380 h-auto pt-2">
-
-          <p className="text-blue-950 font-light text-sm mb-3 ">*Lavazza compensa las emisiones provocadas por estos productos para lograr un impacto cero en emisiones de CO₂. </p>
-          <article className="bg-stone-200  w-auto sm:gap-5 gap-5  divide-stone-50  divide-x-2 pt-10 pb-10 flex flex-row justify-center items-center">
-
-            <div className="flex flex-col h-65 sm:h-43  gap-2 min-w-20  w-1/5 ">
-              <div className=" w-full min-h-22 sm:flex sm:gap-3 sm:min-h-15 sm:items-start  sm:w-8/9">
-                <i className="fa-solid fa-headphones text-xl text-blue-950"></i>
-              <p className="text-sm font-extrabold text-blue-950 tracking-wide">SERVICIO AL CLIENTE</p>
-              </div>
-              <p className="text-xs w-7/8 text-blue-950">¿Necesitas ayuda? Consulta nuestras preguntas frecuentes o ponte en contacto con nosotros.</p>
-
-
-            </div>
-            <div className="flex flex-col h-65 sm:h-43 gap-2 min-w-20  w-1/5">
-              <div className="  w-full min-h-22 sm:flex sm:gap-3 sm:items-start sm:min-h-15  sm:w-8/9">
-                            <i class="fa-solid fa-location-dot text-xl text-blue-950"></i>              
-                            <p className="text-sm font-extrabold text-blue-950 tracking-wide">FLAGSHIP STORE</p>
-              </div>
-              <p className="text-xs w-7/8 text-blue-950">Disfruta de la experiencia Lavazza auténtica en nuestras tiendas.</p>
-
-
-            </div>
-
-
-          </article>
-        
-        
-        </section>
-
-
-            <footer className="absolute top-1800 sm:top-1720 md:top-1450 w-full   ">
+            <footer className=" w-full   ">
 
                 <Footer/>
 
             </footer>
+
+            </article>
   
   </>
   
@@ -373,7 +390,7 @@ function Collection(){
   
   let blockCurrent=useRef(false)
 
- useEffect(()=>{
+  useEffect(()=>{
   
    
    
@@ -394,9 +411,9 @@ function Collection(){
 
 
 
-  return <div className="relative">
+  return <div >
 
-  <section className={`${collections[current].collection.backgroundSettings} pt-15 w-full overflow-hidden h-240  flex flex-col items-center`}>
+  <section className={`${collections[current].collection.backgroundSettings} pt-15  h-240  flex flex-col items-center`}>
       
       <div className="p-5 sm:w-auto  w-100 ml-[-10px]  flex justify-around gap-3     sm:flex sm:justify-center sm:gap-4">
           
@@ -430,12 +447,12 @@ function Collection(){
 
      </section>
 
-    <aside className="overflow-hidden w-full  absolute h-auto md:h-auto  top-230 md:pt-20 md:pb-30  sm:top-220 z-10">
-     <div className="w-full z-10 md:h-100 h-auto flex md:flex-row flex-col items-center md:justify-center md:gap-3 gap-0 ">
+    <aside className="   m-auto  mt-[-50px] mb-[-100px]   h-auto lg:h-auto   lg:pt-20 lg:pb-30   z-10">
+        <div className="  z-10 lg:h-100 h-auto flex lg:flex-row flex-col items-center lg:justify-center lg:gap-3 gap-0 ">
 
         {collections[current] && collections[current].collection.products.map((col)=>{
 
-          return <div className="w-90 min-w-90 h-130 rounded-md bg-stone-50 flex flex-col items-center p-5 ">
+          return <div className=" w-80 shrink-0 h-130 rounded-md bg-stone-50 flex flex-col items-center p-5 ">
         <img className="w-50 mt-10"src={coffeeProduct1} alt="" />
         <p className="text-sm text-blue-950 tracking-widest mb-5">{col.category}</p>
         <p className="text-xl text-blue-950 font-extrabold mb-2">{col.name}</p>
@@ -458,7 +475,7 @@ function Collection(){
   </div>
 }
 
-function Footer(){
+ export function Footer(){
 
   const [visible, setVisible]=useState({
     "productos":false,
@@ -486,6 +503,36 @@ function Footer(){
 
 
   return <>
+
+   <section className=" overflow-hidden w-full sm:p-5  h-auto pt-2">
+
+          <p className="text-blue-950 font-light text-sm mb-3 ">*Lavazza compensa las emisiones provocadas por estos productos para lograr un impacto cero en emisiones de CO₂. </p>
+          <article className="bg-stone-200  w-auto sm:gap-5 gap-5  divide-stone-50  divide-x-2 pt-10 pb-10 flex flex-row justify-center items-center">
+
+            <div className="flex flex-col h-65 sm:h-43  gap-2 min-w-20  w-1/5 ">
+              <div className=" w-full min-h-22 sm:flex sm:gap-3 sm:min-h-15 sm:items-start  sm:w-8/9">
+                <i className="fa-solid fa-headphones text-xl text-blue-950"></i>
+              <p className="text-sm font-extrabold text-blue-950 tracking-wide">SERVICIO AL CLIENTE</p>
+              </div>
+              <p className="text-xs w-7/8 text-blue-950">¿Necesitas ayuda? Consulta nuestras preguntas frecuentes o ponte en contacto con nosotros.</p>
+
+
+            </div>
+            <div className="flex flex-col h-65 sm:h-43 gap-2 min-w-20  w-1/5">
+              <div className="  w-full min-h-22 sm:flex sm:gap-3 sm:items-start sm:min-h-15  sm:w-8/9">
+                            <i class="fa-solid fa-location-dot text-xl text-blue-950"></i>              
+                            <p className="text-sm font-extrabold text-blue-950 tracking-wide">FLAGSHIP STORE</p>
+              </div>
+              <p className="text-xs w-7/8 text-blue-950">Disfruta de la experiencia Lavazza auténtica en nuestras tiendas.</p>
+
+
+            </div>
+
+
+          </article>
+        
+        
+        </section>
 
      <section className="hidden md:inline-block md:w-full md:pb-6 md:bg-blue-950 md:h-auto">
 

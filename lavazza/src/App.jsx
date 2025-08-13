@@ -1,12 +1,23 @@
 import { useState, useEffect, useRef } from 'react'
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
 
 import {Home} from './Home.jsx'
 
+import {Products} from './Products.jsx'
+
 function App() {
 
-  return <main className="font-[Raleway]">
+  return <main className="font-[Raleway] overflow-hidden">
+
+ <BrowserRouter>
+  <Routes>
+
+  <Route path="/" element={<Home/>}> </Route>
+  <Route path="/products/:category" element={<Products/>}></Route>
+
+</Routes>
+ </BrowserRouter>
   
-  <Home/>
   
   </main>
   
