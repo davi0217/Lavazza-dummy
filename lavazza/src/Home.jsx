@@ -13,6 +13,10 @@ import backgroundCoffee2 from './assets/home_img/background-coffee-2.jpg'
 import backgroundCoffee3 from './assets/home_img/background-coffee-3.jpg'
 import coffeeProduct1 from './assets/home_img/coffee-product-1.png'
 import backgroundInspiring from './assets/home_img/background-inspiring.png'
+import woman from './assets/collections/woman-drinking.jpg'
+import licor from './assets/collections/licor.jpg'
+import tonic from './assets/collections/tonic.jpg'
+import affogato from './assets/collections/affogato.jpg'
 
 import {Menu} from './Products.jsx'
 
@@ -737,7 +741,7 @@ function Collection(){
 //hay que pasarle el posicionamiento del texto (justify) y el bg-size y bg-position
 //el height se regula en el elemento padre, al que hay que poner como relative
 
-function Slider({components, addClasses={}}){
+export function Slider({components, addClasses={}}){
 
   const [boxes, setBoxes]=useState(components)
   const [positions, setPositions]=useState({

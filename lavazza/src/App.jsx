@@ -5,6 +5,9 @@ import {Home} from './Home.jsx'
 
 import {Products} from './Products.jsx'
 
+import {Collections} from './Collections.jsx'
+
+
 function App() {
 
   return <main className="font-[Raleway] overflow-hidden">
@@ -14,6 +17,7 @@ function App() {
 
   <Route path="/" element={<Home/>}> </Route>
   <Route path="/products/:category" element={<Products/>}></Route>
+  <Route path="/collections/:collection" element={<Collections/>}></Route>
 
 </Routes>
  </BrowserRouter>

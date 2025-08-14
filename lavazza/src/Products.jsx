@@ -395,7 +395,7 @@ export function Products(){
                 <div className="col-span-1 w-3/4 text-white pl-3  pt-5 bg-stone-400  rounded-sm">
 
                         <p className="text-sm mb-5 font-extrabold tracking-widest">COLLECTIONS</p>
-                        <p className="text-sm mb-5 font-bold tracking-widest ">Qualità Rossa</p>
+                        <p className="text-sm mb-5 font-bold tracking-widest "><Link to="/collections/rossa">Qualità Rossa</Link></p>
                         <p className="text-sm mb-5 font-bold tracking-widest ">Qualità Oro</p>
                         <p className="text-sm mb-5 font-bold tracking-widest ">Espresso</p>
                         <p className="text-sm mb-5 font-bold tracking-widest ">A modo mio</p>
@@ -482,7 +482,7 @@ export function Products(){
                             moveBlock("right","products")
                         }}>&lt;  PRODUCTOS</p>
                         <p className="w-full text-[20px] font-extrabold tracking-wide ">Collections</p>
-                        <p className="w-full text-sm tracking-wide ">Qualità Rossa</p>
+                        <p className="w-full text-sm tracking-wide "><Link to="/collections/rossa">Qualità Rossa</Link></p>
                         <p className="w-full text-sm tracking-wide ">Qualità Oro</p>
                         <p className="w-full text-sm tracking-wide ">Espresso</p>
                         <p className="w-full text-sm tracking-wide ">A Modo Mio</p>
