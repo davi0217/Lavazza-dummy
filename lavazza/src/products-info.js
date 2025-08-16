@@ -17,11 +17,13 @@
        "products":[
          {
            "imgUrl":coffeeGrano,
+           "description":"Qualità Oro es una combinación de seis variedades de granos Arábica procedentes de Centro y Sudamérica. La sinfonía perfecta de sabor que puedes disfrutar todos los días. Como cualquier familia italiana.",
            "category":"GRANOS DE CAFÉ",
            "name":"Qualità Oro en grano",
            "intensity":"5",
            "format":"pack",
            "quantity":"500g",
+           "options":["500g", "1kg"]
          },
          {
            "imgUrl":coffeeCapsule,
