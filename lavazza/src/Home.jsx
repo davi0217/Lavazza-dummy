@@ -758,7 +758,16 @@ export function Slider({components, addClasses={}}){
 
   const giveClass=function(number){
 
-    if(number==current){
+    if(components.length==2){
+      if(number==current){
+            return positions.center
+    }else if(number!=current){
+      return positions.left
+    }else{  
+      return "hidden"
+    }
+
+    }else if(number==current){
             return positions.center
     }else if(number==current-1){
       return positions.left
@@ -801,7 +810,7 @@ export function Slider({components, addClasses={}}){
           </div>
          
           
-          <div onClick={()=>{
+          {components.length==3 && <div onClick={()=>{
             handleCurrent(2)
           }
 
@@ -811,7 +820,7 @@ export function Slider({components, addClasses={}}){
           <p className="font-[Corinthia] text-4xl font-bold">{boxes[2].title}</p>
           <p className="text-2xl font-extrabold mb-6">{boxes[2].subtitle}</p>
           <a className="self-end font-bold tracking-widest hover:underline underline-offset-4 " href="">DESCUBRIR MÁS &gt;</a>
-          </div>
+          </div>}
 
           <div className="flex gap-10 justify-center absolute bottom-0 w-full text-center">
             <button onClick={()=>{
@@ -820,9 +829,10 @@ export function Slider({components, addClasses={}}){
             <button onClick={()=>{
               handleCurrent(1)
             }}><i className={`fa-solid fa-circle text-xs cursor-pointer ${current==1?"text-blue-900":"text-blue-500"}`}></i></button>
-            <button onClick={()=>{
+          { components.length==3 && <button onClick={()=>{
               handleCurrent(2)
-            }}><i className={`fa-solid fa-circle text-xs cursor-pointer ${current==2?"text-blue-900":"text-blue-500"}`}></i></button>
+            }}><i className={`fa-solid fa-circle text-xs cursor-pointer ${current==2?"text-blue-900":"text-blue-500"}`}></i></button>}
+         
           </div>
 
 

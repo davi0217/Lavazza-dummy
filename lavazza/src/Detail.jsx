@@ -8,11 +8,17 @@ import lavazza2 from './assets/home_img/lavazza-2-logo.png'
 import backgroundCoffee1 from './assets/home_img/background-coffee-1.jpg'
 import backgroundCoffee2 from './assets/home_img/background-coffee-2.jpg'
 import backgroundCoffee3 from './assets/home_img/background-coffee-3.jpg'
+import coffeeProduct1 from './assets/home_img/coffee-product-1.png'
 import splash from './assets/collections/splash.png'
 import woman from './assets/collections/woman-drinking.jpg'
 import licor from './assets/collections/licor.jpg'
 import tonic from './assets/collections/tonic.jpg'
 import affogato from './assets/collections/affogato.jpg'
+import map from './assets/products/world-map.png'
+const grain= "./assets/products/grain.jpeg"
+const leaves= "./assets/products/leaves.jpeg"
+const waves= "./assets/products/waves.jpg"
+const cream= "./assets/products/cream.avif"
 
 import {Footer} from './Home.jsx'
 import {Menu} from './Products.jsx'
@@ -35,6 +41,49 @@ export function Detail(){
             "position":2
         }
      ])
+
+    const [sections, setSections]=useState(
+        {
+            "perfil":true,
+            "info":false,
+            "blend":false,
+            "preparados":false
+
+        }
+    )
+
+    const giveBackground=function(){
+
+        if(sections.perfil){
+            return "bg-[url(./assets/products/grain.jpeg)] bg-size-[200px]"
+        }else if(sections.blend){
+            return "bg-[url(./assets/products/waves.jpg)] bg-size-[350px]"
+        }else if(sections.info){
+            return "bg-[url(./assets/products/leaves.jpeg)] bg-size-[400px]"
+        }else  if(sections.preparados){
+            return "bg-[url(./assets/products/cream.avif)]"
+        }
+
+        
+    }
+    
+    const handleSection=function(section){
+
+        let newSections={}
+
+        Object.keys(sections).forEach((k)=>{
+            if(k==section){
+                newSections={...newSections, [k]:true}
+            }else{
+                newSections={...newSections, [k]:false}
+            }
+
+        })
+            
+
+        setSections(newSections)
+
+    }
     
         useEffect(()=>{
     
@@ -196,7 +245,7 @@ export function Detail(){
          
          </div>
 
-         <div className="lg:hidden flex flex-col justify-center items-center">
+         <div className="lg:hidden flex flex-col justify-center pb-10 items-center">
             <div className={`relative mt-20 overflow-hidden flex justify-center items-center w-full`}>
                 <button onClick={()=>{
                     moveBlocks("toRight")
@@ -236,6 +285,142 @@ export function Detail(){
             <button className="w-9/10 px-4 py-2 mt-10 m-auto text-md tracking-widest font-bold text-center rounded-4xl border-1 border-white">COMPRA ONLINE</button>
         </div>
 
+
+         </div>
+
+         <div className="w-full  h-auto lg:pt-20 pt-10 flex lg:flex-row flex-col justify-center items-center gap-10 lg:gap-1 ">
+                    <div className="w-full lg:w-1/2 pr-15 flex justify-center ">
+                    
+                    <div className=" w-80 lg:w-100 rounded-full bg-stone-100 relative flex items-center h-80 lg:h-100" >
+                        <div className={`w-5/7 outline-8 flex justify-center items-center outline-white shadow-stone-500 shadow-lg h-5/7 m-auto rounded-full ${giveBackground()}`}>
+
+                        <img  className="w-24/5" src={coffeeProduct1} alt="" />
+
+                                <div  onClick={()=>{
+                                        handleSection("perfil")
+                                    }} className={` ${sections.perfil?"bg-green-400":""} cursor-pointer absolute w-13 h-13 lg:w-15 lg:h-15 rounded-full flex justify-center items-center border-5 border-stone-300 top-0 right-12 lg:top-3 lg:right-12`}>
+                                    <i class={`${sections.perfil?"text-white":""} fa-solid fa-box text-2xl top-0 right-12 lg:top-3 lg:right-12`}></i>
+                                </div>
+                                    <p className=" absolute w-1/10 text-xs top-0 right-[-10px] lg:top-6 lg:right-[-5px] ">PERFIL Y TUESTE</p>
+                                <div  onClick={()=>{
+                                        handleSection("blend")
+                                    }} className={`absolute w-13 h-13 lg:w-15 lg:h-15 rounded-full cursor-pointer ${sections.blend?"bg-green-400":""} flex justify-center items-center border-5 border-stone-300 top-24 right-[-11px]`}>
+                                    <i  class={`${sections.blend?"text-white":""} fa-solid fa-box text-2xl`}></i>
+                                </div>
+                                     <p className=" absolute w-1/10 text-xs top-28 right-[-58px] lg:top-30 lg:right-[-68px] ">BLEND</p>
+
+                                <div  onClick={()=>{
+                                        handleSection("info")
+                                    }} className={`${sections.info?"bg-green-400":""} cursor-pointer absolute w-13 h-13 lg:w-15 lg:h-15 rounded-full flex justify-center items-center border-5 border-stone-300 top-48 right-[-11px] lg:top-60 lg:right-[-17px]`}>
+                                    <i class={`${sections.info?"text-white":""} fa-solid fa-box text-2xl`}></i>
+                                </div>
+                                   <p className=" absolute w-1/10 text-xs top-48 right-[-58px] lg:top-62 lg:right-[-72px] ">INFORMACIÓN DEL PRODUCTO</p>
+                              <div  onClick={()=>{
+                                        handleSection("preparados")
+                                    }} className={`${sections.preparados?"bg-green-400":""} cursor-pointer absolute w-13 h-13 lg:w-15 lg:h-15 rounded-full flex justify-center items-center border-5 border-stone-300 right-12 top-67 lg:top-83 lg:right-12`}>
+                                    <i class={`${sections.preparados?"text-white":""} fa-solid fa-box text-2xl`}></i>
+                                </div>
+                                       <p className=" absolute w-1/10 text-xs top-70 right-[-10px] lg:top-87 lg:right-[-5px] ">PREPARADOS LAVAZZA</p>
+
+                        </div>
+                    </div>
+                    
+                    </div>
+
+                    <div className={`lg:w-1/2 lg:pl-10 w-full ${sections.perfil?"":"hidden"}`}>
+                            <div className="flex flex-col  justify-center pl-15  text-blue-950">
+                                <p className="font-[Corinthia] text-blue-950  font-extrabold  text-3xl mb-3">Perfil y tueste</p>
+                                <p className="font-extrabold tracking-wide text-2xl text-blue-950  mb-3">Rico y con cuerpo</p>
+                                <p className="font-semibold text-lg w-4/5 text-blue-950  mb-3">Crema de café dorada de color cálido, notas de chocolate y frutos secos.</p>
+                                <div className="flex flex-row gap-4">
+                                    <div className="text-blue-950 flex flex-col justify-start gap-2">
+                                        <p className="font-extrabold tracking-widest text-md ">Notas aromáticas</p>
+                                        <p className="font-normal tracking-widest  text-md ">Afrutado, chocolate</p>
+                                    </div>
+                                    <div className="text-blue-950 flex flex-col justify-start gap-2">
+                                        <p className="font-extrabold tracking-widest text-md ">Tueste</p>
+                                        <p className="font-normal tracking-widest  text-md ">Medio</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                    </div>
+                    <div className={`lg:w-1/2 lg:pl-10  ${sections.info?"":"hidden"}  `}>
+                            <div className="flex flex-col  justify-center pl-15  text-blue-950">
+                                <p className="font-[Corinthia] text-blue-950  font-extrabold  text-3xl mb-3">Información del producto</p>
+                                <p className="font-extrabold tracking-wide text-lg text-blue-950  mb-2">Operador de alimentos</p>
+                                <p className="font-semibold text-md w-4/5 text-blue-950  mb-3">Luigi Lavazza S.p.A. - Via Bologna 32 - 10152 Torino - Italy.</p>
+                                
+                                <p className="font-extrabold tracking-wide text-lg text-blue-950  mb-2">Descripción</p>
+                                <p className="font-semibold text-md w-4/5 text-blue-950  mb-3">Café de tueste natural en grano</p>
+                                
+                                <p className="font-extrabold tracking-wide text-lg text-blue-950  mb-2">Cantidad neta</p>
+                                <p className="font-semibold text-md w-4/5 text-blue-950  mb-3">250g</p>
+                                
+                                
+                            </div>
+
+                    </div>
+                    <div className={`lg:w-1/2 lg:pl-10 w-full ${sections.preparados?"":"hidden"}  `}>
+                            <div className="flex flex-col justify-start items-start  lg:justify-center pl-15  text-blue-950">
+                                <p className="font-[Corinthia] text-blue-950  font-extrabold  text-2xl mb-3">Preparados Lavazza</p>
+                                <p className="font-extrabold tracking-wide text-md text-blue-950  mb-2">Ideal para espresso y cafetera italiana</p>
+                                <div className=" hidden lg:flex flex-row justify-start gap-2 ">
+                                    <div className="w-2/5 h-70 flex  items-start">
+                                        <div className="w-full bg-no-repeat bg-center bg-stone-500 bg-blend-multiply bg-cover bg-[url(./assets/home_img/coffee-pot.png)] text-white flex flex-col p-5 h-4/5 justify-end  rounded-xl">
+                                        <p className="font-[Corinthia] text-2xl mb-4 font-bold">Sugerencia de preparación</p>
+                                        <p className="text-md font-extrabold mb-6">Espresso</p>
+                                        <a className="self-end font-bold text-sm tracking-widest hover:underline underline-offset-4 " href="">REPRODUCIR VÍDEO &gt;</a>
+                                        </div>
+                                        </div>
+                                    <div className="w-2/5 h-70 flex  items-start">
+                                        <div className="w-full bg-no-repeat bg-center bg-stone-500 bg-blend-multiply bg-cover bg-[url(./assets/home_img/coffee-shop.jpg)] text-white flex flex-col p-5 h-4/5 justify-end  rounded-xl">
+                                        <p className="font-[Corinthia] text-2xl mb-4 font-bold">Sugerencia de preparación</p>
+                                        <p className="text-md font-extrabold mb-6">Cafetera italiana</p>
+                                        <a className="self-end font-bold text-sm tracking-widest hover:underline underline-offset-4 " href="">REPRODUCIR VÍDEO &gt;</a>
+                                        </div>
+                                        </div>
+                                </div>
+
+                                <div className="lg:hidden w-full  relative h-70 ">
+                                    <Slider addClasses={{
+                                        "widthLeft":"w-3/5 translate-x-[-25%]",
+                                        "widthCenter":"w-3/5 translate-x-[-50%]"
+                                    }} components={[
+              {
+                "boxUrl":"./assets/home_img/coffee-pot.png",
+                "title":"Sugerencias de preparación",
+                "subtitle":"Espresso"
+              },
+              {
+                "boxUrl":"./assets/home_img/coffee-shop.jpg",
+                "title":"Sugerencias de preparación",
+                "subtitle":"Máquina de café italiana"
+              }
+
+          ]}>
+
+                                    </Slider>
+                                </div>
+                                
+                                
+                            </div>
+
+                    </div>
+
+                    <div className={` w-3/4 lg:pl-10 lg:w-1/2 ${sections.blend?"":"hidden"} flex flex-col relative justify-center items-start text-blue-950`}>
+
+                    <img className="absolute lg:top-[-100px] right-0 w-60 sm:w-90 lg:w-130 opacity-70" src={map} alt="" />
+
+                    <p className="font-[Corinthia] text-3xl font-extrabold ">Blend</p>
+
+                        <p className="font-extrabold tracking-wide text-lg text-blue-950  mb-2">Composición</p>
+                    <p className="font-semibold text-md w-4/5 text-blue-950  mb-3">Arábica y robusta</p>
+                        <p className="font-extrabold tracking-wide text-lg text-blue-950  mb-2">Origen</p>
+                    <p className="font-semibold text-md w-4/5 text-blue-950  mb-3">América del Sur, África, Sudeste de Asia</p>
+                    
+                    </div> 
 
          </div>
 
