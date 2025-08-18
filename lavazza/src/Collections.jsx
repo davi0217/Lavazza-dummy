@@ -24,6 +24,16 @@ import {Slider} from './Home.jsx'
 
 export function Collections(){
 
+    let params=useParams()
+
+    const [collection, setCollection]=useState(productsInfo.filter((p)=>{
+        console.log(p.collection.id==params.id)
+       return p.collection.id==params.id
+    })[0].collection)
+
+console.log(params.id+" is the id and the object is "+collection)
+console.log(collection)
+
     const [scrolled, setScrolled]=useState(false)
 
     useEffect(()=>{
@@ -110,7 +120,7 @@ export function Collections(){
             </div>
 
         
-    <div className="h-200 w-full z-0 absolute top-0 bg-stone-300 bg-blend-multiply bg-[url(./assets/home_img/background-coffee-1.jpg)] bg-size-[1070px] sm:bg-size-[1100px] md:bg-size-[1370px] bg-no-repeat bg-center" >
+    <div className={`h-200 w-full z-0 absolute top-0 bg-stone-300 bg-blend-multiply ${collection.backgroundSettings} bg-size-[1070px] sm:bg-size-[1100px] md:bg-size-[1370px] bg-no-repeat bg-center`} >
 
 {/*             <img className=" w-[1300px] h-full object-cover" src={backgroundCoffee1} alt="" />
  */}    </div>
@@ -119,15 +129,15 @@ export function Collections(){
 
         <div className="w-full mt-20 h-110  text-white flex flex-col justify-center items-center">
             <p className="font-[Corinthia] z-10 text-3xl font-bold text-center w-2/3">Collection</p>
-            <p className=" md:text-7xl text-5xl z-10 font-extrabold mt-4 text-center w-3/4">QUALITÀ ROSSA</p>
-            <p className=" text-xl z-10 font-bold mt-4 text-center w-1/2 md:w-3/4">Un café que encarna el apasionado espíritu italiano que te conquista a diario</p>
+            <p className=" md:text-7xl text-5xl z-10 font-extrabold mt-4 text-center w-3/4">{collection?.name}</p>
+            <p className=" text-xl z-10 font-bold mt-4 text-center w-1/2 md:w-3/4">{collection?.description}</p>
         </div>
 
         <section className="relative w-full mt-5 pb-20 bg-red-900 rounded-b-[200px] rounded-t-[150px] md:rounded-t-[250px] ">
-                <CollectionSlider/>
+                <CollectionSlider collection={collection}/>
 
                 <article className="mt-20 mb-20">
-                <CollectionBlocks/>
+                <CollectionBlocks collection={collection}/>
                 </article>
             <div className="w-full text-center ">
             <button className="text-white border-1 border-white tracking-widest text-sm p-5 rounded-4xl text-center w-80">VER TODOS LOS PRODUCTOS</button>
@@ -203,7 +213,7 @@ export function Collections(){
 
 }
 
-function CollectionBlocks(){
+function CollectionBlocks({collection}){
 
     const [positions, setPositions]=useState([
        { "block":{
@@ -292,12 +302,12 @@ function CollectionBlocks(){
         <section className=" hidden lg:flex lg:flex-row lg:gap-2 lg:w-full lg:justify-center lg:h-auto ">
             <div className="w-2/5 grid grid-cols-2 gap-0 h-auto ">
                 <div className="col-span-1 ">
-                    <img className="mb-4 min-h-2/5 rounded-md max-w-4/5 m-auto object-cover" src={productsInfo[0].collection.blocks[0].imgUrl} alt="" />
-                    <img className="min-h-2/5 rounded-md max-w-4/5 m-auto object-cover" src={productsInfo[0].collection.blocks[1].imgUrl} alt="" />
+                    <img className="mb-4 min-h-2/5 rounded-md max-w-4/5 m-auto object-cover" src={collection?.blocks[0].imgUrl} alt="" />
+                    <img className="min-h-2/5 rounded-md max-w-4/5 m-auto object-cover" src={collection?.blocks[1].imgUrl} alt="" />
                 </div>
                 <div className="col-span-1 gap-2 items-end content-end">
-                    <img className="mb-4 min-h-2/5 rounded-md max-w-4/5 m-auto object-cover" src={productsInfo[0].collection.blocks[2].imgUrl} alt="" />
-                    <img  className="min-h-2/5 rounded-md max-w-4/5 m-auto object-cover" src={productsInfo[0].collection.blocks[3].imgUrl} alt="" />
+                    <img className="mb-4 min-h-2/5 rounded-md max-w-4/5 m-auto object-cover" src={collection?.blocks[2].imgUrl} alt="" />
+                    <img  className="min-h-2/5 rounded-md max-w-4/5 m-auto object-cover" src={collection?.blocks[3].imgUrl} alt="" />
                 </div>
             </div>
             <div className="flex flex-wrap pl-10 h-auto w-3/5 gap-4">
@@ -309,7 +319,7 @@ function CollectionBlocks(){
 
             <div className="flex w-full flex-wrap gap-4 ">
 
-                {productsInfo && productsInfo[0].collection.blocks.map((block)=>{
+                {collection && collection?.blocks.map((block)=>{
                     return <div className="w-full max-w-3/8 text-white">
                         <p className=" font-bold mb-1 text-sm tracking-widest">{block.title}</p>
                         <p className="text-sm font-thin tracking-wide ">{block.description}</p>
@@ -333,7 +343,7 @@ function CollectionBlocks(){
             <div className=" hidden md:grid md:grid-cols-2 md:w-8/10 md:m-auto md:h-auto lg:hidden ">
             
                     <div className="col-span-1 h-auto  ">
-                        {productsInfo[0].collection.blocks.slice(0,2).map((block)=>{
+                        {collection?.blocks.slice(0,2).map((block)=>{
                             return <div className="flex flex-row gap-5  flex-nowrap w-full mb-8">
                                 <img className="w-20 h-30 rounded-md object-cover" src={block.imgUrl} alt="" />
                                 <div className="w-4/7 text-white">
@@ -346,7 +356,7 @@ function CollectionBlocks(){
                         })}
                     </div>
                     <div className="col-span-1 h-auto  ">
-                        {productsInfo[0].collection.blocks.slice(2,4).map((block)=>{
+                        {collection?.blocks.slice(2,4).map((block)=>{
                             return <div className="flex flex-row gap-5 flex-nowrap w-full mb-8">
                                 <img className="w-20 h-30 rounded-md object-cover" src={block.imgUrl} alt="" />
                                 <div className="w-4/7 text-white">
@@ -368,10 +378,10 @@ function CollectionBlocks(){
 
                          <div className="flex p-6 px-15 w-full gap-4">
 
-                                <img className="w-20 h-25 rounded-md object-cover" src={productsInfo[0].collection.blocks[2].imgUrl} alt="" />
+                                <img className="w-20 h-25 rounded-md object-cover" src={collection?.blocks[2].imgUrl} alt="" />
                                 <div className="w-4/5">
-                                      <p className="text-sm font-extrabold mb-3 tracking-widest">{productsInfo[0].collection.blocks[2].title}</p>
-                                    <p className="text-sm font-thin tracking-wide">{productsInfo[0].collection.blocks[2].description}</p>
+                                      <p className="text-sm font-extrabold mb-3 tracking-widest">{collection?.blocks[2].title}</p>
+                                    <p className="text-sm font-thin tracking-wide">{collection?.blocks[2].description}</p>
                                 </div>
 
                             </div>
@@ -379,10 +389,10 @@ function CollectionBlocks(){
                          <div className="flex p-6 px-15 w-full gap-4">
 
                                 <div className="w-4/5">
-                                      <p className="text-sm font-extrabold mb-3 tracking-widest">{productsInfo[0].collection.blocks[3].title}</p>
-                                    <p className="text-sm font-thin tracking-wide">{productsInfo[0].collection.blocks[3].description}</p>
+                                      <p className="text-sm font-extrabold mb-3 tracking-widest">{collection?.blocks[3].title}</p>
+                                    <p className="text-sm font-thin tracking-wide">{collection?.blocks[3].description}</p>
                                 </div>
-                                <img className="w-20 h-25 rounded-md object-cover" src={productsInfo[0].collection.blocks[3].imgUrl} alt="" />
+                                <img className="w-20 h-25 rounded-md object-cover" src={collection?.blocks[3].imgUrl} alt="" />
 
                             </div>
                         
@@ -393,10 +403,10 @@ function CollectionBlocks(){
 
                          <div className="flex p-6 px-15 w-full gap-4">
 
-                                <img className="w-20 h-25 rounded-md object-cover" src={productsInfo[0].collection.blocks[0].imgUrl} alt="" />
+                                <img className="w-20 h-25 rounded-md object-cover" src={collection?.blocks[0].imgUrl} alt="" />
                                 <div className="w-4/5">
-                                      <p className="text-sm font-extrabold mb-3 tracking-widest">{productsInfo[0].collection.blocks[0].title}</p>
-                                    <p className="text-sm font-thin tracking-wide">{productsInfo[0].collection.blocks[0].description}</p>
+                                      <p className="text-sm font-extrabold mb-3 tracking-widest">{collection?.blocks[0].title}</p>
+                                    <p className="text-sm font-thin tracking-wide">{collection?.blocks[0].description}</p>
                                 </div>
 
                             </div>
@@ -404,10 +414,10 @@ function CollectionBlocks(){
                          <div className="flex p-6 px-15 w-full gap-4">
 
                                 <div className="w-4/5">
-                                      <p className="text-sm font-extrabold mb-3 tracking-widest">{productsInfo[0].collection.blocks[1].title}</p>
-                                    <p className="text-sm font-thin tracking-wide">{productsInfo[0].collection.blocks[1].description}</p>
+                                      <p className="text-sm font-extrabold mb-3 tracking-widest">{collection?.blocks[1].title}</p>
+                                    <p className="text-sm font-thin tracking-wide">{collection?.blocks[1].description}</p>
                                 </div>
-                                <img className="w-20 h-25 rounded-md object-cover" src={productsInfo[0].collection.blocks[1].imgUrl} alt="" />
+                                <img className="w-20 h-25 rounded-md object-cover" src={collection?.blocks[1].imgUrl} alt="" />
 
                             </div>
                         
@@ -439,7 +449,7 @@ function CollectionBlocks(){
 }
 
 
-function CollectionSlider(){
+function CollectionSlider({collection}){
 
     const [productsToShow, setProductsToShow]=useState([])
 
@@ -450,7 +460,7 @@ function CollectionSlider(){
         let newProducts=[]
         let position=0
 
-        productsInfo[1].collection.products.forEach((product)=>{
+        collection?.products.forEach((product)=>{
             let included=false
             console.log(product)
             

@@ -31,6 +31,10 @@ import {Slider} from './Home.jsx'
 
 export function Detail(){
 
+    let params=useParams()
+
+    const[product, setProduct]=useState()
+
      const [scrolled, setScrolled]=useState(false)
 
      const [positions, setPositions]=useState([
@@ -51,6 +55,23 @@ export function Detail(){
 
         }
     )
+
+    useEffect(()=>{
+
+        let collection=productsInfo.filter((p)=>{
+            return p.collection.id==params.collection
+        })
+        
+
+        let product=collection[0]?.collection.products.filter((pr)=>{
+            return pr.id==params.product
+        })
+
+        setProduct(product[0])
+
+        console.log(product[0])
+
+    },[])
 
     const giveBackground=function(){
 
@@ -220,21 +241,21 @@ export function Detail(){
 
         <div className="w-full text-white bg-cover bg-blend-multiply bg-stone-500 bg-[url(./assets/home_img/background-coffee-1.jpg))] flex flex-col justify-center  z-20 lg:bg-red-100 lg:w-full lg:mt-40 lg:h-150 lg:flex lg:flex-row  ">
             <div className=" hidden  lg:w-2/3 lg:z-10 lg:h-full  lg:flex lg:items-center ">
-                <img className="w-full  m-auto h-4/5 object-contain" src={productsInfo[0].collection.products[0].imgUrl} alt="" />
+                <img className="w-full  m-auto h-4/5 object-contain" src={product?.imgUrl} alt="" />
             </div>
          
 
          <div className="hidden  lg:w-1/3 lg:z-10 lg:pr-3 lg:text-white lg:flex lg:flex-col lg:gap-5 lg:justify-start lg:items-start ">
 
             <div className="flex z-10 pr-10 flex-row w-full justify-between">
-                <p className="text-stone-50 font-bold  text-xs opacity-80 tracking-wide">{productsInfo[0].collection.products[0].category}</p>
-                <p className=" font-bold text-xs tracking-wide">Intensidad {productsInfo[0].collection.products[0].intensity}/10</p>
+                <p className="text-stone-50 font-bold  text-xs opacity-80 tracking-wide">{product?.category}</p>
+                <p className=" font-bold text-xs tracking-wide">Intensidad {product?.intensity}/10</p>
             </div>
 
-            <p className="w-full text-4xl mb-3 font-bold">{productsInfo[0].collection.products[0].name}</p>
-            <p className="w-full text-sm text-stone-100 font-semibold">{productsInfo[0].collection.products[0].description}</p>
+            <p className="w-full text-4xl mb-3 font-bold">{product?.name}</p>
+            <p className="w-full text-sm text-stone-100 font-semibold">{product?.perfilDescription}</p>
             <div className="w-full flex flex-row gap-10 flex-wrap">
-            {productsInfo[0].collection.products[0].options.map((o)=>{
+            {product?.options.map((o)=>{
                     return <button className="w-1/4 min-w-22 p-1 rounded-xl bg-white text-blue-950 font-bold tracking-widest">
                        <i class="fa-solid fa-box"></i> {o}
                     </button>
@@ -251,12 +272,12 @@ export function Detail(){
                     moveBlocks("toRight")
                 }} className={`cursor-pointer ${positions[1].position>1?"hidden":""} rounded-full h-8 pb-1 pr-1 text-center border-1 border-white text-white font-bold text-xl w-8 `}>&lt;</button>
                 <div className={` ${givePosition(positions[0].position)} p-10  flex items-center transition-transform h-100 max-w-[700px] duration-300 ease-in-out w-4/5  text-center`}>
-                    <img src={productsInfo[0].collection.products[0].imgUrl} alt="" />
+                    <img src={product?.imgUrl} alt="" />
                 </div>
                 <div className={`${givePosition(positions[1].position)} p-10   flex items-center transition-all h-100 duration-300 ease-in-out  w-4/5 z-10  text-stone-50 font-semibold text-center`}>
                     <p>
 
-                    {productsInfo[0].collection.products[0].description}
+                    {product?.perfilDescription}
                     </p>
                 </div>
              <button onClick={()=>{
@@ -267,16 +288,16 @@ export function Detail(){
             </div>
 
          <div className="w-full justify-between px-5 flex ">
-                <p className="text-stone-50 font-bold  text-xs opacity-80 tracking-wide">{productsInfo[0].collection.products[0].category}</p>
-                <p className=" font-bold text-xs tracking-wide">Intensidad {productsInfo[0].collection.products[0].intensity}/10</p>
+                <p className="text-stone-50 font-bold  text-xs opacity-80 tracking-wide">{product?.category}</p>
+                <p className=" font-bold text-xs tracking-wide">Intensidad {product?.intensity}/10</p>
          </div>
 
-            <p className="w-full text-center text-4xl mb-3 mt-10 font-bold">{productsInfo[0].collection.products[0].name}</p>
+            <p className="w-full text-center text-4xl mb-3 mt-10 font-bold">{product?.name}</p>
 
                 <span className="w-1/4 bg-white justify-center px-2 py-1 text-blue-950 text-md mt-5 rounded-md m-auto flex gap-1">
                 <i class="fa-solid fa-box"></i>
                 <select name="options" id="options">
-                    {productsInfo[0].collection.products[0].options.map((o)=>{
+                    {product?.options.map((o)=>{
                         return <option value={o}>{o}</option>
                     })}
                 </select>
@@ -330,33 +351,33 @@ export function Detail(){
                     <div className={`lg:w-1/2 lg:pl-10 w-full ${sections.perfil?"":"hidden"}`}>
                             <div className="flex flex-col  justify-center pl-15  text-blue-950">
                                 <p className="font-[Corinthia] text-blue-950  font-extrabold  text-3xl mb-3">Perfil y tueste</p>
-                                <p className="font-extrabold tracking-wide text-2xl text-blue-950  mb-3">Rico y con cuerpo</p>
-                                <p className="font-semibold text-lg w-4/5 text-blue-950  mb-3">Crema de café dorada de color cálido, notas de chocolate y frutos secos.</p>
+                                <p className="font-extrabold tracking-wide text-2xl text-blue-950  mb-3">{product?.perfilTitle}</p>
+                                <p className="font-semibold text-lg w-4/5 text-blue-950  mb-3">{product?.perfilDescription}</p>
                                 <div className="flex flex-row gap-4">
                                     <div className="text-blue-950 flex flex-col justify-start gap-2">
                                         <p className="font-extrabold tracking-widest text-md ">Notas aromáticas</p>
-                                        <p className="font-normal tracking-widest  text-md ">Afrutado, chocolate</p>
+                                        <p className="font-normal tracking-widest  text-md ">{product?.notes}</p>
                                     </div>
                                     <div className="text-blue-950 flex flex-col justify-start gap-2">
                                         <p className="font-extrabold tracking-widest text-md ">Tueste</p>
-                                        <p className="font-normal tracking-widest  text-md ">Medio</p>
+                                        <p className="font-normal tracking-widest  text-md ">{product?.tueste}</p>
                                     </div>
                                 </div>
                                 
                             </div>
 
                     </div>
-                    <div className={`lg:w-1/2 lg:pl-10  ${sections.info?"":"hidden"}  `}>
+                    <div className={`lg:w-1/2 lg:pl-10 w-full  ${sections.info?"":"hidden"}  `}>
                             <div className="flex flex-col  justify-center pl-15  text-blue-950">
                                 <p className="font-[Corinthia] text-blue-950  font-extrabold  text-3xl mb-3">Información del producto</p>
                                 <p className="font-extrabold tracking-wide text-lg text-blue-950  mb-2">Operador de alimentos</p>
                                 <p className="font-semibold text-md w-4/5 text-blue-950  mb-3">Luigi Lavazza S.p.A. - Via Bologna 32 - 10152 Torino - Italy.</p>
                                 
                                 <p className="font-extrabold tracking-wide text-lg text-blue-950  mb-2">Descripción</p>
-                                <p className="font-semibold text-md w-4/5 text-blue-950  mb-3">Café de tueste natural en grano</p>
+                                <p className="font-semibold text-md w-4/5 text-blue-950  mb-3">{product?.name}</p>
                                 
                                 <p className="font-extrabold tracking-wide text-lg text-blue-950  mb-2">Cantidad neta</p>
-                                <p className="font-semibold text-md w-4/5 text-blue-950  mb-3">250g</p>
+                                <p className="font-semibold text-md w-4/5 text-blue-950  mb-3">{product?.quantity}</p>
                                 
                                 
                             </div>

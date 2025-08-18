@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import {useParams, Link} from 'react-router-dom'
 
 import lavazza from './assets/home_img/lavazza-logo-white.png'
@@ -12,6 +12,9 @@ import {Footer} from './Home.jsx'
 
 import { productsDisplay } from './products-display.js'
 
+import {ProductsContext} from './App.jsx'
+
+
  
 export function Products(){
 
@@ -19,7 +22,19 @@ export function Products(){
     console.log(params.category)
 
     const [display, setDisplay]=useState()
+    const [productsToShow, setProductsToShow]=useState()
     const [menuActive, setMenuActive]=useState(false)
+
+    const useCart=useContext(ProductsContext)
+
+   const {cart, addToCart, removeFromCart}=useCart()
+
+   cart.forEach((c)=>{
+
+    console.log(c.quantity)
+   })
+
+   
 
     useEffect(()=>{
         setMenuActive(false)
@@ -30,6 +45,26 @@ export function Products(){
                 setDisplay(productsDisplay[d])
             }
         })
+
+        let newProducts=[];
+
+        productsInfo.forEach((p)=>{
+            if(params.category=="cafe"){
+                p.collection.products.forEach((pr)=>{
+                   
+                        newProducts.push(pr)
+                })
+            }else{
+                p.collection.products.forEach((pr)=>{
+                    if(pr.categoryLink==params.category){
+                        newProducts.push(pr)
+                    }
+                })
+            }
+        })
+        console.log(newProducts)
+
+        setProductsToShow(newProducts)
 
     },[params.category])
 
@@ -137,146 +172,30 @@ export function Products(){
 
                   <article className="flex flex-wrap justify-center gap-3 w-full pt-10">
 
-                    <div className=" w-80 shrink-0 h-130 rounded-md bg-stone-50 flex flex-col items-center p-5 ">
-                            <img className="w-50 mt-10" src={productsInfo[0].collection.products[0].imgUrl} alt="" />
-                            <p className="text-sm text-blue-950 tracking-widest mb-5">{productsInfo[0].collection.products[0].category}</p>
-                            <p className="text-xl text-blue-950 font-extrabold mb-2">{productsInfo[0].collection.products[0].name}</p>
-                            <p className="text-xs text-blue-950 font-semibold">Intensidad {productsInfo[0].collection.products[0].intensity}/10</p>    
-                            <div className="w-19/20 bg-amber-100 rounded-xl mt-10 h-27 pt-8 pl-5">
+                        {productsToShow?.map((p)=>{
+
+                            return <div className=" w-80 relative shrink-0 h-130 rounded-md bg-stone-50 flex flex-col items-center p-5 ">
+                            <img className="w-50 min-h-40 object-contain  mt-10" src={p.imgUrl} alt="" />
+                            <p className="text-sm text-blue-950 tracking-widest mb-5">{p.category}</p>
+                            <p className="text-xl min-h-15 text-blue-950 font-extrabold">{p.name}</p>
+                            <p className="text-xs text-blue-950 font-semibold">Intensidad {p.intensity}/10</p>    
+                            <div className="w-19/20  bg-amber-100 flex items-center rounded-xl mt-10 h-27 pl-5 ">
                                 <div className="w-1/3 flex items-center gap-2 bg-white rounded-xl h-10 text-blue-950 font-bold text-left pl-2" >
                                 <i className="fa-solid fa-box text-blue-950"></i>
-                                <span className=" text-blue-950 " value=""> {productsInfo[0].collection.products[0].quantity}</span>        
+                                <span className=" text-blue-950 " value=""> {p.quantity}</span>        
                                 </div>
                             </div>
                                 <button className="w-19/20 bg-blue-950 hover:bg-blue-900 transition-colors ease-in text-white rounded-4xl mt-5 p-2 font-extrabold tracking-widest text-sm">COMPRA ONLINE </button>
-                    
-                          </div>
-                    <div className=" w-80 shrink-0 h-130 rounded-md bg-stone-50 flex flex-col items-center p-5 ">
-                            <img className="w-50 mt-10" src={productsInfo[0].collection.products[0].imgUrl} alt="" />
-                            <p className="text-sm text-blue-950 tracking-widest mb-5">{productsInfo[0].collection.products[0].category}</p>
-                            <p className="text-xl text-blue-950 font-extrabold mb-2">{productsInfo[0].collection.products[0].name}</p>
-                            <p className="text-xs text-blue-950 font-semibold">Intensidad {productsInfo[0].collection.products[0].intensity}/10</p>    
-                            <div className="w-19/20 bg-amber-100 rounded-xl mt-10 h-27 pt-8 pl-5">
-                                <div className="w-1/3 flex items-center gap-2 bg-white rounded-xl h-10 text-blue-950 font-bold text-left pl-2" >
-                                <i className="fa-solid fa-box text-blue-950"></i>
-                                <span className=" text-blue-950 " value=""> {productsInfo[0].collection.products[0].quantity}</span>        
+                                <div className="absolute top-2 right-2 w-1/3 flex items-center justify-between pr-2">
+                                <p className="text-blue-950 font-extrabold tracking-widest text-sm">{p.price} €</p>
+                                <i onClick={()=>{
+                                    addToCart(p)
+                                }} class=" cursor-pointer fa-solid fa-cart-shopping p-2 rounded-md hover:bg-blue-950 hover:text-white"></i>
                                 </div>
-                            </div>
-                                <button className="w-19/20 bg-blue-950 hover:bg-blue-900 transition-colors ease-in text-white rounded-4xl mt-5 p-2 font-extrabold tracking-widest text-sm">COMPRA ONLINE </button>
-                    
                           </div>
-                    <div className=" w-80 shrink-0 h-130 rounded-md bg-stone-50 flex flex-col items-center p-5 ">
-                            <img className="w-50 mt-10" src={productsInfo[0].collection.products[0].imgUrl} alt="" />
-                            <p className="text-sm text-blue-950 tracking-widest mb-5">{productsInfo[0].collection.products[0].category}</p>
-                            <p className="text-xl text-blue-950 font-extrabold mb-2">{productsInfo[0].collection.products[0].name}</p>
-                            <p className="text-xs text-blue-950 font-semibold">Intensidad {productsInfo[0].collection.products[0].intensity}/10</p>    
-                            <div className="w-19/20 bg-amber-100 rounded-xl mt-10 h-27 pt-8 pl-5">
-                                <div className="w-1/3 flex items-center gap-2 bg-white rounded-xl h-10 text-blue-950 font-bold text-left pl-2" >
-                                <i className="fa-solid fa-box text-blue-950"></i>
-                                <span className=" text-blue-950 " value=""> {productsInfo[0].collection.products[0].quantity}</span>        
-                                </div>
-                            </div>
-                                <button className="w-19/20 bg-blue-950 hover:bg-blue-900 transition-colors ease-in text-white rounded-4xl mt-5 p-2 font-extrabold tracking-widest text-sm">COMPRA ONLINE </button>
+                        })}
+
                     
-                          </div>
-                    <div className=" w-80 shrink-0 h-130 rounded-md bg-stone-50 flex flex-col items-center p-5 ">
-                            <img className="w-50 mt-10" src={productsInfo[0].collection.products[0].imgUrl} alt="" />
-                            <p className="text-sm text-blue-950 tracking-widest mb-5">{productsInfo[0].collection.products[0].category}</p>
-                            <p className="text-xl text-blue-950 font-extrabold mb-2">{productsInfo[0].collection.products[0].name}</p>
-                            <p className="text-xs text-blue-950 font-semibold">Intensidad {productsInfo[0].collection.products[0].intensity}/10</p>    
-                            <div className="w-19/20 bg-amber-100 rounded-xl mt-10 h-27 pt-8 pl-5">
-                                <div className="w-1/3 flex items-center gap-2 bg-white rounded-xl h-10 text-blue-950 font-bold text-left pl-2" >
-                                <i className="fa-solid fa-box text-blue-950"></i>
-                                <span className=" text-blue-950 " value=""> {productsInfo[0].collection.products[0].quantity}</span>        
-                                </div>
-                            </div>
-                                <button className="w-19/20 bg-blue-950 hover:bg-blue-900 transition-colors ease-in text-white rounded-4xl mt-5 p-2 font-extrabold tracking-widest text-sm">COMPRA ONLINE </button>
-                    
-                          </div>
-                    <div className=" w-80 shrink-0 h-130 rounded-md bg-stone-50 flex flex-col items-center p-5 ">
-                            <img className="w-50 mt-10" src={productsInfo[0].collection.products[0].imgUrl} alt="" />
-                            <p className="text-sm text-blue-950 tracking-widest mb-5">{productsInfo[0].collection.products[0].category}</p>
-                            <p className="text-xl text-blue-950 font-extrabold mb-2">{productsInfo[0].collection.products[0].name}</p>
-                            <p className="text-xs text-blue-950 font-semibold">Intensidad {productsInfo[0].collection.products[0].intensity}/10</p>    
-                            <div className="w-19/20 bg-amber-100 rounded-xl mt-10 h-27 pt-8 pl-5">
-                                <div className="w-1/3 flex items-center gap-2 bg-white rounded-xl h-10 text-blue-950 font-bold text-left pl-2" >
-                                <i className="fa-solid fa-box text-blue-950"></i>
-                                <span className=" text-blue-950 " value=""> {productsInfo[0].collection.products[0].quantity}</span>        
-                                </div>
-                            </div>
-                                <button className="w-19/20 bg-blue-950 hover:bg-blue-900 transition-colors ease-in text-white rounded-4xl mt-5 p-2 font-extrabold tracking-widest text-sm">COMPRA ONLINE </button>
-                    
-                          </div>
-                    <div className=" w-80 shrink-0 h-130 rounded-md bg-stone-50 flex flex-col items-center p-5 ">
-                            <img className="w-50 mt-10" src={productsInfo[0].collection.products[0].imgUrl} alt="" />
-                            <p className="text-sm text-blue-950 tracking-widest mb-5">{productsInfo[0].collection.products[0].category}</p>
-                            <p className="text-xl text-blue-950 font-extrabold mb-2">{productsInfo[0].collection.products[0].name}</p>
-                            <p className="text-xs text-blue-950 font-semibold">Intensidad {productsInfo[0].collection.products[0].intensity}/10</p>    
-                            <div className="w-19/20 bg-amber-100 rounded-xl mt-10 h-27 pt-8 pl-5">
-                                <div className="w-1/3 flex items-center gap-2 bg-white rounded-xl h-10 text-blue-950 font-bold text-left pl-2" >
-                                <i className="fa-solid fa-box text-blue-950"></i>
-                                <span className=" text-blue-950 " value=""> {productsInfo[0].collection.products[0].quantity}</span>        
-                                </div>
-                            </div>
-                                <button className="w-19/20 bg-blue-950 hover:bg-blue-900 transition-colors ease-in text-white rounded-4xl mt-5 p-2 font-extrabold tracking-widest text-sm">COMPRA ONLINE </button>
-                    
-                          </div>
-                    <div className=" w-80 shrink-0 h-130 rounded-md bg-stone-50 flex flex-col items-center p-5 ">
-                            <img className="w-50 mt-10" src={productsInfo[0].collection.products[0].imgUrl} alt="" />
-                            <p className="text-sm text-blue-950 tracking-widest mb-5">{productsInfo[0].collection.products[0].category}</p>
-                            <p className="text-xl text-blue-950 font-extrabold mb-2">{productsInfo[0].collection.products[0].name}</p>
-                            <p className="text-xs text-blue-950 font-semibold">Intensidad {productsInfo[0].collection.products[0].intensity}/10</p>    
-                            <div className="w-19/20 bg-amber-100 rounded-xl mt-10 h-27 pt-8 pl-5">
-                                <div className="w-1/3 flex items-center gap-2 bg-white rounded-xl h-10 text-blue-950 font-bold text-left pl-2" >
-                                <i className="fa-solid fa-box text-blue-950"></i>
-                                <span className=" text-blue-950 " value=""> {productsInfo[0].collection.products[0].quantity}</span>        
-                                </div>
-                            </div>
-                                <button className="w-19/20 bg-blue-950 hover:bg-blue-900 transition-colors ease-in text-white rounded-4xl mt-5 p-2 font-extrabold tracking-widest text-sm">COMPRA ONLINE </button>
-                    
-                          </div>
-                    <div className=" w-80 shrink-0 h-130 rounded-md bg-stone-50 flex flex-col items-center p-5 ">
-                            <img className="w-50 mt-10" src={productsInfo[0].collection.products[0].imgUrl} alt="" />
-                            <p className="text-sm text-blue-950 tracking-widest mb-5">{productsInfo[0].collection.products[0].category}</p>
-                            <p className="text-xl text-blue-950 font-extrabold mb-2">{productsInfo[0].collection.products[0].name}</p>
-                            <p className="text-xs text-blue-950 font-semibold">Intensidad {productsInfo[0].collection.products[0].intensity}/10</p>    
-                            <div className="w-19/20 bg-amber-100 rounded-xl mt-10 h-27 pt-8 pl-5">
-                                <div className="w-1/3 flex items-center gap-2 bg-white rounded-xl h-10 text-blue-950 font-bold text-left pl-2" >
-                                <i className="fa-solid fa-box text-blue-950"></i>
-                                <span className=" text-blue-950 " value=""> {productsInfo[0].collection.products[0].quantity}</span>        
-                                </div>
-                            </div>
-                                <button className="w-19/20 bg-blue-950 hover:bg-blue-900 transition-colors ease-in text-white rounded-4xl mt-5 p-2 font-extrabold tracking-widest text-sm">COMPRA ONLINE </button>
-                    
-                          </div>
-                    <div className=" w-80 shrink-0 h-130 rounded-md bg-stone-50 flex flex-col items-center p-5 ">
-                            <img className="w-50 mt-10" src={productsInfo[0].collection.products[0].imgUrl} alt="" />
-                            <p className="text-sm text-blue-950 tracking-widest mb-5">{productsInfo[0].collection.products[0].category}</p>
-                            <p className="text-xl text-blue-950 font-extrabold mb-2">{productsInfo[0].collection.products[0].name}</p>
-                            <p className="text-xs text-blue-950 font-semibold">Intensidad {productsInfo[0].collection.products[0].intensity}/10</p>    
-                            <div className="w-19/20 bg-amber-100 rounded-xl mt-10 h-27 pt-8 pl-5">
-                                <div className="w-1/3 flex items-center gap-2 bg-white rounded-xl h-10 text-blue-950 font-bold text-left pl-2" >
-                                <i className="fa-solid fa-box text-blue-950"></i>
-                                <span className=" text-blue-950 " value=""> {productsInfo[0].collection.products[0].quantity}</span>        
-                                </div>
-                            </div>
-                                <button className="w-19/20 bg-blue-950 hover:bg-blue-900 transition-colors ease-in text-white rounded-4xl mt-5 p-2 font-extrabold tracking-widest text-sm">COMPRA ONLINE </button>
-                    
-                          </div>
-                    <div className=" w-80 shrink-0 h-130 rounded-md bg-stone-50 flex flex-col items-center p-5 ">
-                            <img className="w-50 mt-10" src={productsInfo[0].collection.products[0].imgUrl} alt="" />
-                            <p className="text-sm text-blue-950 tracking-widest mb-5">{productsInfo[0].collection.products[0].category}</p>
-                            <p className="text-xl text-blue-950 font-extrabold mb-2">{productsInfo[0].collection.products[0].name}</p>
-                            <p className="text-xs text-blue-950 font-semibold">Intensidad {productsInfo[0].collection.products[0].intensity}/10</p>    
-                            <div className="w-19/20 bg-amber-100 rounded-xl mt-10 h-27 pt-8 pl-5">
-                                <div className="w-1/3 flex items-center gap-2 bg-white rounded-xl h-10 text-blue-950 font-bold text-left pl-2" >
-                                <i className="fa-solid fa-box text-blue-950"></i>
-                                <span className=" text-blue-950 " value=""> {productsInfo[0].collection.products[0].quantity}</span>        
-                                </div>
-                            </div>
-                                <button className="w-19/20 bg-blue-950 hover:bg-blue-900 transition-colors ease-in text-white rounded-4xl mt-5 p-2 font-extrabold tracking-widest text-sm">COMPRA ONLINE </button>
-                    
-                          </div>
 
 
                   </article>
