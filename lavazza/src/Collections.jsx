@@ -78,6 +78,15 @@ console.log(collection)
       setMenuActive(state)
     }
 
+    useEffect(()=>{
+
+       setCollection(productsInfo.filter((p)=>{
+      setMenuActive(false)
+       return p.collection.id==params.id
+    })[0].collection)
+
+    },[params.id])
+
 
     return <>
     
@@ -112,7 +121,7 @@ console.log(collection)
                         handleMenuActive(true)
                     }}>CONTACTO</a>
               </nav>
-              <i className={`fa-solid fa-magnifying-glass flex-none basis-10 text-center text-2xl ${scrolled?"text-blue-900":"text-stone-50"} absolute right-40 lg:right-5  z-10`}></i>
+              <Link to="/cart"><i className={`fa-solid fa-magnifying-glass flex-none basis-10 text-center text-2xl ${scrolled?"text-blue-900":"text-stone-50"} absolute right-40 top-[25px] lg:right-5  z-10`}></i></Link>
               <i className={`fa-solid fa-bars-staggered flex  ${scrolled?"text-blue-900":"text-stone-50"} absolute right-12 lg:!hidden`} onClick={(e)=>{
                         e.preventDefault()
                         handleMenuActive(true)
@@ -120,7 +129,7 @@ console.log(collection)
             </div>
 
         
-    <div className={`h-200 w-full z-0 absolute top-0 bg-stone-300 bg-blend-multiply ${collection.backgroundSettings} bg-size-[1070px] sm:bg-size-[1100px] md:bg-size-[1370px] bg-no-repeat bg-center`} >
+    <div className={`h-200 w-full z-0 absolute top-0 bg-stone-300 bg-blend-multiply ${collection.backgroundSettings} bg-size-[1070px] sm:bg-size-[1200px] md:bg-size-[1370px] bg-no-repeat bg-center`} >
 
 {/*             <img className=" w-[1300px] h-full object-cover" src={backgroundCoffee1} alt="" />
  */}    </div>

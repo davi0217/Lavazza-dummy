@@ -113,7 +113,7 @@
        "products":[
          {
            "imgUrl":coffeePowder,
-           "id":1,
+           "id":4,
            "category":"CAFÉ MOLIDO",
            "categoryLink":"molido",
            "name":"Espresso Italiano Classico molido",
@@ -132,7 +132,7 @@
          },
          {
            "imgUrl":coffeeGrano,
-           "id":2,
+           "id":5,
            "category":"GRANOS DE CAFÉ",
            "categoryLink":"grano",
            "sliderSubtitle":"Espresso Barista es la expresión del conocimiento experto de Lavazza en la elaboración de un café de calidad superior, para que te sientas como un auténtico barista. Disfruta del auténtico espresso de tueste italiano.",
@@ -184,7 +184,7 @@
        "products":[
          {
            "imgUrl":coffeeCapsule,
-           "id":1,
+           "id":6,
            "category":"CAPSULAS COMPATIBLES",
            "categoryLink":"capsula",
            "sliderSubtitle":"La armonía perfecta de los mejores granos de café Arábica con notas afrutadas y florales. Deléitate con la verdadera esencia de la elegancia y el sabor con nuestra ¡Tierra! for Planet.",
@@ -203,7 +203,7 @@
          },
          {
            "imgUrl":coffeeGrano,
-           "id":2,
+           "id":7,
            "category":"GRANOS DE CAFÉ",
            "categoryLink":"grano",
            "sliderSubtitle":"Elige granos de café Tierra y disfruta de café recién molido con el inconfundible sabor a tueste italiano",

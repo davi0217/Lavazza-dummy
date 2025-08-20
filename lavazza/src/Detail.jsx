@@ -24,8 +24,10 @@ import {Footer} from './Home.jsx'
 import {Menu} from './Products.jsx'
 
 import { productsInfo } from './products-info.js'
+import { backgrounds } from './backgrounds.js'
 
 import {Slider} from './Home.jsx'
+
 
 
 
@@ -226,7 +228,7 @@ export function Detail(){
                                 handleMenuActive(true)
                             }}>CONTACTO</a>
                       </nav>
-                      <i className={`fa-solid fa-magnifying-glass flex-none basis-10 text-center text-2xl ${scrolled?"text-blue-900":"text-stone-50"} absolute right-40 lg:right-5  z-10`}></i>
+              <Link to="/cart"><i className={`fa-solid fa-magnifying-glass flex-none basis-10 text-center text-2xl ${scrolled?"text-blue-900":"text-stone-50"} absolute right-40 lg:right-5  z-10`}></i></Link>
                       <i className={`fa-solid fa-bars-staggered flex  ${scrolled?"text-blue-900":"text-stone-50"} absolute right-12 lg:!hidden`} onClick={(e)=>{
                                 e.preventDefault()
                                 handleMenuActive(true)
@@ -309,7 +311,7 @@ export function Detail(){
 
          </div>
 
-         <div className="w-full  h-auto lg:pt-20 pt-10 flex lg:flex-row flex-col justify-center items-center gap-10 lg:gap-1 ">
+         <div className="w-full z-10  pb-30 lg:pb-40 relative rounded-b-[200px] bg-stone-500  h-auto lg:pt-20 pt-10 flex lg:flex-row flex-col justify-center items-center gap-10 lg:gap-1 ">
                     <div className="w-full lg:w-1/2 pr-15 flex justify-center ">
                     
                     <div className=" w-80 lg:w-100 rounded-full bg-stone-100 relative flex items-center h-80 lg:h-100" >
@@ -384,9 +386,9 @@ export function Detail(){
 
                     </div>
                     <div className={`lg:w-1/2 lg:pl-10 w-full ${sections.preparados?"":"hidden"}  `}>
-                            <div className="flex flex-col justify-start items-start  lg:justify-center pl-15  text-blue-950">
-                                <p className="font-[Corinthia] text-blue-950  font-extrabold  text-2xl mb-3">Preparados Lavazza</p>
-                                <p className="font-extrabold tracking-wide text-md text-blue-950  mb-2">Ideal para espresso y cafetera italiana</p>
+                            <div className="flex flex-col justify-start items-start  lg:justify-center   text-blue-950">
+                                <p className="font-[Corinthia] text-blue-950 pl-15  font-extrabold  text-2xl mb-3">Preparados Lavazza</p>
+                                <p className="font-extrabold tracking-wide text-md pl-15 text-blue-950  mb-2">Ideal para espresso y cafetera italiana</p>
                                 <div className=" hidden lg:flex flex-row justify-start gap-2 ">
                                     <div className="w-2/5 h-70 flex  items-start">
                                         <div className="w-full bg-no-repeat bg-center bg-stone-500 bg-blend-multiply bg-cover bg-[url(./assets/home_img/coffee-pot.png)] text-white flex flex-col p-5 h-4/5 justify-end  rounded-xl">
@@ -404,7 +406,7 @@ export function Detail(){
                                         </div>
                                 </div>
 
-                                <div className="lg:hidden w-full  relative h-70 ">
+                                <div className="lg:hidden w-full  m-auto  relative h-70 ">
                                     <Slider addClasses={{
                                         "widthLeft":"w-3/5 translate-x-[-25%]",
                                         "widthCenter":"w-3/5 translate-x-[-50%]"
@@ -437,13 +439,106 @@ export function Detail(){
                     <p className="font-[Corinthia] text-3xl font-extrabold ">Blend</p>
 
                         <p className="font-extrabold tracking-wide text-lg text-blue-950  mb-2">Composición</p>
-                    <p className="font-semibold text-md w-4/5 text-blue-950  mb-3">Arábica y robusta</p>
+                    <p className="font-semibold text-md w-4/5 text-blue-950  mb-3">{product?.composicion}</p>
                         <p className="font-extrabold tracking-wide text-lg text-blue-950  mb-2">Origen</p>
-                    <p className="font-semibold text-md w-4/5 text-blue-950  mb-3">América del Sur, África, Sudeste de Asia</p>
+                    <p className="font-semibold text-md w-4/5 text-blue-950  mb-3">{product?.origen}</p>
                     
                     </div> 
+            <img className="m-auto lg:absolute lg:bottom-50  w-50 mt-20 mb-[-260px]" src={splash} alt="" />
 
          </div>
+          <div className="w-full mt-[-200px] h-210 flex flex-col items-center justify-center bg-stone-500 bg-blend-multiply bg-[url('./assets/collections/woman-drinking.jpg')]  bg-cover bg-center relative z-0 md:bg-right">
+        <p className="w-2/3 font-bold mb-5 text-white font-[Corinthia]  text-4xl md:text-5xl lg:text-7xl text-center">Hay que valorar el equilibrio de los contrastes, en la cocina y en la vida</p>
+        <p className="text-white  text-xl font-normal ">David Sánchez</p>
+        </div>
+
+         <section className=" hidden mb-30 mt-[-50px] w-full pb-10 h-110 lg:flex justify-center relative z-10 gap-2 pl-2 pr-3">
+        <div className="w-1/3 h-full  flex  items-start">
+          <div className="w-full bg-no-repeat bg-cover bg-center bg-stone-500 bg-blend-multiply bg-[url(./assets/collections/licor.jpg)] text-white flex flex-col p-5 h-4/5  rounded-xl">
+          <p className="font-[Corinthia] text-4xl font-bold">Licor café</p>
+          <p className="text-xl font-extrabold mb-6">El sabor de la tradición</p>
+          <a className="self-end font-bold tracking-widest hover:underline underline-offset-4 " href="">DESCUBRIR MÁS &gt;</a>
+          </div>
+        </div>
+        <div className="w-1/3 h-full   flex  items-end">
+          <div className="w-full  bg-center bg-no-repeat bg-cover bg-stone-500 bg-blend-multiply bg-[url(./assets/collections/tonic.jpg)] text-white flex flex-col p-5 h-4/5  rounded-xl">
+          <p className="font-[Corinthia] text-4xl font-bold">Espresso tonic </p>
+          <p className="text-xl font-extrabold mb-6">Para los paladares más curiosos</p>
+          <a className="self-end font-bold tracking-widest hover:underline underline-offset-4 " href="">DESCUBRIR MÁS &gt;</a>
+          </div>
+        </div>
+        <div className="w-1/3 h-full  flex  items-start">
+          <div className="w-full bg-no-repeat bg-center bg-stone-500 bg-blend-multiply bg-cover bg-[url(./assets/collections/affogato.jpg)] text-white flex flex-col p-5 h-4/5  rounded-xl">
+          <p className="font-[Corinthia] text-4xl font-bold">Affogato</p>
+          <p className="text-xl font-extrabold mb-6">Un postre a la italiana</p>
+          <a className="self-end font-bold tracking-widest hover:underline underline-offset-4 " href="">DESCUBRIR MÁS &gt;</a>
+          </div>
+        </div>
+     </section>
+
+  <aside className="  w-full mt-[-100px] mb-15  ">
+     <section className="lg:hidden w-full flex justify-center h-auto">
+
+      <article className="w-8/10  h-100 relative">
+
+          <Slider components={[
+              {
+                "boxUrl":"./assets/collections/licor.jpg",
+                "title":"Licor de café",
+                "subtitle":"El sabor de la tradición"
+              },
+              {
+                "boxUrl":'./assets/collections/tonic.jpg',
+                "title":"Espresso tonic",
+                "subtitle":"Para los paladares más curiosos"
+              },
+              {
+                "boxUrl":'./assets/collections/affogato.jpg',
+                "title":"Affogato",
+                "subtitle":"Un postre a la italiana"
+              }
+
+          ]}/>
+
+      </article>
+
+
+     </section>
+     </aside>
+
+     <section className={`w-full mb-20 h-110 flex flex-row gap-5 bg-stone-500 bg-blend-multiply bg-size-[1600px] bg-center bg-no-repeat  bg-[url(${backgrounds.grass})]`}>
+
+        <div className="w-8/10 lg:w-1/2 pl-5  text-white flex flex-col lg:pt-0 pt-10 justify-start lg:justify-center items-start">
+        <h1 className="font-extrabold text-2xl md:text-5xl mb-8 tracking-wide">Ciao!</h1>
+        <p className="md:font-semibold text-lg lg:text-xl mb-4">Sostenible no es solo lo que somos, sino cómo vivimos.</p>
+        <p className="md:font-semibold text-lg lg:textxl mb-4">Gracias a quienes cooperan con nosotros, hemos podido crear un ciclo continuo en el que la innovación en productos y procesos, la excelencia cualitativa y la sostenibilidad se refuerzan mutuamente.</p>
+        <p className="md:font-semibold text-lg lg:text-2xl mb-4">Únete a nosotros y descubre la alegría de la sostenibilidad.</p>
+        </div>
+
+        <div className="hidden relative  w-1/5  lg:flex lg:flex-col">
+        <div className="absolute -bottom-10">
+        <div className={`w-full h-50 bg-size-[340px] rounded-t-4xl bg-center bg-no-repeat bg-[url(${backgrounds.nature1})]`}></div>
+        <div className="bg-white min-h-50 shadow-sm shadow-stone-900 pt-5 pl-3 pb-5 pr-2 flex flex-col justify-center rounded-b-4xl text-blue-950 w-full">
+            <p className="font-[Corinthia] text-4xl mb-4 font-extrabold">Sostenibilidad</p>
+            <p className="text-xl mb-5 font-extrabold">Descubrir la sostenibilidad</p>
+            <p className="text-sm tracking-widest font-bold">MÁS INFORMACIÓN &gt;</p>
+        </div>
+        </div>
+        </div>
+        <div className="hidden w-1/5 relative lg:flex lg:flex-col">
+                <div className="absolute -top-10">
+
+        <div className="bg-white rounded-4xl shadow-sm shadow-stone-900 min-h-100 pt-5 pl-3 pb-5 pr-2 flex flex-col justify-center rounded-b-4xl text-blue-950 w-full">
+            <p className="font-[Corinthia] text-4xl mb-4 font-extrabold">Productos</p>
+            <p className="text-xl mb-5 font-extrabold">Nuestras certificaciones</p>
+            <p className="text-sm  font-semibold">Toma una taza de café y disfruta de la Experiencia Lavazza. Tanto si prefieres las cápsulas A Modo Mio como los granos enteros o molidos Qualità Rossa, lo importante es vivir de manera sostenible, incluso mientras saboreas el primer café del día.</p>
+
+        </div>
+         </div>
+        </div>
+     </section>
+
+     <Footer/>
 
             
                 {menuActive && <Menu handleMenuActive={handleMenuActive}/>}

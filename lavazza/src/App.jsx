@@ -8,6 +8,7 @@ import {useCart} from './useCart.js'
 
 import {Collections} from './Collections.jsx'
 import {Detail} from './Detail.jsx'
+import {Cart} from './Cart.jsx'
 
 export const ProductsContext=createContext()
 
@@ -31,6 +32,7 @@ function App() {
   <Route path="/products/:category" element={<Products/>}></Route>
   <Route path="/collections/:id" element={<Collections/>}></Route>
   <Route path="/detail/:collection/:product" element={<Detail/>}></Route>
+  <Route path="/cart" element={<Cart/>}></Route>
 
 </Routes>
  </BrowserRouter>

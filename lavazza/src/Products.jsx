@@ -31,7 +31,7 @@ export function Products(){
 
    cart.forEach((c)=>{
 
-    console.log(c.quantity)
+    console.log(c.quantity +" "+c.product.name)
    })
 
    
@@ -98,6 +98,8 @@ export function Products(){
    }
 
 
+
+
   return <section > 
 
   
@@ -133,7 +135,7 @@ export function Products(){
                     handleMenuActive(true)
                 }}>CONTACTO</a>
               </nav>
-              <i className={`fa-solid fa-magnifying-glass flex-none basis-10 text-center text-2xl text-blue-900 absolute right-40 lg:right-5  z-10`}></i>
+              <Link to="/cart"><i className={`fa-solid fa-magnifying-glass flex-none top-[25px] text-center text-2xl text-blue-900 absolute right-35 lg:right-5  z-10`}></i></Link>
               <i className={`fa-solid fa-bars-staggered flex  text-blue-900 absolute right-12 lg:!hidden`} onClick={()=>{
                     handleMenuActive(true)
                 }}></i>
@@ -189,8 +191,21 @@ export function Products(){
                                 <div className="absolute top-2 right-2 w-1/3 flex items-center justify-between pr-2">
                                 <p className="text-blue-950 font-extrabold tracking-widest text-sm">{p.price} €</p>
                                 <i onClick={()=>{
+
+                                    
+
+                                    if(cart.some((pr)=>{
+
+                                    return pr.product.id==p.id
+                                })){
+                                    console.log("prod is already on cart")
+                                    
+                                    return 
+                                }
                                     addToCart(p)
-                                }} class=" cursor-pointer fa-solid fa-cart-shopping p-2 rounded-md hover:bg-blue-950 hover:text-white"></i>
+                                }} key={p.id} className={`${ cart.some((pr)=>{
+                                    return pr.product.id==p.id && pr.quantity>0
+                                })?"!bg-green-400 hover:!bg-stone-200 hover:!text-stone-500":"" }  cursor-pointer fa-solid fa-cart-shopping p-2 rounded-md hover:bg-blue-950 hover:text-white`}></i>
                                 </div>
                           </div>
                         })}
@@ -314,9 +329,9 @@ export function Products(){
                 <div className="col-span-1 w-3/4 text-white pl-3  pt-5 bg-stone-400  rounded-sm">
 
                         <p className="text-sm mb-5 font-extrabold tracking-widest">COLLECTIONS</p>
-                        <p className="text-sm mb-5 font-bold tracking-widest "><Link to="/collections/rossa">Qualità Rossa</Link></p>
-                        <p className="text-sm mb-5 font-bold tracking-widest ">Qualità Oro</p>
-                        <p className="text-sm mb-5 font-bold tracking-widest ">Espresso</p>
+                        <p className="text-sm mb-5 font-bold tracking-widest "><Link to="/collections/1">Qualità Oro</Link></p>
+                        <p className="text-sm mb-5 font-bold tracking-widest "><Link to="/collections/2">Espresso</Link></p>
+                        <p className="text-sm mb-5 font-bold tracking-widest "><Link to="/collections/3">Tierra</Link></p>
                         <p className="text-sm mb-5 font-bold tracking-widest ">A modo mio</p>
                         <p className="text-sm mb-5 font-bold tracking-widest ">¡Tierra!</p>
                 </div>
@@ -401,9 +416,9 @@ export function Products(){
                             moveBlock("right","products")
                         }}>&lt;  PRODUCTOS</p>
                         <p className="w-full text-[20px] font-extrabold tracking-wide ">Collections</p>
-                        <p className="w-full text-sm tracking-wide "><Link to="/collections/rossa">Qualità Rossa</Link></p>
-                        <p className="w-full text-sm tracking-wide ">Qualità Oro</p>
-                        <p className="w-full text-sm tracking-wide ">Espresso</p>
+                        <p className="w-full text-sm tracking-wide "><Link to="/collections/1">Qualità Oro</Link></p>
+                        <p className="w-full text-sm tracking-wide "><Link to="/collections/2">Espresso</Link></p>
+                        <p className="w-full text-sm tracking-wide "><Link to="/collections/3">Tierra</Link></p>
                         <p className="w-full text-sm tracking-wide ">A Modo Mio</p>
                         <p className="w-full text-sm tracking-wide ">¡Tierra!</p>
                     </div>
