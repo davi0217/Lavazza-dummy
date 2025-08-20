@@ -24,9 +24,9 @@ import {Footer} from './Home.jsx'
 import {Menu} from './Products.jsx'
 
 import { productsInfo } from './products-info.js'
-import { backgrounds } from './backgrounds.js'
 
 import {Slider} from './Home.jsx'
+import {Slider2} from './Home.jsx'
 
 
 
@@ -506,18 +506,18 @@ export function Detail(){
      </section>
      </aside>
 
-     <section className={`w-full mb-20 h-110 flex flex-row gap-5 bg-stone-500 bg-blend-multiply bg-size-[1600px] bg-center bg-no-repeat  bg-[url(${backgrounds.grass})]`}>
+     <section className={`w-full mb-20 h-110 flex flex-row gap-5 bg-stone-500 bg-blend-multiply bg-size-[1600px] bg-center bg-no-repeat  bg-[url(./assets/backgrounds/grass.jpg)]`}>
 
         <div className="w-8/10 lg:w-1/2 pl-5  text-white flex flex-col lg:pt-0 pt-10 justify-start lg:justify-center items-start">
         <h1 className="font-extrabold text-2xl md:text-5xl mb-8 tracking-wide">Ciao!</h1>
         <p className="md:font-semibold text-lg lg:text-xl mb-4">Sostenible no es solo lo que somos, sino cómo vivimos.</p>
-        <p className="md:font-semibold text-lg lg:textxl mb-4">Gracias a quienes cooperan con nosotros, hemos podido crear un ciclo continuo en el que la innovación en productos y procesos, la excelencia cualitativa y la sostenibilidad se refuerzan mutuamente.</p>
-        <p className="md:font-semibold text-lg lg:text-2xl mb-4">Únete a nosotros y descubre la alegría de la sostenibilidad.</p>
+        <p className="md:font-semibold text-lg lg:text-xl mb-4">Gracias a quienes cooperan con nosotros, hemos podido crear un ciclo continuo en el que la innovación en productos y procesos, la excelencia cualitativa y la sostenibilidad se refuerzan mutuamente.</p>
+        <p className="md:font-semibold text-lg lg:text-xl mb-4">Únete a nosotros y descubre la alegría de la sostenibilidad.</p>
         </div>
 
         <div className="hidden relative  w-1/5  lg:flex lg:flex-col">
         <div className="absolute -bottom-10">
-        <div className={`w-full h-50 bg-size-[340px] rounded-t-4xl bg-center bg-no-repeat bg-[url(${backgrounds.nature1})]`}></div>
+        <div className={`w-full h-50 bg-size-[340px] rounded-t-4xl bg-center bg-no-repeat bg-[url(./assets/backgrounds/nature1.jpg)]`}></div>
         <div className="bg-white min-h-50 shadow-sm shadow-stone-900 pt-5 pl-3 pb-5 pr-2 flex flex-col justify-center rounded-b-4xl text-blue-950 w-full">
             <p className="font-[Corinthia] text-4xl mb-4 font-extrabold">Sostenibilidad</p>
             <p className="text-xl mb-5 font-extrabold">Descubrir la sostenibilidad</p>
@@ -535,6 +535,39 @@ export function Detail(){
 
         </div>
          </div>
+        </div>
+
+        <div className="lg:hidden flex z-30 relative h-150">
+            <Slider2 blocks={
+                {"content":[<div>
+                                <div className={`w-full h-50 bg-size-[340px] rounded-t-4xl bg-center bg-no-repeat bg-[url(./assets/backgrounds/nature1.jpg)]`}></div>
+                                <div className="bg-white min-h-50 shadow-sm shadow-stone-900 pt-5 pl-3 pb-5 pr-2 flex flex-col justify-center rounded-b-4xl text-blue-950 w-full">
+                                    <p className="font-[Corinthia] text-4xl mb-4 font-extrabold">Sostenibilidad</p>
+                                    <p className="text-xl mb-5 font-extrabold">Descubrir la sostenibilidad</p>
+                                    <p className="text-sm tracking-widest font-bold">MÁS INFORMACIÓN &gt;</p>
+                                </div>
+                                </div>,
+                                <div className="bg-white rounded-4xl shadow-sm shadow-stone-900 min-h-100 pt-5 pl-3 pb-5 pr-2 flex flex-col justify-center rounded-b-4xl text-blue-950 w-full">
+            <p className="font-[Corinthia] text-4xl mb-4 font-extrabold">Productos</p>
+            <p className="text-xl mb-5 font-extrabold">Nuestras certificaciones</p>
+            <p className="text-sm  font-semibold">Toma una taza de café y disfruta de la Experiencia Lavazza. Tanto si prefieres las cápsulas A Modo Mio como los granos enteros o molidos Qualità Rossa, lo importante es vivir de manera sostenible, incluso mientras saboreas el primer café del día.</p>
+
+        </div>
+                                
+                            ],
+                "widthLeft":"w-100",
+                "widthCenter":"w-120",
+                "widthLRight":"w-100",
+                "heightLeft":"h-50",
+                "heightCenter":"h-70",
+                "heightRight":"h-50",
+                
+
+
+                }
+            }>
+
+            </Slider2>
         </div>
      </section>
 

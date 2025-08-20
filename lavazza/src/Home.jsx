@@ -839,3 +839,79 @@ export function Slider({components, addClasses={}}){
 
 </>
 }
+
+
+export function Slider2({blocks}){
+
+  const [boxes, setBoxes]=useState(blocks)
+  const [positions, setPositions]=useState({
+
+    "left":`${boxes.widthLeft} ${boxes.heightLeft} left-30 z-50 top-100`,
+
+    "center":`${boxes.widthCenter} ${boxes.heightCenter} left-30 z-50 top-100`,
+
+    "right":`${boxes.widthRight} ${boxes.heightRight} left-30 z-50 top-100 `
+
+  })
+
+  console.log(boxes.content)
+
+  const [current,setCurrent]=useState(1)
+
+  const giveClass=function(number){
+    console.log(boxes.content.length +" is length" +"and the index is "+number)
+
+    if(boxes.content.length==2){
+      if(number==current){
+        console.log("center has been given")
+            return positions.center
+    }else if(number!=current){
+      console.log("left has been given")
+      return positions.left
+    }else{  
+      return "hidden"
+    }
+
+    }else if(number==current){
+            return positions.center
+    }else if(number==current-1){
+      return positions.left
+    }else if(number==current+1){
+      return positions.right
+    }else{
+      return "hidden"
+    }
+  }
+
+  const handleCurrent=function(num){
+
+    setCurrent(num)
+  }
+
+  return <>
+
+   
+
+    {boxes.content.map((b, index)=>{
+
+      <div key={index} onClick={()=>{
+            handleCurrent(index)
+          }
+
+          } 
+          
+          className={` ${
+            giveClass(index)
+          }  z-30 transition-all ease-in-out duration-500`}>
+
+            {b}
+          
+          </div>
+
+    })}
+
+          
+
+</>
+
+}
