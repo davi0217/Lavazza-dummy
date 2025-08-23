@@ -9,6 +9,13 @@ import {useCart} from './useCart.js'
 import {Collections} from './Collections.jsx'
 import {Detail} from './Detail.jsx'
 import {Cart} from './Cart.jsx'
+import {Environement} from './Environement.jsx'
+import {Contact} from './Contact.jsx'
+import {Recetas} from './Recetas.jsx'
+import {DetalleRecetas} from './DetalleRecetas.jsx'
+import {Chefs} from './Chefs.jsx'
+import {DetalleChefs} from './DetalleChefs.jsx'
+import {DetalleEnvironement} from './DetalleEnvironement.jsx'
 
 export const ProductsContext=createContext()
 
@@ -33,6 +40,13 @@ function App() {
   <Route path="/collections/:id" element={<Collections/>}></Route>
   <Route path="/detail/:collection/:product" element={<Detail/>}></Route>
   <Route path="/cart" element={<Cart/>}></Route>
+  <Route path="/esg" element={<Environement/>}></Route>
+  <Route path="/contact" element={<Contact/>}></Route>
+  <Route path="/recetas" element={<Recetas/>}></Route>
+  <Route path="/recetas/:id" element={<DetalleRecetas/>}></Route>
+  <Route path="/chefs" element={<Chefs/>}></Route>
+  <Route path="/chefs/:id" element={<DetalleChefs/>}></Route>
+  <Route path="/esg/:id" element={<DetalleEnvironement/>}></Route>
 
 </Routes>
  </BrowserRouter>

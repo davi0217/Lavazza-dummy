@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef, useContext } from 'react'
 import {useParams, Link} from 'react-router-dom'
+import {useNavigator} from './useNavigator.js'
 
-import lavazza from './assets/home_img/lavazza-logo-white.png'
+
+import terranaWhite from './assets/home_img/terrana-white.png'
 
 import lavazza2 from './assets/home_img/lavazza-2-logo.png'
 import productsHeader from './assets/products/products-header.png'
@@ -9,6 +11,7 @@ import productsHeader2 from './assets/products/products-header-2.png'
 
 import {productsInfo} from './products-info.js'
 import {Footer} from './Home.jsx'
+import {Navigator} from './Collections.jsx'
 
 import { productsDisplay } from './products-display.js'
 
@@ -23,21 +26,13 @@ export function Products(){
 
     const [display, setDisplay]=useState()
     const [productsToShow, setProductsToShow]=useState()
-    const [menuActive, setMenuActive]=useState(false)
 
     const useCart=useContext(ProductsContext)
 
    const {cart, addToCart, removeFromCart}=useCart()
-
-   cart.forEach((c)=>{
-
-    console.log(c.quantity +" "+c.product.name)
-   })
-
-   
+   const {scrolled, menuActive, handleMenuActive}=useNavigator()
 
     useEffect(()=>{
-        setMenuActive(false)
         Object.keys(productsDisplay).forEach((d)=>{
             console.log(d)
             console.log(productsDisplay[d])
@@ -68,23 +63,7 @@ export function Products(){
 
     },[params.category])
 
-    useEffect(()=>{
-
-        let x=window.scrollX
-        let y=window.scrollY
-        const disableScroll=function(){
-            window.scrollTo(x,y)
-        }
-        if(menuActive){
-
-
-        window.addEventListener("scroll", disableScroll)
-
-    }
-
-        return ()=>window.removeEventListener("scroll", disableScroll)
-
-    },[menuActive])
+    
 
     const [showDescription, setShowDescription]=useState(false)
 
@@ -92,10 +71,18 @@ export function Products(){
         setShowDescription(!showDescription)
     }
 
+    const giveColour=function(cat){
 
-   const handleMenuActive=function(state){
-    setMenuActive(state)
-   }
+        if(cat=="GRANOS DE CAFÉ"){
+            return "bg-lime-50"
+
+        }else if(cat=="CAFÉ MOLIDO"){
+                return "bg-cyan-50"
+        }else if(cat=="CAPSULAS COMPATIBLES"){
+            return "bg-red-50"
+
+        }
+    }
 
 
 
@@ -112,34 +99,7 @@ export function Products(){
             </div>
            
   
-            <div className={`flex fixed text-blue-950 bg-white  transition-colors ease-in flex-nowrap w-full items-center h-20 z-[30] top-0`}>
-              <div className={` left-[-10px] sm:left-[-15px] bottom-[0px] sm:bottom-[-30px] absolute h-auto`}>
-               <Link to="/"> <img className=" w-30 cursor-pointer sm:min-w-50 sm:max-w-50  z-10  " src={lavazza2} alt="" /></Link>
-                </div>
-            
-              <nav className="hidden  text-sm font-bold  lg:flex gap-8 tracking-widest  md:flex-none absolute left-0 right-0 justify-center z-[11]">
-                <a href="" className={` hover:underline underline-offset-8 decoration-blue-900 z-20`} onClick={(e)=>{
-                    e.preventDefault()
-                    handleMenuActive(true)
-                }}>PRODUCTOS</a>
-                <a href=""className={` hover:underline underline-offset-8 decoration-blue-900 z-20`} onClick={(e)=>{
-                    e.preventDefault()
-                    handleMenuActive(true)
-                }}>LAVAZZA STORE</a>
-                <a href=""className={` hover:underline underline-offset-8 decoration-blue-900 z-20`} onClick={(e)=>{
-                    e.preventDefault()
-                    handleMenuActive(true)
-                }}>SOSTENIBILIDAD</a>
-                <a href=""className={` hover:underline underline-offset-8 decoration-blue-900 z-20`} onClick={(e)=>{
-                    e.preventDefault()
-                    handleMenuActive(true)
-                }}>CONTACTO</a>
-              </nav>
-              <Link to="/cart"><i className={`fa-solid fa-magnifying-glass flex-none top-[25px] text-center text-2xl text-blue-900 absolute right-35 lg:right-5  z-10`}></i></Link>
-              <i className={`fa-solid fa-bars-staggered flex  text-blue-900 absolute right-12 lg:!hidden`} onClick={()=>{
-                    handleMenuActive(true)
-                }}></i>
-            </div>
+           <Navigator transparent={false} scrolled={scrolled} handleMenu={handleMenuActive}/>
 
             {menuActive && <Menu handleMenuActive={handleMenuActive}/>}
 
@@ -176,7 +136,7 @@ export function Products(){
 
                         {productsToShow?.map((p)=>{
 
-                            return <div className=" w-80 relative shrink-0 h-130 rounded-md bg-stone-50 flex flex-col items-center p-5 ">
+                            return <div className={` w-80 relative shrink-0 h-130 rounded-md ${giveColour(p.category)} flex flex-col items-center p-5 `}>
                             <img className="w-50 min-h-40 object-contain  mt-10" src={p.imgUrl} alt="" />
                             <p className="text-sm text-blue-950 tracking-widest mb-5">{p.category}</p>
                             <p className="text-xl min-h-15 text-blue-950 font-extrabold">{p.name}</p>
@@ -187,7 +147,7 @@ export function Products(){
                                 <span className=" text-blue-950 " value=""> {p.quantity}</span>        
                                 </div>
                             </div>
-                                <button className="w-19/20 bg-blue-950 hover:bg-blue-900 transition-colors ease-in text-white rounded-4xl mt-5 p-2 font-extrabold tracking-widest text-sm">COMPRA ONLINE </button>
+                                <Link to={`/detail/${p.collectionId}/${p.id}`}><button className="w-40 bg-blue-950 hover:bg-blue-900 transition-colors ease-in text-white rounded-4xl mt-5 p-2 font-extrabold tracking-widest text-sm">DESCUBRIR MÁS</button></Link>
                                 <div className="absolute top-2 right-2 w-1/3 flex items-center justify-between pr-2">
                                 <p className="text-blue-950 font-extrabold tracking-widest text-sm">{p.price} €</p>
                                 <i onClick={()=>{
@@ -302,18 +262,22 @@ export function Products(){
               <div className={`flex fixed text-white bg-blue-950 transition-colors ease-in flex-nowrap w-full items-center h-20 z-[30] top-0 pt-5 left-0`}>
               
                            <div className={`left-5  absolute h-auto`}>
-                          <Link to="/"><img className=" w-30 cursor-pointer sm:min-w-50 sm:max-w-50  z-10  " src={lavazza} alt="" /></Link>
+                          <Link to="/"><img className=" w-30 h-12 object-cover relative cursor-pointer sm:min-w-50 sm:max-w-50  z-30  " src={terranaWhite} alt="" /></Link>
                             <p className={`mt-1 text-[7px] text-white text-center font-bold sm:text-xs`}>VIGO. SPAGNA. 2001</p>
 
                           </div>
                       
                         <nav className="hidden  text-sm font-bold  lg:flex gap-8 tracking-widest  md:flex-none absolute left-0 right-0 justify-center z-11">
                           <a href="" className={` hover:underline underline-offset-8 decoration-white z-20`}>PRODUCTOS</a>
-                          <a href=""className={` hover:underline underline-offset-8 decoration-white z-20`}>LAVAZZA STORE</a>
-                          <a href=""className={` hover:underline underline-offset-8 decoration-white z-20`}>SOSTENIBILIDAD</a>
-                          <a href=""className={` hover:underline underline-offset-8 decoration-white z-20`}>CONTACTO</a>
+                          <a href=""className={` hover:underline underline-offset-8 decoration-white z-20`}>TERRANA STORIES</a>
+                          <a onClick={(e)=>{
+                            e.preventDefault()
+                          }} href=""className={` hover:underline underline-offset-8 decoration-white z-20`}><Link to="/esg">SOSTENIBILIDAD</Link></a>
+                          <a onClick={(e)=>{
+                            e.preventDefault()
+                          }} href=""className={` hover:underline underline-offset-8 decoration-white z-20`}><Link to="/contact">CONTACTO</Link></a>
                         </nav>
-                        <i className={`fa-solid fa-magnifying-glass flex-none basis-10 text-center text-2xl text-stone-50 absolute right-40 lg:right-5  z-10`}></i>
+                        <Link to="/cart"><i className={`fa-solid fa-cart-shopping flex-none basis-10 text-center text-2xl text-stone-50 absolute right-40 lg:right-5  z-10`}></i></Link>
                         <i className={`fa-solid fa-bars-staggered flex text-stone-50 absolute right-12 lg:!hidden`}></i>
                       </div>
               
@@ -329,11 +293,9 @@ export function Products(){
                 <div className="col-span-1 w-3/4 text-white pl-3  pt-5 bg-stone-400  rounded-sm">
 
                         <p className="text-sm mb-5 font-extrabold tracking-widest">COLLECTIONS</p>
-                        <p className="text-sm mb-5 font-bold tracking-widest "><Link to="/collections/1">Qualità Oro</Link></p>
-                        <p className="text-sm mb-5 font-bold tracking-widest "><Link to="/collections/2">Espresso</Link></p>
-                        <p className="text-sm mb-5 font-bold tracking-widest "><Link to="/collections/3">Tierra</Link></p>
-                        <p className="text-sm mb-5 font-bold tracking-widest ">A modo mio</p>
-                        <p className="text-sm mb-5 font-bold tracking-widest ">¡Tierra!</p>
+                        <p className="text-sm mb-5 font-bold tracking-widest "><Link to="/collections/1">Atlántica</Link></p>
+                        <p className="text-sm mb-5 font-bold tracking-widest "><Link to="/collections/2">Mediterránea</Link></p>
+                        <p className="text-sm mb-5 font-bold tracking-widest "><Link to="/collections/3">Arcana</Link></p>
                 </div>
                 <div className="col-span-1 text-white pl-3  rounded-sm">
 
@@ -366,7 +328,7 @@ export function Products(){
                         <p className="w-full cursor-pointer tracking-wide " onClick={()=>{
                             moveBlock("left","stories")
                             moveBlock("left","general")
-                        }}>LAVAZZA STORIES</p>
+                        }}>TERRANA STORIES</p>
                         <p className="w-full tracking-wide ">SOSTENIBILIDAD</p>
                         <p className="w-full tracking-wide ">CONTACTO</p>
                     </div>
@@ -419,20 +381,17 @@ export function Products(){
                         <p className="w-full text-sm tracking-wide "><Link to="/collections/1">Qualità Oro</Link></p>
                         <p className="w-full text-sm tracking-wide "><Link to="/collections/2">Espresso</Link></p>
                         <p className="w-full text-sm tracking-wide "><Link to="/collections/3">Tierra</Link></p>
-                        <p className="w-full text-sm tracking-wide ">A Modo Mio</p>
-                        <p className="w-full text-sm tracking-wide ">¡Tierra!</p>
                     </div>
                     <div className={`absolute ${givePosition(positions[5].position)} top-0 left-0 transition-transform duration-500 ease-in-out py-5 px-5 flex flex-col gap-5 text-2xl  w-full border-white justify-center items-center text-white font-extrabold `}>
                         <p className="w-full cursor-pointer text-sm tracking-wide " onClick={()=>{
                             moveBlock("right","stories")
                             moveBlock("right","general")
                         }}>&lt;  BACK</p>
-                        <p className="w-full text-[30px] mb-8  font-extrabold tracking-wide ">LAVAZZA STORIES</p>
-                        <p className="w-full text-sm pl-3 mb-4 tracking-wide ">Blend for better: Sostenibilidad</p>
-                        <p className="w-full text-sm pl-3 mb-4 tracking-wide ">Coffee Secrets</p>
-                        <p className="w-full text-sm pl-3 mb-4 tracking-wide ">Calendario Lavazza</p>
-                        <p className="w-full text-sm pl-3 mb-4 tracking-wide ">Top Gastronomy</p>
-                        <p className="w-full text-sm pl-3 mb-4 tracking-wide ">Deporte</p>
+                        <p className="w-full text-[30px] mb-8  font-extrabold tracking-wide ">TERRANA STORIES</p>
+                        <p className="w-full text-sm pl-3 mb-4 tracking-wide "><Link to="/esg">Raíces Responsables: Sostenibilidad</Link></p>
+                        <p className="w-full text-sm pl-3 mb-4 tracking-wide "><Link to="/recetas">Café a tu modo</Link></p>
+                        <p className="w-full text-sm pl-3 mb-4 tracking-wide "><Link to="/chefs">Bon appetit</Link></p>
+                        <p className="w-full text-sm pl-3 mb-4 tracking-wide ">Álbum Lavazza</p>
                     </div>
 
                 </div>

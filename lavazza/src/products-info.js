@@ -1,6 +1,12 @@
- import coffeeGrano from './assets/products/coffee-product-1.png'
- import coffeeCapsule from './assets/products/coffee-capsule.png'
- import coffeePowder from './assets/products/coffee-powder.png'
+import atlanticaGrano from './assets/products/atlántica-grano.png'
+import atlanticaMolido from './assets/products/atlántica-molido.png'
+import atlanticaCapsula from './assets/products/atlántica-capsula.png'
+import mediterraneaGrano from './assets/products/mediterránea-grano.png'
+import mediterraneaMolido from './assets/products/mediterránea-molido.png'
+import mediterraneaCapsula from './assets/products/mediterránea-capsula.png'
+import arcanaGrano from './assets/products/arcana-grano.png'
+import arcanaMolido from './assets/products/arcana-molido.png'
+import arcanaCapsula from './assets/products/arcana-capsula.png'
 
  import block1 from './assets/collections/block-1.jpg'
  import block2 from './assets/collections/block-2.jpg'
@@ -11,238 +17,365 @@
  import backgroundCoffee2 from './assets/home_img/background-coffee-2.jpg'
  import backgroundCoffee3 from './assets/home_img/background-coffee-3.jpg'
  
- export const productsInfo=[
-     {"collection":{
-       "active":true,
-       "name":"Qualità Oro",
-       "id":1,
-       "description":"Descubre cada mañana la excelencia del blend y saborea la sinfonía perfecta en una taza en casa.",
-       "imageUrl":backgroundCoffee1,
-       "backgroundSettings":"bg-[url(./assets/home_img/background-coffee-1.jpg)]  bg-size-[1500px] bg-no-repeat",
-       "products":[
-         {
-           "imgUrl":coffeeGrano,
-           "id":1,
-           "description":"Qualità Oro es una combinación de seis variedades de granos Arábica procedentes de Centro y Sudamérica. La sinfonía perfecta de sabor que puedes disfrutar todos los días. Como cualquier familia italiana.",
-           "category":"GRANOS DE CAFÉ",
-           "categoryLink":"grano",
-           "sliderSubtitle":"Una combinación de los Arábica más exquisitos. La armonía perfecta para un sabor excepcional siempre, desde 1956.",
-           "name":"Qualità Oro en grano",
-           "intensity":"5",
-           "format":"pack",
-           "quantity":"500g",
-           "options":["500g", "1kg"],
-           "perfilTitle":"Rico y con cuerpo",
-           "perfilDescription":"Crema de café dorada de color cálido, notas de chocolate y frutos secos.",
-           "notes":"Afrutado, Chocolate",
-           "tueste":"Medio",
-           "composicion":"Arábica y Robusta",
-           "origen":"África, América del Sur, Sudeste del Asia",
-           "price":2.99
-           
-         },
-         {
-           "imgUrl":coffeeCapsule,
-           "id":2,
-           "category":"CAPSULAS COMPATIBLES",
-           "categoryLink":"capsula",
-           "sliderSubtitle":"Una sinfonía perfecta de los mejores granos de café arábica, la máxima expresión de la mezcla de orígenes.",
-           "name":"Qualità Oro",
-           "intensity":"8",
-           "format":"capsule",
-           "quantity":"10",
-            "options":["10", "20"],
-           "perfilTitle":"Rico y con cuerpo",
-           "perfilDescription":"Crema de café dorada de color cálido, notas de chocolate y frutos secos.",
-           "notes":"Afrutado, Chocolate",
-           "tueste":"Medio",
-           "composicion":"Arábica y Robusta",
-           "origen":"África, América del Sur, Sudeste del Asia",
-           "price":2.99
-         },
-         {
-           "imgUrl":coffeeGrano,
-           "id":3,
-           "category":"GRANOS DE CAFÉ",
-           "categoryLink":"grano",
-           "sliderSubtitle":"Una sinfonía perfecta de los mejores granos de café arábica, la máxima expresión de la mezcla de orígenes.",
-           "name":"Qualità Oro en grano",
-           "intensity":"5",
-           "format":"pack",
-           "quantity":"1kg",
-            "options":["500g", "1kg"],
-           "perfilTitle":"Rico y con cuerpo",
-           "perfilDescription":"Crema de café dorada de color cálido, notas de chocolate y frutos secos.",
-           "notes":"Afrutado, Chocolate",
-           "tueste":"Medio",
-           "composicion":"Arábica y Robusta",
-           "origen":"África, América del Sur, Sudeste del Asia",
-           "price":2.99
-         }
-       ],
-       "blocks":[
+
+
+     export const productsInfo = [
+  {
+    "collection": {
+      "active": true,
+      "name": "Atlántica",
+      "id": 1,
+      "claim":"Fresco, ancestral, profundo",
+       "granoClaim": "La frescura del norte en cada grano. Despierta tus sentidos con notas florales y minerales.",
+    "molidoClaim": "Tradición celta para tu ritual diario. Un café equilibrado con acidez brillante y final limpio.",
+    "capsulaClaim": "Intensidad fresca y viva en cada cápsula. Disfruta del Atlántico sin salir de casa.",
+      "description": "Inspirada en el carácter fresco y mineral del norte de España, con raíces celtas y aromas de la tierra húmeda y el mar.",
+      "imageUrl": backgroundCoffee1,
+      "backgroundSettings": "bg-[url(./assets/home_img/background-coffee-1.jpg)]  bg-size-[1500px] bg-no-repeat",
+      "products": [
+
         {
-          "title":"ORÍGENES",
-          "description":"Los orígenes de Qualità Rossa se seleccionan cuidadosamente para mantener el aroma y el sabor tan únicos como siempre.",
-          "imgUrl":block1
+          "collectionId":1,
+          "imgUrl": atlanticaGrano,
+          "id": 1,
+          "description": "Un blend de altura con frescura chispeante y notas florales, evocando el verde Atlántico.",
+          "category": "GRANOS DE CAFÉ",
+          "categoryLink": "grano",
+          "sliderSubtitle": "La fuerza de la tierra húmeda y el aire salino en cada grano.",
+          "name": "Brezo en grano",
+          "intensity": "6",
+          "format": "pack",
+          "quantity": "500g",
+          "options": ["500g", "1kg"],
+          "perfilTitle": "Floral y fresco",
+          "perfilDescription": "Notas de brezo silvestre con un final delicado.",
+          "notes": "Floral, Herbal",
+          "tueste": "Medio",
+          "composicion": "Arábica",
+          "origen": "Galicia, Norte de España",
+          "price": 3.49
         },
         {
-          "title":"BLEND",
-          "description":"Un blend único de granos de Robusta y Arábica, perfecto solo o con leche.",
-          "imgUrl":block2
+          "collectionId":1,
+          "imgUrl": atlanticaCapsula,
+          "id": 2,
+          "category": "CAPSULAS COMPATIBLES",
+          "categoryLink": "capsula",
+          "sliderSubtitle": "Intensidad terrosa inspirada en la roca y la montaña.",
+          "name": "Pedra cápsulas",
+          "intensity": "7",
+          "format": "capsule",
+          "quantity": "10",
+          "options": ["10", "20"],
+          "perfilTitle": "Mineral y robusto",
+          "perfilDescription": "Un espresso con cuerpo y final persistente.",
+          "notes": "Terroso, Cacao",
+          "tueste": "Oscuro",
+          "composicion": "Arábica y Robusta",
+          "origen": "España, Centroamérica",
+          "price": 3.29
         },
         {
-          "title":"AROMA",
-          "description":"Un sabor delicado y muy aromático, completo, con un equilibrio perfecto entre los frutos secos y el chocolate.",
-          "imgUrl":block3
+          "collectionId":1,
+          "imgUrl": atlanticaGrano,
+          "id": 3,
+          "category": "GRANOS DE CAFÉ",
+          "categoryLink": "grano",
+          "sliderSubtitle": "Un café chispeante como la lluvia fina.",
+          "name": "Orvallo en grano",
+          "intensity": "5",
+          "format": "pack",
+          "quantity": "1kg",
+          "options": ["500g", "1kg"],
+          "perfilTitle": "Ligero y vivo",
+          "perfilDescription": "Notas cítricas y minerales, con acidez brillante.",
+          "notes": "Cítrico, Mineral",
+          "tueste": "Claro",
+          "composicion": "Arábica",
+          "origen": "Etiopía, Galicia",
+          "price": 4.10
         },
         {
-          "title":"VARIEDADES",
-          "description":"En todas sus formas, Qualità Rossa mantiene todo su sabor y su equilibrio, sin renunciar a su intenso aroma.",
-          "imgUrl":block4
-        },
-       ]
-     }},
-     {"collection":{
-       "active":true,
-       "name":"Espresso",
-       "id":2,
-       "description":"El espresso más auténtico. ¡Descubre el ADN auténticamente italiano con Lavazza!",
-       "imageUrl":backgroundCoffee2,
-       "backgroundSettings":"bg-[url(./assets/home_img/background-coffee-2.jpg)]  bg-size-[1800px] bg-no-repeat",
-       "products":[
-         {
-           "imgUrl":coffeePowder,
-           "id":4,
-           "category":"CAFÉ MOLIDO",
-           "categoryLink":"molido",
-           "name":"Espresso Italiano Classico molido",
-           "sliderSubtitle":"Si quieres un auténtico café de barista en casa, prueba nuestro blend Espresso Barista. Descubre nuestro café con tueste delicado de “tambor” especialmente seleccionado para ofrecer una experiencia cafetera de profesional.",
-           "intensity":"5",
-           "format":"pack",
-           "quantity":"1kg",
-            "options":["500g", "1kg"],
-           "perfilTitle":"Rico y con cuerpo",
-           "perfilDescription":"Crema de café dorada de color cálido, notas de chocolate y frutos secos.",
-           "notes":"Afrutado, Chocolate",
-           "tueste":"Medio",
-           "composicion":"Arábica y Robusta",
-           "origen":"África, América del Sur, Sudeste del Asia",
-           "price":2.99
-         },
-         {
-           "imgUrl":coffeeGrano,
-           "id":5,
-           "category":"GRANOS DE CAFÉ",
-           "categoryLink":"grano",
-           "sliderSubtitle":"Espresso Barista es la expresión del conocimiento experto de Lavazza en la elaboración de un café de calidad superior, para que te sientas como un auténtico barista. Disfruta del auténtico espresso de tueste italiano.",
-           "name":"Espresso Italiano Classico en grano",
-           "intensity":"5",
-           "format":"pack",
-           "quantity":"1kg",
-            "options":["500g", "1kg"],
-           "perfilTitle":"Rico y con cuerpo",
-           "perfilDescription":"Crema de café dorada de color cálido, notas de chocolate y frutos secos.",
-           "notes":"Afrutado, Chocolate",
-           "tueste":"Medio",
-           "composicion":"Arábica y Robusta",
-           "origen":"África, América del Sur, Sudeste del Asia",
-           "price":2.99
-         }
-       ],
-       "blocks":[
+          "collectionId":1,
+          "imgUrl": atlanticaMolido,
+          "id": 4,
+          "category": "CAFÉ MOLIDO",
+          "categoryLink": "molido",
+          "sliderSubtitle": "Tradición celta en cada sorbo.",
+          "name": "Atlántica Molido Tradicional",
+          "intensity": "6",
+          "format": "pack",
+          "quantity": "500g",
+          "options": ["250g", "500g"],
+          "perfilTitle": "Suave y equilibrado",
+          "perfilDescription": "Notas herbales con toques de nuez.",
+          "notes": "Herbal, Nuez",
+          "tueste": "Medio",
+          "composicion": "Arábica y Robusta",
+          "origen": "España, Brasil",
+          "price": 2.89
+        }
+      ],
+      "blocks": [
         {
-          "title":"ORÍGENES",
-          "description":"Los orígenes de Qualità Rossa se seleccionan cuidadosamente para mantener el aroma y el sabor tan únicos como siempre.",
-          "imgUrl":block1
+          "title": "ORÍGENES",
+          "description": "Una colección que se inspira en el norte húmedo y sus raíces celtas.",
+          "imgUrl": block1
         },
         {
-          "title":"BLEND",
-          "description":"Un blend único de granos de Robusta y Arábica, perfecto solo o con leche.",
-          "imgUrl":block2
+          "title": "BLEND",
+          "description": "Frescura, mineralidad y equilibrio en cada mezcla.",
+          "imgUrl": block2
         },
         {
-          "title":"AROMA",
-          "description":"Un sabor delicado y muy aromático, completo, con un equilibrio perfecto entre los frutos secos y el chocolate.",
-          "imgUrl":block3
+          "title": "AROMA",
+          "description": "Notas de lluvia fina, hierba fresca y flores silvestres.",
+          "imgUrl": block3
         },
         {
-          "title":"VARIEDADES",
-          "description":"En todas sus formas, Qualità Rossa mantiene todo su sabor y su equilibrio, sin renunciar a su intenso aroma.",
-          "imgUrl":block4
-        },
-       ]
-     }},
-     {"collection":{
-       "active":true,
-       "name":"Tierra",
-       "id":3,
-       "description":"Disfruta del sabor de cuidar de la naturaleza y de las personas: descubre nuestros blends orgánicos ¡Tierra!",
-       "imageUrl":backgroundCoffee3,
-       "backgroundSettings":"bg-[url(./assets/home_img/background-coffee-3.jpg)]  bg-size-[1500px] bg-no-repeat",
- 
-       "products":[
-         {
-           "imgUrl":coffeeCapsule,
-           "id":6,
-           "category":"CAPSULAS COMPATIBLES",
-           "categoryLink":"capsula",
-           "sliderSubtitle":"La armonía perfecta de los mejores granos de café Arábica con notas afrutadas y florales. Deléitate con la verdadera esencia de la elegancia y el sabor con nuestra ¡Tierra! for Planet.",
-           "name":"¡Tierra! For Planet",
-           "intensity":"7",
-           "format":"capsule",
-           "quantity":"10",
-            "options":["10", "20"],
-           "perfilTitle":"Rico y con cuerpo",
-           "perfilDescription":"Crema de café dorada de color cálido, notas de chocolate y frutos secos.",
-           "notes":"Afrutado, Chocolate",
-           "tueste":"Medio",
-           "composicion":"Arábica y Robusta",
-           "origen":"África, América del Sur, Sudeste del Asia",
-           "price":2.99
-         },
-         {
-           "imgUrl":coffeeGrano,
-           "id":7,
-           "category":"GRANOS DE CAFÉ",
-           "categoryLink":"grano",
-           "sliderSubtitle":"Elige granos de café Tierra y disfruta de café recién molido con el inconfundible sabor a tueste italiano",
-           "name":"¡Tierra! Bio-Organic for Planet Café en grano ",
-           "intensity":"8",
-           "format":"pack",
-           "quantity":"1kg",
-            "options":["500g", "1kg"],
-           "perfilTitle":"Rico y con cuerpo",
-           "perfilDescription":"Crema de café dorada de color cálido, notas de chocolate y frutos secos.",
-           "notes":"Afrutado, Chocolate",
-           "tueste":"Medio",
-           "composicion":"Arábica y Robusta",
-           "origen":"África, América del Sur, Sudeste del Asia",
-           "price":2.99
-         }
-       ],
-       "blocks":[
+          "title": "VARIEDADES",
+          "description": "Disponible en cápsula, grano y molido para cada ritual.",
+          "imgUrl": block4
+        }
+      ]
+    }
+  },
+  {
+    "collection": {
+      "active": true,
+      "name": "Mediterránea",
+      "id": 2,
+      "claim":"Luminoso, cálido, eterno" ,
+       "granoClaim": "Calidez y luz mediterránea en cada grano. Notas suaves de pan tostado y almendra para disfrutar.",
+    "molidoClaim": "Ideal para sobremesas compartidas. Un café redondo con aroma dulce y cuerpo equilibrado.",
+    "capsulaClaim": "El sabor del Mediterráneo en cápsula. Aromático, suave y perfecto para cualquier momento del día.",
+      "description": "La calidez del sol, la tradición de la sobremesa y los sabores del Mediterráneo en cada taza.",
+      "imageUrl": backgroundCoffee2,
+      "backgroundSettings": "bg-[url(./assets/home_img/background-coffee-2.jpg)]  bg-size-[1800px] bg-no-repeat",
+      "products": [
         {
-          "title":"ORÍGENES",
-          "description":"Los orígenes de Qualità Rossa se seleccionan cuidadosamente para mantener el aroma y el sabor tan únicos como siempre.",
-          "imgUrl":block1
+          "collectionId":2,
+          "imgUrl": mediterraneaMolido,
+          "id": 5,
+          "category": "CAFÉ MOLIDO",
+          "categoryLink": "molido",
+          "name": "Solera molido",
+          "sliderSubtitle": "Inspirado en la tradición de compartir bajo el sol.",
+          "intensity": "5",
+          "format": "pack",
+          "quantity": "500g",
+          "options": ["250g", "500g"],
+          "perfilTitle": "Suave y aromático",
+          "perfilDescription": "Un café redondo con notas dulces y de pan tostado.",
+          "notes": "Dulce, Pan Tostado",
+          "tueste": "Medio",
+          "composicion": "Arábica",
+          "origen": "España, Colombia",
+          "price": 2.99
         },
         {
-          "title":"BLEND",
-          "description":"Un blend único de granos de Robusta y Arábica, perfecto solo o con leche.",
-          "imgUrl":block2
+          "collectionId":2,
+          "imgUrl": mediterraneaGrano,
+          "id": 6,
+          "category": "GRANOS DE CAFÉ",
+          "categoryLink": "grano",
+          "sliderSubtitle": "Un blend que recuerda al viento Tramontana.",
+          "name": "Tramontana en grano",
+          "intensity": "7",
+          "format": "pack",
+          "quantity": "1kg",
+          "options": ["500g", "1kg"],
+          "perfilTitle": "Aromático y especiado",
+          "perfilDescription": "Notas de especias dulces y final prolongado.",
+          "notes": "Especiado, Dulce",
+          "tueste": "Oscuro",
+          "composicion": "Arábica y Robusta",
+          "origen": "Italia, España",
+          "price": 4.20
         },
         {
-          "title":"AROMA",
-          "description":"Un sabor delicado y muy aromático, completo, con un equilibrio perfecto entre los frutos secos y el chocolate.",
-          "imgUrl":block3
+                    "collectionId":2,
+
+          "imgUrl": mediterraneaCapsula,
+          "id": 7,
+          "category": "CAPSULAS COMPATIBLES",
+          "categoryLink": "capsula",
+          "sliderSubtitle": "Un café dulce y delicado para los momentos de sobremesa.",
+          "name": "Almendra cápsulas",
+          "intensity": "6",
+          "format": "capsule",
+          "quantity": "10",
+          "options": ["10", "20"],
+          "perfilTitle": "Delicado y dulce",
+          "perfilDescription": "Notas suaves a almendra tostada y miel.",
+          "notes": "Almendra, Miel",
+          "tueste": "Medio",
+          "composicion": "Arábica",
+          "origen": "Mediterráneo",
+          "price": 3.49
         },
         {
-          "title":"VARIEDADES",
-          "description":"En todas sus formas, Qualità Rossa mantiene todo su sabor y su equilibrio, sin renunciar a su intenso aroma.",
-          "imgUrl":block4
+                    "collectionId":2,
+
+          "imgUrl": mediterraneaGrano,
+          "id": 8,
+          "category": "GRANOS DE CAFÉ",
+          "categoryLink": "grano",
+          "sliderSubtitle": "La esencia del Mediterráneo en grano.",
+          "name": "Mediterránea Clásico en grano",
+          "intensity": "5",
+          "format": "pack",
+          "quantity": "500g",
+          "options": ["500g", "1kg"],
+          "perfilTitle": "Suave y equilibrado",
+          "perfilDescription": "Toques de pan dulce y frutos secos.",
+          "notes": "Pan Dulce, Frutos Secos",
+          "tueste": "Claro",
+          "composicion": "Arábica y Robusta",
+          "origen": "España, Grecia",
+          "price": 3.10
+        }
+      ],
+      "blocks": [
+        {
+          "title": "ORÍGENES",
+          "description": "Inspirada en la calidez del Mediterráneo, sus sobremesas y su luz.",
+          "imgUrl": block1
         },
-       ]
-     }}
- 
-   ]
+        {
+          "title": "BLEND",
+          "description": "Aromas suaves y dulces con cuerpo redondo.",
+          "imgUrl": block2
+        },
+        {
+          "title": "AROMA",
+          "description": "Notas de pan tostado, almendra y especias.",
+          "imgUrl": block3
+        },
+        {
+          "title": "VARIEDADES",
+          "description": "Disponible en cápsulas, molido y grano.",
+          "imgUrl": block4
+        }
+      ]
+    }
+  },
+  {
+    "collection": {
+      "active": true,
+      "name": "Arcana",
+      "id": 3,
+      "claim":"Misterioso, intenso, único",
+      "granoClaim": "Descubre la profundidad de Arcana en cada grano. Aromas especiados y terrosos que envuelven tus sentidos.",
+    "molidoClaim": "Un café intenso y misterioso para los amantes de lo oculto. Final prolongado y notas de especias oscuras.",
+    "capsulaClaim": "El misterio servido en cápsula. Profundo, aromático y con carácter que perdura.",
+      "description": "La colección misteriosa: profunda, especiada, con raíces en la tradición oculta de la península.",
+      "imageUrl": backgroundCoffee3,
+      "backgroundSettings": "bg-[url(./assets/home_img/background-coffee-3.jpg)]  bg-size-[1500px] bg-no-repeat",
+      "products": [
+        {
+          "collectionId":3,
+          "imgUrl": arcanaCapsula,
+          "id": 9,
+          "category": "CAPSULAS COMPATIBLES",
+          "categoryLink": "capsula",
+          "sliderSubtitle": "Notas especiadas y un aroma envolvente.",
+          "name": "Canela cápsulas",
+          "intensity": "8",
+          "format": "capsule",
+          "quantity": "10",
+          "options": ["10", "20"],
+          "perfilTitle": "Especiado y aromático",
+          "perfilDescription": "Un café con toques cálidos de canela y cacao.",
+          "notes": "Canela, Cacao",
+          "tueste": "Oscuro",
+          "composicion": "Arábica y Robusta",
+          "origen": "Oriente Medio, España",
+          "price": 3.79
+        },
+        {
+         "collectionId":3,
+          "imgUrl": arcanaGrano,
+          "id": 10,
+          "category": "GRANOS DE CAFÉ",
+          "categoryLink": "grano",
+          "sliderSubtitle": "Intensidad dorada como el azafrán.",
+          "name": "Zafrán en grano",
+          "intensity": "9",
+          "format": "pack",
+          "quantity": "1kg",
+          "options": ["500g", "1kg"],
+          "perfilTitle": "Profundo y exótico",
+          "perfilDescription": "Notas terrosas con un final especiado.",
+          "notes": "Terroso, Especiado",
+          "tueste": "Oscuro",
+          "composicion": "Arábica",
+          "origen": "India, España",
+          "price": 4.50
+        },
+        {
+          "collectionId":3,
+          "imgUrl": arcanaMolido,
+          "id": 11,
+          "category": "CAFÉ MOLIDO",
+          "categoryLink": "molido",
+          "sliderSubtitle": "El misterio de la tierra en tu taza.",
+          "name": "Arcilla molido",
+          "intensity": "7",
+          "format": "pack",
+          "quantity": "500g",
+          "options": ["250g", "500g"],
+          "perfilTitle": "Terroso y fuerte",
+          "perfilDescription": "Notas ahumadas con un cuerpo persistente.",
+          "notes": "Ahumado, Mineral",
+          "tueste": "Medio",
+          "composicion": "Arábica y Robusta",
+          "origen": "Yemen, España",
+          "price": 3.39
+        },
+        {
+           "collectionId":3,
+          "imgUrl": arcanaGrano,
+          "id": 12,
+          "category": "GRANOS DE CAFÉ",
+          "categoryLink": "grano",
+          "sliderSubtitle": "El secreto de los aromas ocultos.",
+          "name": "Arcana Reserva en grano",
+          "intensity": "10",
+          "format": "pack",
+          "quantity": "500g",
+          "options": ["500g", "1kg"],
+          "perfilTitle": "Intenso y misterioso",
+          "perfilDescription": "Toques de especias oscuras y final prolongado.",
+          "notes": "Clavo, Pimienta Negra",
+          "tueste": "Oscuro",
+          "composicion": "Arábica",
+          "origen": "Etiopía, Yemen",
+          "price": 5.10
+        }
+      ],
+      "blocks": [
+        {
+          "title": "ORÍGENES",
+          "description": "Inspirada en las tradiciones ocultas y la riqueza especiada.",
+          "imgUrl": block1
+        },
+        {
+          "title": "BLEND",
+          "description": "Mezclas intensas con notas especiadas y profundas.",
+          "imgUrl": block2
+        },
+        {
+          "title": "AROMA",
+          "description": "Aromas de canela, azafrán y humo sutil.",
+          "imgUrl": block3
+        },
+        {
+          "title": "VARIEDADES",
+          "description": "Disponible en cápsula, grano y molido, para quienes buscan intensidad.",
+          "imgUrl": block4
+        }
+      ]
+    }
+  }
+]

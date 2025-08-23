@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
 import {useParams, Link} from 'react-router-dom'
 
-import lavazza from './assets/home_img/lavazza-logo-white.png'
 
-import lavazza2 from './assets/home_img/lavazza-2-logo.png'
+import terranaWhite from './assets/home_img/terrana-white.png'
+
+import terranaBlue from './assets/home_img/terrana-blue.png'
 
 import backgroundCoffee1 from './assets/home_img/background-coffee-1.jpg'
 import backgroundCoffee2 from './assets/home_img/background-coffee-2.jpg'
@@ -20,6 +21,9 @@ import {Menu} from './Products.jsx'
 import { productsInfo } from './products-info.js'
 
 import {Slider} from './Home.jsx'
+import {Sustainability} from './Detail.jsx'
+import {useNavigator} from './useNavigator.js'
+import { productsDisplay } from './products-display.js'
 
 
 export function Collections(){
@@ -31,57 +35,15 @@ export function Collections(){
        return p.collection.id==params.id
     })[0].collection)
 
-console.log(params.id+" is the id and the object is "+collection)
-console.log(collection)
 
-    const [scrolled, setScrolled]=useState(false)
+    const {scrolled, menuActive, handleMenuActive}=useNavigator()
 
-    useEffect(()=>{
-
-      const handleScrolled=function(){
-
-        if(window.scrollY>100){
-          setScrolled(true)
-        }else{
-          setScrolled(false)
-        }
-      }
-
-      window.addEventListener("scroll", handleScrolled)
-
-      return ()=>removeEventListener("scroll", handleScrolled)
-
-
-    },[])
-
-     const [menuActive, setMenuActive]=useState(false)
-
-    useEffect(()=>{
-
-        let x=window.scrollX
-        let y=window.scrollY
-        const disableScroll=function(){
-            window.scrollTo(x,y)
-        }
-        if(menuActive){
-
-
-        window.addEventListener("scroll", disableScroll)
-
-    }
-
-        return ()=>window.removeEventListener("scroll", disableScroll)
-
-    },[menuActive])
-
-    const handleMenuActive=function(state){
-      setMenuActive(state)
-    }
-
+console.log(scrolled)
+   
     useEffect(()=>{
 
        setCollection(productsInfo.filter((p)=>{
-      setMenuActive(false)
+       handleMenuActive(false)
        return p.collection.id==params.id
     })[0].collection)
 
@@ -91,42 +53,9 @@ console.log(collection)
     return <>
     
   
-            <div className={`flex fixed ${scrolled?"bg-white text-blue-900":"text-white"} transition-colors ease-in flex-nowrap w-full items-center h-20 z-[30] top-0`}>
-              {!scrolled && <div className={`  left-2 sm:left-4 absolute h-auto`}>
-    
-                <img className=" w-20  sm:min-w-35 sm:max-w-35  z-10  " src={lavazza} alt="" />
-                <p className={`mt-1 text-[7px] text-center font-bold sm:text-xs`}>VIGO. SPAGNA. 2001</p>
-    
-                </div>}
-    
-                {scrolled && <div className={` left-[-10px] sm:left-[-15px] bottom-[0px] sm:bottom-[-30px] absolute h-auto`}>
-                <img className=" w-30  sm:min-w-50 sm:max-w-50  z-10  " src={lavazza2} alt="" />
-                </div>
-            }
-              <nav className="hidden  text-sm font-bold  lg:flex gap-8 tracking-widest  md:flex-none absolute left-0 right-0 justify-center z-11">
-                <a href="" className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`} onClick={(e)=>{
-                        e.preventDefault()
-                        handleMenuActive(true)
-                    }}>PRODUCTOS</a>
-                <a href=""className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`} onClick={(e)=>{
-                        e.preventDefault()
-                        handleMenuActive(true)
-                    }}>LAVAZZA STORE</a>
-                <a href=""className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`} onClick={(e)=>{
-                        e.preventDefault()
-                        handleMenuActive(true)
-                    }}>SOSTENIBILIDAD</a>
-                <a href=""className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`} onClick={(e)=>{
-                        e.preventDefault()
-                        handleMenuActive(true)
-                    }}>CONTACTO</a>
-              </nav>
-              <Link to="/cart"><i className={`fa-solid fa-magnifying-glass flex-none basis-10 text-center text-2xl ${scrolled?"text-blue-900":"text-stone-50"} absolute right-40 top-[25px] lg:right-5  z-10`}></i></Link>
-              <i className={`fa-solid fa-bars-staggered flex  ${scrolled?"text-blue-900":"text-stone-50"} absolute right-12 lg:!hidden`} onClick={(e)=>{
-                        e.preventDefault()
-                        handleMenuActive(true)
-                    }}></i>
-            </div>
+            <Navigator transparent={true} scrolled={scrolled} handleMenu={handleMenuActive}>
+
+            </Navigator>
 
         
     <div className={`h-200 w-full z-0 absolute top-0 bg-stone-300 bg-blend-multiply ${collection.backgroundSettings} bg-size-[1070px] sm:bg-size-[1200px] md:bg-size-[1370px] bg-no-repeat bg-center`} >
@@ -149,7 +78,7 @@ console.log(collection)
                 <CollectionBlocks collection={collection}/>
                 </article>
             <div className="w-full text-center ">
-            <button className="text-white border-1 border-white tracking-widest text-sm p-5 rounded-4xl text-center w-80">VER TODOS LOS PRODUCTOS</button>
+            <Link to="/products/cafe"><button className="text-white border-1 border-white tracking-widest text-sm p-5 rounded-4xl cursor-pointer text-center w-80">VER TODOS LOS PRODUCTOS</button></Link>
             </div>
 
             <img className="m-auto  w-50 mt-20 mb-[-160px]" src={splash} alt="" />
@@ -167,21 +96,21 @@ console.log(collection)
           <div className="w-full bg-no-repeat bg-cover bg-center bg-stone-500 bg-blend-multiply bg-[url(./assets/collections/licor.jpg)] text-white flex flex-col p-5 h-4/5  rounded-xl">
           <p className="font-[Corinthia] text-4xl font-bold">Licor café</p>
           <p className="text-xl font-extrabold mb-6">El sabor de la tradición</p>
-          <a className="self-end font-bold tracking-widest hover:underline underline-offset-4 " href="">DESCUBRIR MÁS &gt;</a>
+          <a onClick={(e)=>{e.preventDefault}} className="self-end font-bold tracking-widest hover:underline underline-offset-4 "><Link to="/recetas/1">DESCUBRIR MÁS &gt;</Link></a>
           </div>
         </div>
         <div className="w-1/3 h-full   flex  items-end">
           <div className="w-full  bg-center bg-no-repeat bg-cover bg-stone-500 bg-blend-multiply bg-[url(./assets/collections/tonic.jpg)] text-white flex flex-col p-5 h-4/5  rounded-xl">
           <p className="font-[Corinthia] text-4xl font-bold">Espresso tonic </p>
           <p className="text-xl font-extrabold mb-6">Para los paladares más curiosos</p>
-          <a className="self-end font-bold tracking-widest hover:underline underline-offset-4 " href="">DESCUBRIR MÁS &gt;</a>
+          <a onClick={(e)=>{e.preventDefault}} className="self-end font-bold tracking-widest hover:underline underline-offset-4 "><Link to="/recetas/2">DESCUBRIR MÁS &gt;</Link></a>
           </div>
         </div>
         <div className="w-1/3 h-full  flex  items-start">
           <div className="w-full bg-no-repeat bg-center bg-stone-500 bg-blend-multiply bg-cover bg-[url(./assets/collections/affogato.jpg)] text-white flex flex-col p-5 h-4/5  rounded-xl">
           <p className="font-[Corinthia] text-4xl font-bold">Affogato</p>
           <p className="text-xl font-extrabold mb-6">Un postre a la italiana</p>
-          <a className="self-end font-bold tracking-widest hover:underline underline-offset-4 " href="">DESCUBRIR MÁS &gt;</a>
+          <a onClick={(e)=>{e.preventDefault}} className="self-end font-bold tracking-widest hover:underline underline-offset-4 "><Link to="/recetas/3">DESCUBRIR MÁS &gt;</Link></a>
           </div>
         </div>
      </section>
@@ -195,17 +124,20 @@ console.log(collection)
               {
                 "boxUrl":"./assets/collections/licor.jpg",
                 "title":"Licor de café",
-                "subtitle":"El sabor de la tradición"
+                "subtitle":"El sabor de la tradición",
+                "link":"/recetas/1"
               },
               {
                 "boxUrl":'./assets/collections/tonic.jpg',
                 "title":"Espresso tonic",
-                "subtitle":"Para los paladares más curiosos"
+                "subtitle":"Para los paladares más curiosos",
+                "link":"/recetas/2"
               },
               {
                 "boxUrl":'./assets/collections/affogato.jpg',
                 "title":"Affogato",
-                "subtitle":"Un postre a la italiana"
+                "subtitle":"Un postre a la italiana",
+                "link":"/recetas/3"
               }
 
           ]}/>
@@ -215,6 +147,8 @@ console.log(collection)
 
      </section>
      </aside>
+
+    <Sustainability/> 
         
     <Footer/>
     
@@ -321,8 +255,8 @@ function CollectionBlocks({collection}){
             </div>
             <div className="flex flex-wrap pl-10 h-auto w-3/5 gap-4">
             <div className="w-full text-white ">
-                <p className="font-[Corinthia] text-6xl ">Qualità Rossa</p>
-                <p className="font-extrabold text-6xl ">Pasión roja italiana</p>
+                <p className="font-[Corinthia] text-6xl ">{collection.name}</p>
+                <p className="font-extrabold text-6xl ">{collection.claim}</p>
 
             </div>
 
@@ -346,8 +280,8 @@ function CollectionBlocks({collection}){
 
         </section>
 
-                <p className=" lg:hidden  w-8/10 m-auto font-[Corinthia] text-white text-3xl ">Qualità Rossa</p>
-                <p className="lg:hidden w-8/10 m-auto  text-white font-extrabold mb-10 text-xl ">Pasión roja italiana</p>
+                <p className=" lg:hidden  w-8/10 m-auto font-[Corinthia] text-white text-3xl ">{collection.name}</p>
+                <p className="lg:hidden w-8/10 m-auto  text-white font-extrabold mb-10 text-xl ">{collection.claim}</p>
 
             <div className=" hidden md:grid md:grid-cols-2 md:w-8/10 md:m-auto md:h-auto lg:hidden ">
             
@@ -462,6 +396,8 @@ function CollectionSlider({collection}){
 
     const [productsToShow, setProductsToShow]=useState([])
 
+    const params =useParams()
+
    
 
     useEffect(()=>{
@@ -487,15 +423,14 @@ function CollectionSlider({collection}){
 
         if(newProducts.length<3){
             newProducts.push({...newProducts[0], "position":2})
-            newProducts.push({...newProducts[1], "position":3})
-            
+            newProducts.push({...newProducts[1], "position":3})            
         }
 
         console.log(newProducts)
 
         setProductsToShow(newProducts)
 
-    },[])
+    },[ collection])
 
     const handleMoveProduct=function(movement){
 
@@ -544,17 +479,17 @@ function CollectionSlider({collection}){
 
         if(category=="GRANOS DE CAFÉ"){
             return {"title":"Granos de café",
-                "subtitle":"Elige granos de café Qualità Rossa y disfruta de café recién molido con el inconfundible sabor a tueste italiano"
+                "subtitle":collection.granoClaim
             }
         }else if(category=="CAFÉ MOLIDO"){
             return {
                 "title":"Tostado y molido",
-                "subtitle":"La solución ideal para saborear cada momento: disfruta del intenso aroma del café filtrado o de un delicioso espresso."
+                "subtitle":collection.molidoClaim
             }
         }else if(category=="CAPSULAS COMPATIBLES"){
             return {
                 "title":"Cápsulas compatibles con máquinas",
-                "subtitle":"Nuestro pasado y nuestro futuro se mezclan ahora con excelencia italiana e impacto de CO₂ nulo. Cápsulas compatibles con las máquinas Nespresso* Original."
+                "subtitle":collection.capsulaClaim
             }
         }
     }
@@ -564,6 +499,7 @@ function CollectionSlider({collection}){
     return <article className="relative w-full h-auto py-2 ">
 
        {productsToShow && productsToShow.map((p)=>{
+        console.log(p)
             return <>
 
             <img onClick={()=>{
@@ -594,9 +530,9 @@ function CollectionSlider({collection}){
     
                 if(p.position==1){
             return  <div className="w-full flex flex-col text-white justify-center items-center mt-30 sm:mt-60 h-auto">
-            <p className=" md:text-4xl text-3xl z-10 font-extrabold mt-4 text-center w-3/4">{giveText(p.category).title}</p>
+            <p className=" md:text-4xl text-3xl z-10 font-extrabold mt-18 text-center w-3/4">{giveText(p.category).title}</p>
             <p className=" text-xl z-10 font-bold mt-5 text-center w-3/4">{giveText(p.category).subtitle}</p> 
-            <button className=" w-2xs font-semibold mt-10   text-white tracking-widest border-1 p-3 rounded-4xl  text-center">DESCUBRIR MÁS</button>
+            <Link to={`/detail/${p.collectionId}/${p.id}`}><button className=" w-2xs font-semibold mt-10   text-white tracking-widest border-1 p-3 cursor-pointer rounded-4xl  text-center">DESCUBRIR MÁS</button></Link>
 
             </div>
                 }
@@ -606,4 +542,55 @@ function CollectionSlider({collection}){
 
 
     </article>
+}
+
+export function Navigator({transparent, scrolled, handleMenu}){
+
+    
+
+    
+
+    return <>
+     <div className={`flex fixed ${scrolled?"bg-white text-blue-900":""} ${(!scrolled && transparent)?"text-white":""} ${!scrolled && !transparent?"bg-blue-950 text-white":""} transition-colors ease-in flex-nowrap w-full items-center h-20 z-[30] top-0`}>
+              {!scrolled && <div className={`  left-2 sm:left-4  z-30 absolute h-auto`}>
+    
+                <Link to="/"><img  className=" w-35  h-11 object-cover  cursor-pointer  z-30  " src={terranaWhite} alt="" /></Link>
+                <p className={` text-[7px] text-center font-bold sm:text-xs`}>VIGO. SPAGNA. 2001</p>
+    
+                </div>}
+    
+                {scrolled && <div className={`  left-2 bottom-[20px] sm:bottom-[25px] absolute `}>
+               <Link to="/"><img className=" w-35 h-13 object-cover   sm:w-50   z-30 cursor-pointer relative   " src={terranaBlue} alt="" /></Link> 
+                </div>
+            }
+              <nav className="hidden  text-sm font-bold  lg:flex gap-8 tracking-widest  md:flex-none absolute left-0 right-0 justify-center z-11">
+                <a href="" className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`} onClick={(e)=>{
+                        e.preventDefault()
+                        handleMenu(true)
+                    }}>PRODUCTOS</a>
+                <a href=""className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`} onClick={(e)=>{
+                        e.preventDefault()
+                        handleMenu(true)
+                    }}>TERRANA STORIES</a>
+                <a href=""className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`} onClick={(e)=>{
+                        e.preventDefault()
+                       
+                
+                    }}><Link to="/esg">SOSTENIBILIDAD</Link></a>
+                <a href=""className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`} onClick={(e)=>{
+                        e.preventDefault()
+                       
+                  
+             
+                        handleMenu(true)
+                    }}><Link to="/contact">CONTACTO</Link></a>
+              </nav>
+              <Link to="/cart"><i className={`fa-solid fa-cart-shopping z-30 flex-none basis-10 text-center text-2xl ${scrolled?"text-blue-900":"text-stone-50"} absolute right-40 top-[25px] lg:right-5  z-10`}></i></Link>
+              <i className={`fa-solid fa-bars-staggered cursor-pointer flex  ${scrolled?"text-blue-900":"text-stone-50"} absolute right-12 lg:!hidden`} onClick={(e)=>{
+                        e.preventDefault()
+                 
+                        handleMenu(true)
+                    }}></i>
+            </div>
+</>
 }

@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
+import { useNavigator } from './useNavigator.js'
 import {useParams, Link} from 'react-router-dom'
 
 import lavazza from './assets/home_img/lavazza-logo-white.png'
@@ -22,11 +23,13 @@ const cream= "./assets/products/cream.avif"
 
 import {Footer} from './Home.jsx'
 import {Menu} from './Products.jsx'
+import {Navigator} from './Collections.jsx'
 
 import { productsInfo } from './products-info.js'
 
 import {Slider} from './Home.jsx'
 import {Slider2} from './Home.jsx'
+import { ProductsContext } from './App.jsx'
 
 
 
@@ -35,9 +38,13 @@ export function Detail(){
 
     let params=useParams()
 
+    const useCart=useContext(ProductsContext)
+
+    const {cart, addToCart}=useCart()
+
     const[product, setProduct]=useState()
 
-     const [scrolled, setScrolled]=useState(false)
+    
 
      const [positions, setPositions]=useState([
         {
@@ -58,20 +65,25 @@ export function Detail(){
         }
     )
 
+    const {scrolled, menuActive, handleMenuActive}=useNavigator()
+
     useEffect(()=>{
 
         let collection=productsInfo.filter((p)=>{
             return p.collection.id==params.collection
         })
         
+        
 
         let product=collection[0]?.collection.products.filter((pr)=>{
             return pr.id==params.product
         })
+        
+
 
         setProduct(product[0])
 
-        console.log(product[0])
+        
 
     },[])
 
@@ -108,47 +120,7 @@ export function Detail(){
 
     }
     
-        useEffect(()=>{
-    
-          const handleScrolled=function(){
-    
-            if(window.scrollY>100){
-              setScrolled(true)
-            }else{
-              setScrolled(false)
-            }
-          }
-    
-          window.addEventListener("scroll", handleScrolled)
-    
-          return ()=>removeEventListener("scroll", handleScrolled)
-    
-    
-        },[])
-    
-         const [menuActive, setMenuActive]=useState(false)
-    
-        useEffect(()=>{
-    
-            let x=window.scrollX
-            let y=window.scrollY
-            const disableScroll=function(){
-                window.scrollTo(x,y)
-            }
-            if(menuActive){
-    
-    
-            window.addEventListener("scroll", disableScroll)
-    
-        }
-    
-            return ()=>window.removeEventListener("scroll", disableScroll)
-    
-        },[menuActive])
-    
-        const handleMenuActive=function(state){
-          setMenuActive(state)
-        }
+       
 
         const givePosition=function(state){
             if(state==0){
@@ -198,43 +170,7 @@ export function Detail(){
 
 
         return <>
-         <div className={`flex fixed ${scrolled?"bg-white text-blue-900":"text-white"} transition-colors ease-in flex-nowrap w-full items-center h-20 z-[30] top-0`}>
-                      {!scrolled && <div className={`  left-2 sm:left-4 absolute h-auto`}>
-            
-                        <img className=" w-20  sm:min-w-35 sm:max-w-35  z-10  " src={lavazza} alt="" />
-                        <p className={`mt-1 text-[7px] text-center font-bold sm:text-xs`}>VIGO. SPAGNA. 2001</p>
-            
-                        </div>}
-            
-                        {scrolled && <div className={` left-[-10px] sm:left-[-15px] bottom-[0px] sm:bottom-[-30px] absolute h-auto`}>
-                        <img className=" w-30  sm:min-w-50 sm:max-w-50  z-10  " src={lavazza2} alt="" />
-                        </div>
-                    }
-                      <nav className="hidden  text-sm font-bold lg:flex gap-8 tracking-widest  md:flex-none absolute left-0 right-0 justify-center z-11">
-                        <a href="" className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`} onClick={(e)=>{
-                                e.preventDefault()
-                                handleMenuActive(true)
-                            }}>PRODUCTOS</a>
-                        <a href=""className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`} onClick={(e)=>{
-                                e.preventDefault()
-                                handleMenuActive(true)
-                            }}>LAVAZZA STORE</a>
-                        <a href=""className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`} onClick={(e)=>{
-                                e.preventDefault()
-                                handleMenuActive(true)
-                            }}>SOSTENIBILIDAD</a>
-                        <a href=""className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`} onClick={(e)=>{
-                                e.preventDefault()
-                                handleMenuActive(true)
-                            }}>CONTACTO</a>
-                      </nav>
-              <Link to="/cart"><i className={`fa-solid fa-magnifying-glass flex-none basis-10 text-center text-2xl ${scrolled?"text-blue-900":"text-stone-50"} absolute right-40 lg:right-5  z-10`}></i></Link>
-                      <i className={`fa-solid fa-bars-staggered flex  ${scrolled?"text-blue-900":"text-stone-50"} absolute right-12 lg:!hidden`} onClick={(e)=>{
-                                e.preventDefault()
-                                handleMenuActive(true)
-                            }}></i>
-                    </div>
-        
+         <Navigator transparent={false} scrolled={scrolled} handleMenu={handleMenuActive}/>
                 
         <div className="hidden  lg:flex lg:h-200 lg:w-full z-0 absolute top-0 bg-stone-500 bg-blend-multiply bg-[url(./assets/home_img/background-coffee-1.jpg)] bg-size-[1070px] sm:bg-size-[1100px] md:bg-size-[1370px] bg-no-repeat bg-center" >
         
@@ -264,7 +200,13 @@ export function Detail(){
             })}
             </div>
 
-            <button className="w-full p-4 mt-10 text-md tracking-widest font-bold text-center rounded-3xl border-1 border-white">COMPRA ONLINE</button>
+            <button onClick={()=>{
+                addToCart(product)
+            }} className={` ${
+                cart.some((c)=>{
+                    return c.product.id==product?.id
+                })?"bg-green-500 hover:bg-stone-400 hover:text-white cursor-not-allowed":" cursor-pointer"
+            }  w-full p-4 mt-10 text-md tracking-widest font-bold text-center rounded-3xl border-1 border-white`}>COMPRA ONLINE</button>
          
          </div>
 
@@ -311,13 +253,13 @@ export function Detail(){
 
          </div>
 
-         <div className="w-full z-10  pb-30 lg:pb-40 relative rounded-b-[200px] bg-stone-500  h-auto lg:pt-20 pt-10 flex lg:flex-row flex-col justify-center items-center gap-10 lg:gap-1 ">
+         <div className="w-full z-10  pb-30 lg:pb-40 relative rounded-b-[200px] bg-white  h-auto lg:pt-20 pt-10 flex lg:flex-row flex-col justify-center items-center gap-10 lg:gap-1 ">
                     <div className="w-full lg:w-1/2 pr-15 flex justify-center ">
                     
                     <div className=" w-80 lg:w-100 rounded-full bg-stone-100 relative flex items-center h-80 lg:h-100" >
                         <div className={`w-5/7 outline-8 flex justify-center items-center outline-white shadow-stone-500 shadow-lg h-5/7 m-auto rounded-full ${giveBackground()}`}>
 
-                        <img  className="w-24/5" src={coffeeProduct1} alt="" />
+                        <img  className="w-24/5" src={product?.imgUrl} alt="" />
 
                                 <div  onClick={()=>{
                                         handleSection("perfil")
@@ -457,21 +399,21 @@ export function Detail(){
           <div className="w-full bg-no-repeat bg-cover bg-center bg-stone-500 bg-blend-multiply bg-[url(./assets/collections/licor.jpg)] text-white flex flex-col p-5 h-4/5  rounded-xl">
           <p className="font-[Corinthia] text-4xl font-bold">Licor café</p>
           <p className="text-xl font-extrabold mb-6">El sabor de la tradición</p>
-          <a className="self-end font-bold tracking-widest hover:underline underline-offset-4 " href="">DESCUBRIR MÁS &gt;</a>
+          <a onClick={(e)=>{e.preventDefault}} className="self-end font-bold tracking-widest hover:underline underline-offset-4 "><Link to="/recetas/1">DESCUBRIR MÁS &gt;</Link></a>
           </div>
         </div>
         <div className="w-1/3 h-full   flex  items-end">
           <div className="w-full  bg-center bg-no-repeat bg-cover bg-stone-500 bg-blend-multiply bg-[url(./assets/collections/tonic.jpg)] text-white flex flex-col p-5 h-4/5  rounded-xl">
           <p className="font-[Corinthia] text-4xl font-bold">Espresso tonic </p>
           <p className="text-xl font-extrabold mb-6">Para los paladares más curiosos</p>
-          <a className="self-end font-bold tracking-widest hover:underline underline-offset-4 " href="">DESCUBRIR MÁS &gt;</a>
+          <a onClick={(e)=>{e.preventDefault}} className="self-end font-bold tracking-widest hover:underline underline-offset-4 "><Link to="/recetas/2">DESCUBRIR MÁS &gt;</Link></a>
           </div>
         </div>
         <div className="w-1/3 h-full  flex  items-start">
           <div className="w-full bg-no-repeat bg-center bg-stone-500 bg-blend-multiply bg-cover bg-[url(./assets/collections/affogato.jpg)] text-white flex flex-col p-5 h-4/5  rounded-xl">
           <p className="font-[Corinthia] text-4xl font-bold">Affogato</p>
           <p className="text-xl font-extrabold mb-6">Un postre a la italiana</p>
-          <a className="self-end font-bold tracking-widest hover:underline underline-offset-4 " href="">DESCUBRIR MÁS &gt;</a>
+          <a onClick={(e)=>{e.preventDefault}} className="self-end font-bold tracking-widest hover:underline underline-offset-4 "><Link to="/recetas/3">DESCUBRIR MÁS &gt;</Link></a>
           </div>
         </div>
      </section>
@@ -485,17 +427,20 @@ export function Detail(){
               {
                 "boxUrl":"./assets/collections/licor.jpg",
                 "title":"Licor de café",
-                "subtitle":"El sabor de la tradición"
+                "subtitle":"El sabor de la tradición",
+                "link":"/recetas/1"
               },
               {
                 "boxUrl":'./assets/collections/tonic.jpg',
                 "title":"Espresso tonic",
-                "subtitle":"Para los paladares más curiosos"
+                "subtitle":"Para los paladares más curiosos",
+                "link":"/recetas/2"
               },
               {
                 "boxUrl":'./assets/collections/affogato.jpg',
                 "title":"Affogato",
-                "subtitle":"Un postre a la italiana"
+                "subtitle":"Un postre a la italiana",
+                "link":"/recetas/3"
               }
 
           ]}/>
@@ -506,13 +451,29 @@ export function Detail(){
      </section>
      </aside>
 
+     
+        <Sustainability/>
+
+     <Footer/>
+
+            
+                {menuActive && <Menu handleMenuActive={handleMenuActive}/>}
+        </>
+
+}
+
+export function Sustainability(){
+
+    return <>
      <section className={`w-full mb-20 h-110 flex flex-row gap-5 bg-stone-500 bg-blend-multiply bg-size-[1600px] bg-center bg-no-repeat  bg-[url(./assets/backgrounds/grass.jpg)]`}>
 
         <div className="w-8/10 lg:w-1/2 pl-5  text-white flex flex-col lg:pt-0 pt-10 justify-start lg:justify-center items-start">
-        <h1 className="font-extrabold text-2xl md:text-5xl mb-8 tracking-wide">Ciao!</h1>
-        <p className="md:font-semibold text-lg lg:text-xl mb-4">Sostenible no es solo lo que somos, sino cómo vivimos.</p>
-        <p className="md:font-semibold text-lg lg:text-xl mb-4">Gracias a quienes cooperan con nosotros, hemos podido crear un ciclo continuo en el que la innovación en productos y procesos, la excelencia cualitativa y la sostenibilidad se refuerzan mutuamente.</p>
-        <p className="md:font-semibold text-lg lg:text-xl mb-4">Únete a nosotros y descubre la alegría de la sostenibilidad.</p>
+        <h1 className="font-extrabold text-2xl md:text-5xl mb-8 tracking-wide">Hola, Terrana</h1>
+        <p className="md:font-semibold text-lg lg:text-xl mb-4">La sostenibilidad no es solo un valor, es la forma en que cultivamos cada paso.</p>
+        <p className="md:font-semibold text-lg lg:text-xl mb-4">Gracias a la colaboración con quienes creen en este viaje, hemos creado un ciclo vivo en el que innovación, calidad y respeto por la tierra se encuentran y se fortalecen mutuamente.
+</p>
+        <p className="md:font-semibold text-lg lg:text-xl mb-4">Súmate y descubre el placer de un café que cuida tanto como inspira.
+</p>
         </div>
 
         <div className="hidden relative  w-1/5  lg:flex lg:flex-col">
@@ -521,7 +482,7 @@ export function Detail(){
         <div className="bg-white min-h-50 shadow-sm shadow-stone-900 pt-5 pl-3 pb-5 pr-2 flex flex-col justify-center rounded-b-4xl text-blue-950 w-full">
             <p className="font-[Corinthia] text-4xl mb-4 font-extrabold">Sostenibilidad</p>
             <p className="text-xl mb-5 font-extrabold">Descubrir la sostenibilidad</p>
-            <p className="text-sm tracking-widest font-bold">MÁS INFORMACIÓN &gt;</p>
+           <Link to="/esg"> <p className="text-sm  cursor-pointer tracking-widest font-bold">MÁS INFORMACIÓN &gt;</p></Link>
         </div>
         </div>
         </div>
@@ -531,20 +492,24 @@ export function Detail(){
         <div className="bg-white rounded-4xl shadow-sm shadow-stone-900 min-h-100 pt-5 pl-3 pb-5 pr-2 flex flex-col justify-center rounded-b-4xl text-blue-950 w-full">
             <p className="font-[Corinthia] text-4xl mb-4 font-extrabold">Productos</p>
             <p className="text-xl mb-5 font-extrabold">Nuestras certificaciones</p>
-            <p className="text-sm  font-semibold">Toma una taza de café y disfruta de la Experiencia Lavazza. Tanto si prefieres las cápsulas A Modo Mio como los granos enteros o molidos Qualità Rossa, lo importante es vivir de manera sostenible, incluso mientras saboreas el primer café del día.</p>
+            <p className="text-sm  font-semibold">  Tómate un respiro con una taza de café Terrana. Ya sea en cápsulas, en grano o molido, lo importante es disfrutar del primer sorbo del día con conciencia y sostenibilidad, honrando cada origen y cada historia que nos une a la tierra.
+</p>
 
         </div>
          </div>
         </div>
 
-        <div className="lg:hidden flex z-30 relative h-150">
+     </section>
+    
+    
+    <div className="lg:hidden mb-15 mt-[-105px]  sm:mt-[-160px] w-full flex z-30 relative justify-center  h-110">
             <Slider2 blocks={
                 {"content":[<div>
                                 <div className={`w-full h-50 bg-size-[340px] rounded-t-4xl bg-center bg-no-repeat bg-[url(./assets/backgrounds/nature1.jpg)]`}></div>
                                 <div className="bg-white min-h-50 shadow-sm shadow-stone-900 pt-5 pl-3 pb-5 pr-2 flex flex-col justify-center rounded-b-4xl text-blue-950 w-full">
                                     <p className="font-[Corinthia] text-4xl mb-4 font-extrabold">Sostenibilidad</p>
                                     <p className="text-xl mb-5 font-extrabold">Descubrir la sostenibilidad</p>
-                                    <p className="text-sm tracking-widest font-bold">MÁS INFORMACIÓN &gt;</p>
+                                    <Link to="/esg"><p className="text-sm tracking-widest font-bold">MÁS INFORMACIÓN &gt;</p></Link>
                                 </div>
                                 </div>,
                                 <div className="bg-white rounded-4xl shadow-sm shadow-stone-900 min-h-100 pt-5 pl-3 pb-5 pr-2 flex flex-col justify-center rounded-b-4xl text-blue-950 w-full">
@@ -555,12 +520,12 @@ export function Detail(){
         </div>
                                 
                             ],
-                "widthLeft":"w-100",
-                "widthCenter":"w-120",
-                "widthLRight":"w-100",
-                "heightLeft":"h-50",
-                "heightCenter":"h-70",
-                "heightRight":"h-50",
+                "widthLeft":"w-50",
+                "widthCenter":"w-75",
+                "widthLRight":"w-50",
+                "heightLeft":"h-30",
+                "heightCenter":"h-30",
+                "heightRight":"h-30",
                 
 
 
@@ -569,12 +534,6 @@ export function Detail(){
 
             </Slider2>
         </div>
-     </section>
 
-     <Footer/>
-
-            
-                {menuActive && <Menu handleMenuActive={handleMenuActive}/>}
         </>
-
 }
