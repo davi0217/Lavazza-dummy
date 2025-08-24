@@ -1,20 +1,23 @@
 import { useState, useEffect, useRef } from 'react'
 import {useParams, Link} from 'react-router-dom'
 
+import {Footer, Menu, Navigator} from './Utilities.jsx'
 
+import {useNavigator} from '../custom-hooks/useNavigator.js'
 
-
-import {Footer} from './Home.jsx'
-import {Menu} from './Products.jsx'
-import {Navigator} from './Collections.jsx'
-
-
-import {useNavigator} from './useNavigator.js'
-
-import {chefs} from './chefs.js'
+import {chefs} from '../data/chefs.js'
 
 export  function Chefs(){
 
+
+    /* 
+El hook personalizado nos ofrece estados y handlers:
+- scrolled: Si el usuario ha hecho scroll en la web, para cambiar el color del navegador
+- menuActive: Estado del menú principal que se despliega del navegador
+- handleMenuActive: Activar o desactivar el menú del navegador
+- storiesActive: Estado del menú de historias que se despliega del navegador
+- handleStoriesActive: Activar o desactivar el menú de historias del navegador
+*/
     const {scrolled, menuActive, handleMenuActive,storiesActive, handleStoriesActive}=useNavigator()
 
   
@@ -36,7 +39,7 @@ export  function Chefs(){
         <section className="relative mt-140 flex flex-row  flex-wrap  mb-30 justify-center px-20 lg:px-5  md:justify-between  lg:justify-center gap-10 lg:gap-4 w-full "> 
 
             {chefs.map((b, index)=>{
-                return <div className={`${(index%2!=0 && index<3)?" lg:translate-y-20 lg:!mb-30":""} ${(index>3 && (index-1)%3==0)?" ":"lg:mt-[-40px]"} w-3/4 md:w-4/10 lg:w-3/10 lg:mb-10 shadow-sm shadow-stone-900 h-110 rounded-4xl`}>
+                return <div className={`${(index%2!=0 && index<3)?" lg:translate-y-20 lg:!mb-30":""} ${(index>3 && (index-1)%3==0)?" ":"lg:mt-[-40px]"} w-full sm:w-3/4 md:w-4/10 lg:w-3/10 lg:mb-10 shadow-sm shadow-stone-900 h-110 rounded-4xl`}>
         <div className={`w-full h-50 bg-size-[540px] rounded-t-4xl  bg-stone-500 bg-blend-multiply ${chefs[index].bgSettingsLittle}`}></div>
         <div className="bg-white h-60  pt-5 pl-3 pb-5 pr-2 flex flex-col justify-between rounded-b-4xl text-blue-950 w-full">
             <p className="font-[Corinthia] text-2xl mb-4 font-extrabold">{b.name}</p>
@@ -48,10 +51,11 @@ export  function Chefs(){
 
         </section>
 
-    <Footer>
+ {/* Se cierra la sección con un Footer personalizado
+        Más información sobre el componente Footer en Utilities.jsx */}
+    <Footer/>
 
 
-    </Footer>
             {(menuActive || storiesActive) && <Menu handleMenuActive={handleMenuActive} handleStoriesActive ={handleStoriesActive} storiesActive={storiesActive} menuActive={menuActive}/>}
 
     </section>

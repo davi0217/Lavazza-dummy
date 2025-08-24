@@ -1,27 +1,26 @@
 import { useState, useEffect, useRef } from 'react'
 import {useParams, Link} from 'react-router-dom'
 
-import lavazza from './assets/home_img/lavazza-logo-white.png'
+import {Footer, Menu, Navigator} from './Utilities.jsx'
 
-import lavazza2 from './assets/home_img/lavazza-2-logo.png'
-import cultivation1 from './assets/backgrounds/cultivation-1.jpg'
-import cultivation2 from './assets/backgrounds/cultivation-2.jpg'
-import cultivation3 from './assets/backgrounds/cultivation-3.jpg'
-import cultivation4 from './assets/backgrounds/cultivation-4.jpg'
+import {sections} from '../data/esgSections.jsx'
+
+import { productsInfo } from '../data/products-info.js'
 
 
-import {Footer} from './Home.jsx'
-import {Menu} from './Products.jsx'
-import {Navigator} from './Collections.jsx'
-import {sections} from './esgSections.jsx'
-
-import { productsInfo } from './products-info.js'
-
-
-import {useNavigator} from './useNavigator.js'
+import {useNavigator} from '../custom-hooks/useNavigator.js'
 
 export  function Environement(){
 
+
+  /* 
+El hook personalizado nos ofrece estados y handlers:
+- scrolled: Si el usuario ha hecho scroll en la web, para cambiar el color del navegador
+- menuActive: Estado del menú principal que se despliega del navegador
+- handleMenuActive: Activar o desactivar el menú del navegador
+- storiesActive: Estado del menú de historias que se despliega del navegador
+- handleStoriesActive: Activar o desactivar el menú de historias del navegador
+*/
     const {scrolled, menuActive, handleMenuActive, storiesActive, handleStoriesActive}=useNavigator()
 
 
@@ -53,10 +52,11 @@ export  function Environement(){
 
         </section>
 
-    <Footer>
 
+ {/* Se cierra la sección con un Footer personalizado
+        Más información sobre el componente Footer en Utilities.jsx */}
+    <Footer/>
 
-    </Footer>
             {(menuActive || storiesActive) && <Menu handleMenuActive={handleMenuActive} handleStoriesActive ={handleStoriesActive} storiesActive={storiesActive} menuActive={menuActive}/>}
 
     </section>

@@ -2,18 +2,24 @@ import { useState, useEffect, useRef } from 'react'
 import {useParams, Link} from 'react-router-dom'
 
 
+import {Footer, Menu, Navigator} from './Utilities.jsx'
+
+import {sections} from '../data/esgSections.jsx'
 
 
-import {Footer} from './Home.jsx'
-import {Menu} from './Products.jsx'
-import {Navigator} from './Collections.jsx'
-import {sections} from './esgSections.jsx'
-
-
-import {useNavigator} from './useNavigator.js'
+import {useNavigator} from '../custom-hooks/useNavigator.js'
 
 export  function DetalleEnvironement(){
 
+
+    /* 
+El hook personalizado nos ofrece estados y handlers:
+- scrolled: Si el usuario ha hecho scroll en la web, para cambiar el color del navegador
+- menuActive: Estado del menú principal que se despliega del navegador
+- handleMenuActive: Activar o desactivar el menú del navegador
+- storiesActive: Estado del menú de historias que se despliega del navegador
+- handleStoriesActive: Activar o desactivar el menú de historias del navegador
+*/
     const {scrolled, menuActive, handleMenuActive, storiesActive, handleStoriesActive}=useNavigator()
 
     const params=useParams()
@@ -139,10 +145,11 @@ export  function DetalleEnvironement(){
             })}
             </div>
 
-    <Footer>
 
+ {/* Se cierra la sección con un Footer personalizado
+        Más información sobre el componente Footer en Utilities.jsx */}
+    <Footer/>
 
-    </Footer>
             {(menuActive || storiesActive) && <Menu handleMenuActive={handleMenuActive} handleStoriesActive ={handleStoriesActive} storiesActive={storiesActive} menuActive={menuActive}/>}
 
    

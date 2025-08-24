@@ -1,14 +1,10 @@
 import { useState, useEffect, useRef, useContext } from 'react'
 import {useParams, Link} from 'react-router-dom'
-import {useNavigator} from './useNavigator.js'
+import {useNavigator} from '../custom-hooks/useNavigator.js'
 
 import { ProductsContext } from './App.jsx'
-import {Menu} from './Products.jsx'
-import {Footer} from './Home.jsx'
-import {Navigator} from './Collections.jsx'
-import lavazza from './assets/home_img/lavazza-logo-white.png'
+import {Menu, Footer, Navigator} from './Utilities.jsx'
 
-import lavazza2 from './assets/home_img/lavazza-2-logo.png'
 
 
 export function Cart(){
@@ -17,6 +13,15 @@ export function Cart(){
     const useCart=useContext(ProductsContext)
 
     const {cart, addToCart, removeFromCart, totalPrice}=useCart()
+
+/* 
+El hook personalizado nos ofrece estados y handlers:
+- scrolled: Si el usuario ha hecho scroll en la web, para cambiar el color del navegador
+- menuActive: Estado del menú principal que se despliega del navegador
+- handleMenuActive: Activar o desactivar el menú del navegador
+- storiesActive: Estado del menú de historias que se despliega del navegador
+- handleStoriesActive: Activar o desactivar el menú de historias del navegador
+*/
     const {scrolled, menuActive, handleMenuActive, storiesActive, handleStoriesActive}=useNavigator()
 
     
@@ -42,14 +47,14 @@ export function Cart(){
                                 <p className="text-blue-950 lg:text-lg text-xs font-bold tracking-widest ">{pr.product.name}</p>
                                 <p className="text-blue-950 lg:text-lg text-xs font-extrabold">{pr.quantity}</p>
                                 <span className="w-full flex gap-2 sm:gap-5 justify-start items-center">
-                                <p className="text-blue-950 lg:text-lg text-xs w-20 font-semibold">{(pr.quantity*pr.product.price).toFixed(2)} €</p>
+                                <p className="text-blue-950 lg:text-lg text-lg w-20 font-semibold">{(pr.quantity*pr.product.price).toFixed(2)} €</p>
 
                                 <button onClick={()=>{
                                     removeFromCart(pr.product)
-                                }}  className="cursor-pointer rounded-full h-4 w-4 text-xs md:w-10 md:h-10 text-center  md:text-xl font-bold bg-stone-100 ">-</button>
+                                }}  className="cursor-pointer rounded-full h-10 w-10 text-lg md:w-10 md:h-10 text-center  md:text-xl font-bold bg-stone-100 ">-</button>
                                 <button onClick={()=>{
                                     addToCart(pr.product)
-                                }} className=" cursor-pointer rounded-full h-4 w-4 text-xs md:w-10 md:h-10 text-center md:text-xl font-bold bg-stone-100 ">+</button>
+                                }} className=" cursor-pointer rounded-full h-10 w-10 text-lg md:w-10 md:h-10 text-center md:text-xl font-bold bg-stone-100 ">+</button>
                                 </span>
                                 </div>
 
@@ -83,6 +88,9 @@ export function Cart(){
                 </div>
             {(menuActive || storiesActive) && <Menu handleMenuActive={handleMenuActive} handleStoriesActive ={handleStoriesActive} storiesActive={storiesActive} menuActive={menuActive}/>}
 
+
+ {/* Se cierra la sección con un Footer personalizado
+        Más información sobre el componente Footer en Utilities.jsx */}
     <Footer/>
     
     </>

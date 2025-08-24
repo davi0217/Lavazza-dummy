@@ -4,7 +4,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import {Home} from './Home.jsx'
 
 import {Products} from './Products.jsx'
-import {useCart} from './useCart.js'
+import {useCart} from '../custom-hooks/useCart.js'
 
 import {Collections} from './Collections.jsx'
 import {Detail} from './Detail.jsx'

@@ -1,13 +1,13 @@
-import licorcafe2 from './assets/recipes/licorcafe-2.jpg'
-import affogato2 from './assets/recipes/affogato-2.jpg'
-import tonic2 from './assets/recipes/tonic-2.jpg'
-import mediterraneofrio2 from './assets/recipes/mediterraneofrio-2.jpg'
-import arcanalatte2 from './assets/recipes/arcanalatte-2.jpg'
-import auroraarcana2 from './assets/recipes/auroraarcana-2.jpg'
-import frappe2 from './assets/recipes/frappe-2.jpg'
-import cafecitrico2 from './assets/recipes/cafecitrico-2.jpg'
-import caferia2 from './assets/recipes/caferia-2.jpg'
-import terranamoka2 from './assets/recipes/terranamoka-2.jpg'
+import licorcafe2 from '../assets/recipes/licorcafe-2.jpg'
+import affogato2 from '../assets/recipes/affogato-2.jpg'
+import tonic2 from '../assets/recipes/tonic-2.jpg'
+import mediterraneofrio2 from '../assets/recipes/mediterraneofrio-2.jpg'
+import arcanalatte2 from '../assets/recipes/arcanalatte-2.jpg'
+import auroraarcana2 from '../assets/recipes/auroraarcana-2.jpg'
+import frappe2 from '../assets/recipes/frappe-2.jpg'
+import cafecitrico2 from '../assets/recipes/cafecitrico-2.jpg'
+import caferia2 from '../assets/recipes/caferia-2.jpg'
+import terranamoka2 from '../assets/recipes/terranamoka-2.jpg'
 
 
 export const recipes = [
