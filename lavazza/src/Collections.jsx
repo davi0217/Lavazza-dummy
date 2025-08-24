@@ -36,7 +36,7 @@ export function Collections(){
     })[0].collection)
 
 
-    const {scrolled, menuActive, handleMenuActive}=useNavigator()
+    const {scrolled, menuActive, handleMenuActive,  storiesActive, handleStoriesActive}=useNavigator()
 
 console.log(scrolled)
    
@@ -53,7 +53,7 @@ console.log(scrolled)
     return <>
     
   
-            <Navigator transparent={true} scrolled={scrolled} handleMenu={handleMenuActive}>
+            <Navigator transparent={true} scrolled={scrolled} handleMenu={handleMenuActive} handleStories={handleStoriesActive}>
 
             </Navigator>
 
@@ -63,7 +63,7 @@ console.log(scrolled)
 {/*             <img className=" w-[1300px] h-full object-cover" src={backgroundCoffee1} alt="" />
  */}    </div>
     
-        {menuActive && <Menu handleMenuActive={handleMenuActive}/>}
+            {(menuActive || storiesActive) && <Menu handleMenuActive={handleMenuActive} handleStoriesActive ={handleStoriesActive} storiesActive={storiesActive} menuActive={menuActive}/>}
 
         <div className="w-full mt-20 h-110  text-white flex flex-col justify-center items-center">
             <p className="font-[Corinthia] z-10 text-3xl font-bold text-center w-2/3">Collection</p>
@@ -544,7 +544,7 @@ function CollectionSlider({collection}){
     </article>
 }
 
-export function Navigator({transparent, scrolled, handleMenu}){
+export function Navigator({transparent, scrolled, handleMenu, handleStories}){
 
     
 
@@ -570,19 +570,18 @@ export function Navigator({transparent, scrolled, handleMenu}){
                     }}>PRODUCTOS</a>
                 <a href=""className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`} onClick={(e)=>{
                         e.preventDefault()
-                        handleMenu(true)
+                        handleMenu(false)
+                        handleStories(true)
                     }}>TERRANA STORIES</a>
                 <a href=""className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`} onClick={(e)=>{
                         e.preventDefault()
+                        handleMenu(false)
                        
                 
                     }}><Link to="/esg">SOSTENIBILIDAD</Link></a>
                 <a href=""className={` hover:underline underline-offset-8 ${ scrolled?"decoration-blue-900":"decoration-white"} z-20`} onClick={(e)=>{
                         e.preventDefault()
-                       
-                  
-             
-                        handleMenu(true)
+                        handleMenu(false)
                     }}><Link to="/contact">CONTACTO</Link></a>
               </nav>
               <Link to="/cart"><i className={`fa-solid fa-cart-shopping z-30 flex-none basis-10 text-center text-2xl ${scrolled?"text-blue-900":"text-stone-50"} absolute right-40 top-[25px] lg:right-5  z-10`}></i></Link>

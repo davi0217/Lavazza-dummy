@@ -20,7 +20,7 @@ import {useNavigator} from './useNavigator.js'
 
 export  function Contact(){
 
-    const {scrolled, menuActive, handleMenuActive}=useNavigator()
+    const {scrolled, menuActive, handleMenuActive, storiesActive, handleStoriesActive}=useNavigator()
 
     return <section>
 
@@ -32,7 +32,9 @@ export  function Contact(){
                     </div>
 
 
-    <Navigator scrolled={scrolled} handleMenu={handleMenuActive} transparent={false}/>
+<Navigator transparent={false} scrolled={scrolled} handleMenu={handleMenuActive} handleStories={handleStoriesActive}>
+
+            </Navigator>
 
  
     
@@ -65,7 +67,7 @@ export  function Contact(){
 
 
     
-    {menuActive && <Menu handleMenuActive={handleMenuActive}/>}
+            {(menuActive || storiesActive) && <Menu handleMenuActive={handleMenuActive} handleStoriesActive ={handleStoriesActive} storiesActive={storiesActive} menuActive={menuActive}/>}
 
     </section>
 

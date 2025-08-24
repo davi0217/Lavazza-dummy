@@ -22,21 +22,20 @@ import {useNavigator} from './useNavigator.js'
 
 export  function Environement(){
 
-    const {scrolled, menuActive, handleMenuActive}=useNavigator()
+    const {scrolled, menuActive, handleMenuActive, storiesActive, handleStoriesActive}=useNavigator()
 
 
 
     return <section>
 
 
-    <Navigator scrolled={scrolled} handleMenu={handleMenuActive} transparent={true}>
+   <Navigator transparent={true} scrolled={scrolled} handleMenu={handleMenuActive} handleStories={handleStoriesActive}>
 
-    </Navigator>
+            </Navigator>
 
         <div className={`h-170 w-full z-0 absolute flex flex-col justify-center top-0 bg-stone-500 bg-blend-multiply bg-[url(./assets/backgrounds/nature1.jpg)] bg-size-[1070px] sm:bg-size-[1200px] md:bg-size-[1370px] bg-no-repeat bg-center`} >
         <h1 className="font-extrabold text-white w-full text-center px-2 text-5xl md:text-8xl tracking-wide mb-5 ">Raíces Responsables</h1>
         <h1 className="font-semibold text-white w-1/2 mx-auto text-center text-lg md:text-2xl  ">Descubre las iniciativas sociales, económicas y medioambientales de Terrana.</h1>
-        <button className="w-2/5 mx-auto mt-8 rounded-4xl border-white border-1 p-5 text-center text-white text-sm md:text-lg font-bold tracking-widest">DESCUBRE MÁS</button>
         </div>
 
         <section className="relative mt-140 flex flex-row flex-wrap  mb-30 justify-center pl-10 pr-10  md:justify-center gap-10  lg:justify-around w-full "> 
@@ -58,7 +57,7 @@ export  function Environement(){
 
 
     </Footer>
-    {menuActive && <Menu handleMenuActive={handleMenuActive}/>}
+            {(menuActive || storiesActive) && <Menu handleMenuActive={handleMenuActive} handleStoriesActive ={handleStoriesActive} storiesActive={storiesActive} menuActive={menuActive}/>}
 
     </section>
 

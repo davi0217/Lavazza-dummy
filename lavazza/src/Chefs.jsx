@@ -15,7 +15,7 @@ import {chefs} from './chefs.js'
 
 export  function Chefs(){
 
-    const {scrolled, menuActive, handleMenuActive}=useNavigator()
+    const {scrolled, menuActive, handleMenuActive,storiesActive, handleStoriesActive}=useNavigator()
 
   
 
@@ -23,9 +23,9 @@ export  function Chefs(){
     return <section>
 
 
-    <Navigator scrolled={scrolled} handleMenu={handleMenuActive} transparent={true}>
+  <Navigator transparent={true} scrolled={scrolled} handleMenu={handleMenuActive} handleStories={handleStoriesActive}>
 
-    </Navigator>
+            </Navigator>
 
         <div className={`h-170 w-full z-0 absolute flex flex-col justify-center top-0 bg-stone-500 bg-blend-multiply  bg-[url(./assets/chefs/chefs.jpg)] bg-size-[1070px] sm:bg-size-[1200px] md:bg-size-[1370px] bg-no-repeat bg-center`} >
         <h1 className="font-extrabold text-white w-full text-center px-2 text-5xl md:text-8xl tracking-wide mb-5 ">Bon appetit</h1>
@@ -52,7 +52,7 @@ export  function Chefs(){
 
 
     </Footer>
-    {menuActive && <Menu handleMenuActive={handleMenuActive}/>}
+            {(menuActive || storiesActive) && <Menu handleMenuActive={handleMenuActive} handleStoriesActive ={handleStoriesActive} storiesActive={storiesActive} menuActive={menuActive}/>}
 
     </section>
 

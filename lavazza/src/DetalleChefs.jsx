@@ -14,7 +14,7 @@ import {useNavigator} from './useNavigator.js'
 
 export  function DetalleChefs(){
 
-    const {scrolled, menuActive, handleMenuActive}=useNavigator()
+    const {scrolled, menuActive, handleMenuActive, storiesActive, handleStoriesActive}=useNavigator()
 
     const params=useParams()
 
@@ -29,9 +29,9 @@ export  function DetalleChefs(){
     return <section>
 
 
-    <Navigator scrolled={scrolled} handleMenu={handleMenuActive} transparent={true}>
+   <Navigator transparent={true} scrolled={scrolled} handleMenu={handleMenuActive} handleStories={handleStoriesActive}>
 
-    </Navigator>
+            </Navigator>
 
         <div className={`h-170 w-full z-0 absolute flex flex-col items-center justify-center top-0 bg-stone-500 bg-blend-multiply ${chefs[params.id-1].bgSettings} `} >
         <h1 className="font-extrabold text-white  px-8    text-center text-4xl  sm:text-6xl md:text-7xl tracking-wide mb-5 ">{chefs[params.id-1].name}</h1>
@@ -105,9 +105,9 @@ export  function DetalleChefs(){
 
 
     </Footer>
-    {menuActive && <Menu handleMenuActive={handleMenuActive}/>}
 
     </section>
+            {(menuActive || storiesActive) && <Menu handleMenuActive={handleMenuActive} handleStoriesActive ={handleStoriesActive} storiesActive={storiesActive} menuActive={menuActive}/>}
 
     </section>
 

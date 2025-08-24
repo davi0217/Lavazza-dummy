@@ -27,6 +27,7 @@ export function useNavigator(){
         },[])
     
          const [menuActive, setMenuActive]=useState(false)
+         const [storiesActive, setStoriesActive]=useState(false)
     
         useEffect(()=>{
     
@@ -35,7 +36,7 @@ export function useNavigator(){
             const disableScroll=function(){
                 window.scrollTo(x,y)
             }
-            if(menuActive){
+            if(menuActive || storiesActive){
     
     
             window.addEventListener("scroll", disableScroll)
@@ -44,18 +45,23 @@ export function useNavigator(){
     
             return ()=>window.removeEventListener("scroll", disableScroll)
     
-        },[menuActive])
+        },[menuActive, storiesActive])
     
         const handleMenuActive=function(state){
           setMenuActive(state)
         }
+        const handleStoriesActive=function(state){
+          setStoriesActive(state)
+        }
 
         useEffect(()=>{
+
+          handleStoriesActive(false)
         
           handleMenuActive(false)
           window.scrollTo(0,0)
         },[params])
 
 
-        return {scrolled, menuActive, handleMenuActive}
+        return {scrolled, menuActive, handleMenuActive, storiesActive, handleStoriesActive}
 }

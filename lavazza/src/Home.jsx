@@ -28,20 +28,21 @@ import { productsInfo } from './products-info.js'
 
 export  function Home() {
 
-   const {scrolled, menuActive, handleMenuActive } = useNavigator()
+   const {scrolled, menuActive, handleMenuActive, storiesActive, handleStoriesActive } = useNavigator()
 
   return <>
 
       <div className="absolute bg-[url('./assets/backgrounds/space-bg.jpg')] text-center bg-no-repeat w-full bg-size-[auto_800px] bg-right lg:bg-size-[auto_850px] lg:bg-center h-200">
 
-        <Navigator transparent={true} scrolled={scrolled} handleMenu={handleMenuActive}/>
-        
+<Navigator transparent={true} scrolled={scrolled} handleMenu={handleMenuActive} handleStories={handleStoriesActive}>
+
+            </Navigator>        
 
         <p className="text-white font-extrabold w-2xs text-4xl mt-40 mb-30 lg:text-7xl  text-center lg:w-3xl m-auto lg:mt-45">EL AROMA NOS CONECTA</p>
         <Link to="esg/4"><button className=" w-2xs font-semibold  lg:my-0 text-white tracking-widest border-1 p-3 rounded-4xl cursor-pointer m-auto text-center">Descubre la campaña</button></Link>
     </div>
 
-    {menuActive && <Menu handleMenuActive={handleMenuActive}/>}
+            {(menuActive || storiesActive) && <Menu handleMenuActive={handleMenuActive} handleStoriesActive ={handleStoriesActive} storiesActive={storiesActive} menuActive={menuActive}/>}
 <article className="absolute top-200">
     <section className={`flex flex-col w-full gap-15  pr-2 pl-2 pt-20 pb-15 h-auto `}>
 
@@ -361,7 +362,7 @@ function Collection(){
    <section className=" overflow-hidden w-full sm:p-5  h-auto pt-2">
 
           <p className="text-blue-950 font-light text-sm mb-3 ">*Terrana compensa las emisiones provocadas por estos productos para lograr un impacto cero en emisiones de CO₂. </p>
-          <article className="bg-stone-200  w-auto sm:gap-5 gap-5  divide-stone-50  divide-x-2 pt-10 pb-10 flex flex-row justify-center items-center">
+          <article className="bg-stone-200  w-auto sm:gap-5 gap-15  md:divide-stone-50  md:divide-x-2 pt-10 pb-10 flex flex-row justify-center items-center">
 
             <div className="flex flex-col h-65 sm:h-43  gap-2 min-w-20  w-1/5 ">
               <div className=" w-full min-h-22 sm:flex sm:gap-3 sm:min-h-15 sm:items-start  sm:w-8/9">
@@ -400,32 +401,31 @@ function Collection(){
 
         <div className="col-span-1 pr-8">
 <h1 className=" tracking-widest font-extrabold mb-4 text-sm">PRODUCTOS</h1>
-<p className="font-bold text-[14px] mb-3">Café</p>
-<p className="font-normal text-[12px] mb-2">Granos de café</p>
-<p className="font-normal text-[12px] mb-2">Café molido</p>
-<p className="font-normal text-[12px] mb-2">Cápsulas A Modo Mio</p>
-<p className="font-normal text-[12px] mb-2">Cápsulas Lavazza compatibles con las máquinas Nespresso*</p>
-<p className="font-normal text-[12px] mb-2">Original</p>
-<p className="font-normal text-[12px] mb-3">Nescafè® Dolce Gusto®</p>
+<p className="font-bold text-[14px]  mb-3"><Link to="/products/cafe">Café</Link></p>
+<p className="font-normal text-[12px] mb-2"><Link to="/products/grano">Granos de café</Link></p>
+<p className="font-normal text-[12px] mb-2"><Link to="/products/molido">Café molido</Link></p>
+<p className="font-normal text-[12px] mb-2"><Link to="/products/capsula">Cápsulas</Link></p>
+
 <p className="font-bold text-[14px] mb-3">Máquinas de café</p>
 
         </div>
         <div className="col-span-1 ">
 <h1 className=" tracking-widest font-extrabold mb-4  text-sm">TERRANA STORIES</h1>
-<h1 className=" tracking-widest font-extrabold mb-4 text-sm">SOSTENIBILIDAD</h1>
-<h1 className=" tracking-widest font-extrabold text-sm">TERRANA WORLD</h1>
+<h1 className=" tracking-widest font-extrabold mb-4 text-sm"><Link to="/esg">SOSTENIBILIDAD</Link></h1>
+<h1 className=" tracking-widest font-extrabold text-sm"><Link to="/chefs">BON APPETIT</Link></h1>
+<h1 className=" tracking-widest font-extrabold text-sm"><Link to="/recetas">A TU MODO</Link></h1>
 
         </div>
         <div className="col-span-1 pr-8">
 <h1 className=" tracking-widest font-extrabold mb-4 text-sm">AYUDA</h1>
-<h1 className=" tracking-widest font-extrabold mb-4 text-[12px]">PREGUNTAS FRECUENTES</h1>
-<h1 className=" tracking-widest font-extrabold text-[12px]">Contacto</h1>
+<h1 className=" tracking-widest font-extrabold mb-4 text-[12px]"><Link to="/contact">PREGUNTAS FRECUENTES</Link></h1>
+<h1 className=" tracking-widest font-extrabold text-[12px]"><Link to="/contact">Contacto</Link></h1>
 
         </div>
         <div className="col-span-1 pr-8">
 <h1 className=" tracking-widest font-extrabold mb-4 text-sm">NOTAS LEGALES</h1>
 <h1 className=" tracking-widest font-extrabold mb-4 text-[12px]">Condiciones legales</h1>
-<h1 className=" tracking-widest font-extrabold text-[12px]">Bases legales y política privacidad sorteo entradas MMO</h1>
+<h1 className=" tracking-widest font-extrabold text-[12px]">Bases legales y política privacidad</h1>
 
         </div>
         <div>
@@ -493,12 +493,10 @@ function Collection(){
 
         <div className={` ${visible.productos?" ":"hidden"} cursor-pointer transition-all ease-in text-white text-[12px] font-normal`}>
 
-          <p className="mb-2 font-bold">Café</p>
-          <p className="mb-3">Granos de café</p>
-          <p className="mb-3">Café molido</p>
-          <p className="mb-3">Cápsulas A Modo Mio</p>
-          <p className="mb-3">Cápsulas Lavazza compatibles con las máquinas Nespresso* Original</p>
-          <p className="mb-3">Nescafè® Dolce Gusto® cápsulas compatibles**</p>
+          <p className="mb-2 font-bold"><Link to="/products/cafe">Café</Link></p>
+          <p className="mb-3"><Link to="/products/grano">Granos de café</Link></p>
+          <p className="mb-3"><Link to="/products/molido">Café molido</Link></p>
+          <p className="mb-3"><Link to="/products/capsula">Cápsulas</Link></p>
           <p className="font-bold mb-3">Máquinas de Café</p>
 
 
@@ -507,15 +505,9 @@ function Collection(){
 
 
           <div className="w-full flex justify-between h-12 items-center ">
-        <h1 className='text-white text-sm  tracking-widest font-bold'>TERRANA STORIES</h1>
+        <h1 className='text-white text-sm  tracking-widest font-bold'><Link to="/esg">TERRANA STORIES</Link></h1>
           </div>  
-          <div className="w-full flex justify-between h-12 items-center ">
-        <h1 className='text-white text-sm  tracking-widest font-bold'>SOSTENIBILIDAD</h1>
-          </div>  
-          <div className="w-full flex justify-between h-12 items-center ">
-        <h1 className='text-white text-sm  tracking-widest font-bold'>TERRANA WORLD</h1>
-
-          </div>  
+          
        <div className="text-white">
           <div className="w-full flex justify-between h-12 items-center ">
         <h1 className='text-white w-full text-sm  tracking-widest font-bold'>AYUDA</h1>
@@ -525,8 +517,8 @@ function Collection(){
         }}></i>
          </div>
          <div className={` ${visible.ayuda?"":"hidden"} transition-all duration-75 ease-in-out`}>
-          <p className="w-full text-xs font-bold mb-3">PREGUNTAS FRECUENTES</p>
-          <p className=" text-[11px] mb-3">Contacto</p>
+          <p className="w-full text-xs font-bold mb-3"><Link to="/contact">PREGUNTAS FRECUENTES</Link></p>
+          <p className=" text-[11px] mb-3"><Link to="/contact">Contacto</Link></p>
          </div>
           </div>  
        <div className="text-white">
@@ -539,7 +531,7 @@ function Collection(){
          </div>
          <div className={` ${visible.notasLegales?"":"hidden"} transition-all duration-75 ease-in-out`}>
           <p className="w-full text-xs font-bold mb-3">Condiciones de uso</p>
-          <p className=" text-[11px] font-bold mb-3">Bases Legales y Política Privacidad Sorteo Entradas MMO</p>
+          <p className=" text-[11px] font-bold mb-3">Bases Legales y Política Privacidad</p>
          </div>
           </div>   
       </div>

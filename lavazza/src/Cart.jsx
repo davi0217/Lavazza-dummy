@@ -17,17 +17,17 @@ export function Cart(){
     const useCart=useContext(ProductsContext)
 
     const {cart, addToCart, removeFromCart, totalPrice}=useCart()
-    const {scrolled, menuActive, handleMenuActive}=useNavigator()
+    const {scrolled, menuActive, handleMenuActive, storiesActive, handleStoriesActive}=useNavigator()
 
     
 
 
     return <>
 
-                <Navigator scrolled={scrolled} transparent={false} handleMenu={handleMenuActive}/>
+                <Navigator scrolled={scrolled} transparent={false} handleMenu={handleMenuActive} handleStories={handleStoriesActive}/>
 
                 <div className="h-30 w-full border-b-2 border-b-blue-950 border pb-4 items-center text-blue-950 pl-10 mt-20 flex justify-center sm:justify-start">
-                    <h1 className="text-6xl font-extrabold tracking-widest ">Your cart</h1>
+                    <h1 className="text-6xl font-extrabold tracking-widest ">Tu carrito</h1>
                 </div>
 
                 <div className="w-full mb-30  flex sm:flex-row flex-col items-center md:items-start   sm:justify-start   text-blue-950">
@@ -61,7 +61,7 @@ export function Cart(){
 
                     <div className="w-4/5 sm:w-2/5 pt-5 pb-5 bg-stone-100 flex flex-col  items-end">
 
-                    <h1 className="w-full mb-5 text-right pr-5 text-blue-950 font-extrabold text-sm tracking-widest ">YOUR TOTAL</h1>
+                    <h1 className="w-full mb-5 text-right pr-5 text-blue-950 font-extrabold text-sm tracking-widest ">Tu ticket</h1>
                     {cart && cart.map((pr)=>{
                             return <div className="mb-4 w-full pr-5 pb-5 ">
 
@@ -81,7 +81,7 @@ export function Cart(){
 
 
                 </div>
-    {menuActive && <Menu handleMenuActive={handleMenuActive}/>}
+            {(menuActive || storiesActive) && <Menu handleMenuActive={handleMenuActive} handleStoriesActive ={handleStoriesActive} storiesActive={storiesActive} menuActive={menuActive}/>}
 
     <Footer/>
     

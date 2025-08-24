@@ -65,7 +65,7 @@ export function Detail(){
         }
     )
 
-    const {scrolled, menuActive, handleMenuActive}=useNavigator()
+    const {scrolled, menuActive, handleMenuActive, storiesActive, handleStoriesActive}=useNavigator()
 
     useEffect(()=>{
 
@@ -170,8 +170,9 @@ export function Detail(){
 
 
         return <>
-         <Navigator transparent={false} scrolled={scrolled} handleMenu={handleMenuActive}/>
-                
+<Navigator transparent={true} scrolled={scrolled} handleMenu={handleMenuActive} handleStories={handleStoriesActive}>
+
+            </Navigator>                
         <div className="hidden  lg:flex lg:h-200 lg:w-full z-0 absolute top-0 bg-stone-500 bg-blend-multiply bg-[url(./assets/home_img/background-coffee-1.jpg)] bg-size-[1070px] sm:bg-size-[1100px] md:bg-size-[1370px] bg-no-repeat bg-center" >
         
         {/*             <img className=" w-[1300px] h-full object-cover" src={backgroundCoffee1} alt="" />
@@ -457,7 +458,7 @@ export function Detail(){
      <Footer/>
 
             
-                {menuActive && <Menu handleMenuActive={handleMenuActive}/>}
+            {(menuActive || storiesActive) && <Menu handleMenuActive={handleMenuActive} handleStoriesActive ={handleStoriesActive} storiesActive={storiesActive} menuActive={menuActive}/>}
         </>
 
 }

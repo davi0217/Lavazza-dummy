@@ -30,7 +30,7 @@ export function Products(){
     const useCart=useContext(ProductsContext)
 
    const {cart, addToCart, removeFromCart}=useCart()
-   const {scrolled, menuActive, handleMenuActive}=useNavigator()
+   const {scrolled, menuActive, handleMenuActive, storiesActive, handleStoriesActive}=useNavigator()
 
     useEffect(()=>{
         Object.keys(productsDisplay).forEach((d)=>{
@@ -94,14 +94,15 @@ export function Products(){
             <div className="absolute  top-20 w-full z-0 ">
                 
                <img className=" hidden z-0  sm:flex brightness-150  w-full object-cover h-80 md:h-80 lg:h-80 " src={productsHeader} alt="" /> 
-           <img className="sm:hidden z-0 brightness-150 opacity-80  w-full object-cover h-80 md:h-80 lg:h-80 " src={productsHeader2} alt="" />
+           <img className="sm:hidden z-0 brightness-150 opacity-20  w-full object-cover h-80 md:h-80 lg:h-80 " src={productsHeader2} alt="" />
                 
             </div>
            
   
-           <Navigator transparent={false} scrolled={scrolled} handleMenu={handleMenuActive}/>
+<Navigator transparent={false} scrolled={scrolled} handleMenu={handleMenuActive} handleStories={handleStoriesActive}>
 
-            {menuActive && <Menu handleMenuActive={handleMenuActive}/>}
+            </Navigator>
+            {(menuActive || storiesActive) && <Menu handleMenuActive={handleMenuActive} handleStoriesActive ={handleStoriesActive} storiesActive={storiesActive} menuActive={menuActive}/>}
 
            
     
@@ -186,7 +187,7 @@ export function Products(){
  }
 
 
- export function Menu({handleMenuActive}){
+ export function Menu({handleMenuActive, handleStoriesActive, storiesActive, menuActive}){
 
     const [positions, setPositions]=useState(
         [
@@ -258,7 +259,7 @@ export function Products(){
     }
 
     return <section>
-<div className="fixed py-5 px-5  top-20 h-120 w-full bg-blue-950 opacity-97 z-[30]">
+ { menuActive && <div className="fixed py-5 px-5  top-20 h-120 w-full bg-blue-950 opacity-97 z-[30]">
               <div className={`flex fixed text-white bg-blue-950 transition-colors ease-in flex-nowrap w-full items-center h-20 z-[30] top-0 pt-5 left-0`}>
               
                            <div className={`left-5  absolute h-auto`}>
@@ -268,8 +269,17 @@ export function Products(){
                           </div>
                       
                         <nav className="hidden  text-sm font-bold  lg:flex gap-8 tracking-widest  md:flex-none absolute left-0 right-0 justify-center z-11">
-                          <a href="" className={` hover:underline underline-offset-8 decoration-white z-20`}>PRODUCTOS</a>
-                          <a href=""className={` hover:underline underline-offset-8 decoration-white z-20`}>TERRANA STORIES</a>
+                          <a onClick={
+                            (e)=>{e.preventDefault()
+                            handleMenuActive(false)
+                        }
+                            }  className={` hover:underline underline-offset-8 decoration-white z-20`}>PRODUCTOS</a>
+                          <a onClick={
+                            (e)=>{e.preventDefault()
+                                handleMenuActive(false)
+                            handleStoriesActive(true)
+                        }
+                            } href=""className={` hover:underline underline-offset-8 decoration-white z-20`}>TERRANA STORIES</a>
                           <a onClick={(e)=>{
                             e.preventDefault()
                           }} href=""className={` hover:underline underline-offset-8 decoration-white z-20`}><Link to="/esg">SOSTENIBILIDAD</Link></a>
@@ -277,7 +287,7 @@ export function Products(){
                             e.preventDefault()
                           }} href=""className={` hover:underline underline-offset-8 decoration-white z-20`}><Link to="/contact">CONTACTO</Link></a>
                         </nav>
-                        <Link to="/cart"><i className={`fa-solid fa-cart-shopping flex-none basis-10 text-center text-2xl text-stone-50 absolute right-40 lg:right-5  z-10`}></i></Link>
+                        <Link to="/cart"><i className={`fa-solid fa-cart-shopping flex-none  text-center text-2xl text-stone-50 absolute right-40 top-10 lg:right-5  z-10`}></i></Link>
                         <i className={`fa-solid fa-bars-staggered flex text-stone-50 absolute right-12 lg:!hidden`}></i>
                       </div>
               
@@ -329,8 +339,171 @@ export function Products(){
                             moveBlock("left","stories")
                             moveBlock("left","general")
                         }}>TERRANA STORIES</p>
-                        <p className="w-full tracking-wide ">SOSTENIBILIDAD</p>
-                        <p className="w-full tracking-wide ">CONTACTO</p>
+                       <p className="w-full tracking-wide cursor-pointer "><Link to="/esg">SOSTENIBILIDAD</Link></p>
+                        <p className="w-full tracking-wide cursor-pointer "><Link to="/contact">CONTACTO</Link></p>
+                    </div>
+                    <div className={`absolute ${givePosition(positions[1].position)} top-0 left-0 transition-transform duration-500 ease-in-out py-5 px-5 flex flex-col gap-5 text-2xl  w-full border-white justify-center items-center text-white font-extrabold `}>
+                        <p className="w-full cursor-pointer text-sm tracking-wide " onClick={()=>{
+                            moveBlock("right","general")
+                            moveBlock("right","products")
+                        }}>&lt;  BACK</p>
+                        <p className="w-full text-md font-extrabold tracking-wide ">PRODUCTOS</p>
+                        <p className="w-full cursor-pointer text-sm tracking-wide " onClick={()=>{
+                            moveBlock("left","products")
+                            moveBlock("left","cafe")
+                        }}>Café</p>
+                        <p className="w-full cursor-pointer border-b-2 border-white pb-5 text-sm tracking-wide " onClick={()=>{
+                            moveBlock("left","products")
+                            moveBlock("left","maquinas")
+                        }}>Máquinas de café</p>
+                        <p className="w-full cursor-pointer text-sm tracking-wide " onClick={()=>{
+                            moveBlock("left","products")
+                            moveBlock("left","collections")
+                        }}>Collections</p>
+                    </div>
+                    <div className={`absolute ${givePosition(positions[2].position)} top-0 left-0 transition-transform duration-500 ease-in-out py-5 px-5 flex flex-col gap-5 text-2xl  w-full border-white justify-center items-center text-white font-extrabold `}>
+                        <p className="w-full cursor-pointer text-sm tracking-wide " onClick={()=>{
+                            moveBlock("right","cafe")
+                            moveBlock("right","products")
+                        }}>&lt;  PRODUCTOS</p>
+                        <p className="w-full text-[20px] font-extrabold cursor-pointer tracking-wide "><Link to="/products/cafe">Café</Link></p>
+                        <p className="w-full text-sm cursor-pointer tracking-wide "><Link to="/products/grano">Granos</Link></p>
+                        <p className="w-full text-sm cursor-pointer tracking-wide "><Link to="/products/molido">Café molido</Link></p>
+                        <p className="w-full  text-sm cursor-pointer tracking-wide "><Link to="/products/capsula">Cápsulas</Link></p>
+
+                        <p className="w-full text-stone-500 text-sm tracking-wide ">A Modo Mio</p>
+                        <p className="w-full text-stone-500 text-sm tracking-wide ">Cápsulas compatibles con máquinas</p>
+                    </div>
+                    <div className={`absolute ${givePosition(positions[3].position)} top-0 left-0 transition-transform duration-500 ease-in-out py-5 px-5 flex flex-col gap-5 text-2xl  w-full border-white justify-center items-center text-white font-extrabold `}>
+                        <p className="w-full cursor-pointer text-sm tracking-wide " onClick={()=>{
+                            moveBlock("right","maquinas")
+                            moveBlock("right","products")
+                        }}>&lt;  PRODUCTOS</p>
+                        <p className="w-full text-[20px] font-extrabold tracking-wide ">Máquinas de café</p>
+                        <p className="w-full text-sm tracking-wide ">Máquinas de café</p>
+                    </div>
+                    <div className={`absolute ${givePosition(positions[4].position)} top-0 left-0 transition-transform duration-500 ease-in-out py-5 px-5 flex flex-col gap-5 text-2xl  w-full border-white justify-center items-center text-white font-extrabold `}>
+                        <p className="w-full cursor-pointer text-sm tracking-wide " onClick={()=>{
+                            moveBlock("right","collections")
+                            moveBlock("right","products")
+                        }}>&lt;  PRODUCTOS</p>
+                        <p className="w-full text-[20px] font-extrabold tracking-wide ">Collections</p>
+                        <p className="w-full text-sm tracking-wide "><Link to="/collections/1">Atlántica</Link></p>
+                        <p className="w-full text-sm tracking-wide "><Link to="/collections/2">Mediterránea</Link></p>
+                        <p className="w-full text-sm tracking-wide "><Link to="/collections/3">Arcana</Link></p>
+                    </div>
+                    <div className={`absolute ${givePosition(positions[5].position)} top-0 left-0 transition-transform duration-500 ease-in-out py-5 px-5 flex flex-col gap-5 text-2xl  w-full border-white justify-center items-center text-white font-extrabold `}>
+                        <p className="w-full cursor-pointer text-sm tracking-wide " onClick={()=>{
+                            moveBlock("right","stories")
+                            moveBlock("right","general")
+                        }}>&lt;  BACK</p>
+                        <p className="w-full text-[30px] mb-8  font-extrabold tracking-wide ">TERRANA STORIES</p>
+                        <p className="w-full text-sm pl-3 mb-4 tracking-wide "><Link to="/esg">Raíces Responsables: Sostenibilidad</Link></p>
+                        <p className="w-full text-sm pl-3 mb-4 tracking-wide "><Link to="/recetas">Café a tu modo</Link></p>
+                        <p className="w-full text-sm pl-3 mb-4 tracking-wide "><Link to="/chefs">Bon appetit</Link></p>
+                        <p className="w-full text-sm pl-3 mb-4 tracking-wide "><Link to="esg/1">Álbum Lavazza</Link></p>
+                    </div>
+
+                </div>
+
+
+
+
+
+               </div>
+              
+                
+                
+            </div>}
+
+    {storiesActive && <div className="fixed py-5 px-5  top-20 h-120 w-full bg-blue-950 opacity-97 z-[30]">
+              <div className={`flex fixed text-white bg-blue-950 transition-colors ease-in flex-nowrap w-full items-center h-20 z-[30] top-0 pt-5 left-0 `}>
+              
+                           <div className={`left-5  absolute h-auto`}>
+                          <Link to="/"><img className=" w-30 h-12 object-cover relative cursor-pointer sm:min-w-50 sm:max-w-50  z-30  " src={terranaWhite} alt="" /></Link>
+                            <p className={`mt-1 text-[7px] text-white text-center font-bold sm:text-xs`}>VIGO. SPAGNA. 2001</p>
+
+                          </div>
+                      
+                        <nav className="hidden  text-sm font-bold  lg:flex gap-8 tracking-widest  md:flex-none absolute left-0 right-0 justify-center z-11">
+                          <a onClick={(e)=>{
+                            e.preventDefault()
+                            handleStoriesActive(false)
+                            handleMenuActive(true)
+                          }} href="" className={` hover:underline underline-offset-8 decoration-white z-20`}>PRODUCTOS</a>
+                          <a onClick={(e)=>{
+                            e.preventDefault()
+                            handleMenuActive(false)
+                            handleStoriesActive(false)
+                          }} href=""className={` hover:underline underline-offset-8 decoration-white z-20`}>TERRANA STORIES</a>
+                          <a onClick={(e)=>{
+                            e.preventDefault()
+                          }} href=""className={` hover:underline underline-offset-8 decoration-white z-20`}><Link to="/esg">SOSTENIBILIDAD</Link></a>
+                          <a onClick={(e)=>{
+                            e.preventDefault()
+                          }} href=""className={` hover:underline underline-offset-8 decoration-white z-20`}><Link to="/contact">CONTACTO</Link></a>
+                        </nav>
+                        <Link to="/cart"><i className={`fa-solid fa-cart-shopping flex-none top-10 text-center text-2xl text-stone-50 absolute right-40 lg:right-5  z-10`}></i></Link>
+                        <i className={`fa-solid fa-bars-staggered flex text-stone-50 absolute cursor-pointer right-12 lg:!hidden`}></i>
+                      </div>
+              
+
+
+                <div className="flex h-15 justify-end">
+                    <i class="fa-solid fa-xmark text-white cursor-pointer text-5xl" onClick={()=>{
+                    handleMenuActive(false)
+                    handleStoriesActive(false)
+                }}></i>
+
+                </div>
+
+                <div className=" hidden lg:flex gap-10 ">
+
+                <div className=" w-1/3 rounded-xl bg-stone-400 opacity-80 text-blue-950 text-lg  p-10">
+                    <h2 className="font-bold cursor-pointer mb-10 tracking-wide"><Link to="/esg">RAÍCES RESPONSABLES</Link></h2>
+                    <h2 className="font-bold cursor-pointer mb-10 tracking-wide"><Link to="/chefs">BON APPETIT</Link></h2>
+                    <h2 className="font-bold cursor-pointer mb-10 tracking-wide"><Link to="/recetas"> CAFÉ A TU MODO</Link></h2>
+                    <h2 className="font-bold cursor-pointer mb-10 tracking-wide"><Link to="/esg/1">ÁLBUM 2025</Link></h2>
+
+                </div>
+
+                <div className="w-3/5  gap-5 flex flex-wrap  justify-center items-center">
+
+                    <div className="w-60 h-40 text-white p-5 rounded-md flex flex-col gap-5 justify-end items-end bg-stone-500 bg-blend-multiply bg-[url(./assets/backgrounds/nature1.jpg)] bg-size-[500px] bg-center">
+                    <h3 className="font-[Corinthia] text-3xl font-bold ">Raíces Responsables</h3>
+                    <h3 className="font-extrabold text-sm tracking-widest hover:underline cursor-pointer"><Link to="/esg">DESCUBRE MÁS</Link></h3>
+                    </div>
+                    <div className="w-60 h-40 text-white p-5 rounded-md flex flex-col gap-5 justify-end items-end bg-stone-500 bg-blend-multiply bg-[url(./assets/chefs/chefs.jpg)] bg-size-[500px] bg-center">
+                    <h3 className="font-[Corinthia] text-3xl font-bold ">Bon appetit</h3>
+                    <h3 className="font-extrabold text-sm tracking-widest hover:underline cursor-pointer"><Link to="/chefs">DESCUBRE MÁS</Link></h3>
+                    </div>
+                    <div className="w-60 h-40 text-white p-5 rounded-md flex flex-col gap-5 justify-end items-end bg-stone-500 bg-blend-multiply bg-[url(./assets/backgrounds/coffee-maker.jpg)] bg-size-[500px] bg-center">
+                    <h3 className="font-[Corinthia] text-3xl font-bold ">A tu modo</h3>
+                    <h3 className="font-extrabold text-sm tracking-widest hover:underline cursor-pointer"><Link to="/recetas">DESCUBRE MÁS</Link></h3>
+                    </div>
+                    <div className="w-60 h-40 text-white p-5 rounded-md flex flex-col gap-5 justify-end items-end bg-stone-500 bg-blend-multiply bg-[url(./assets/esg/album.jpg)] bg-size-[500px] bg-center">
+                    <h3 className="font-[Corinthia] text-3xl font-bold ">Álbum 2025</h3>
+                    <h3 className="font-extrabold text-sm tracking-widest hover:underline cursor-pointer"><Link to="/esg/1">DESCUBRE MÁS</Link></h3>
+                    </div>
+
+
+                </div >
+                </div>
+
+                <div className="lg:hidden flex overflow-hidden  w-full">
+
+                <div className="relative w-full h-85 overflow-y-scroll  overflow-x-hidden">
+                    <div className={`absolute ${givePosition(positions[0].position)} top-0 left-0 transition-transform duration-500 ease-in-out py-5 px-5 flex flex-col gap-6 text-2xl border-b-2 w-full border-white justify-center items-center text-white font-extrabold `}>
+                        <p className="w-full cursor-pointer tracking-wide " onClick={()=>{
+                            moveBlock("left","general")
+                            moveBlock("left","products")
+                        }}>PRODUCTOS</p>
+                        <p className="w-full cursor-pointer tracking-wide " onClick={()=>{
+                            moveBlock("left","stories")
+                            moveBlock("left","general")
+                        }}>TERRANA STORIES</p>
+                        <p className="w-full tracking-wide cursor-pointer "><Link to="/esg">SOSTENIBILIDAD</Link></p>
+                        <p className="w-full tracking-wide cursor-pointer "><Link to="/contact">DESCUBRE MÁS</Link></p>
                     </div>
                     <div className={`absolute ${givePosition(positions[1].position)} top-0 left-0 transition-transform duration-500 ease-in-out py-5 px-5 flex flex-col gap-5 text-2xl  w-full border-white justify-center items-center text-white font-extrabold `}>
                         <p className="w-full cursor-pointer text-sm tracking-wide " onClick={()=>{
@@ -401,10 +574,9 @@ export function Products(){
 
 
                </div>
-              
-                
-                
-            </div>
+               
+          
+            </div>}
 
     </section>
  }

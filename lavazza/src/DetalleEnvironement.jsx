@@ -14,7 +14,7 @@ import {useNavigator} from './useNavigator.js'
 
 export  function DetalleEnvironement(){
 
-    const {scrolled, menuActive, handleMenuActive}=useNavigator()
+    const {scrolled, menuActive, handleMenuActive, storiesActive, handleStoriesActive}=useNavigator()
 
     const params=useParams()
 
@@ -29,9 +29,9 @@ export  function DetalleEnvironement(){
     return <section>
 
 
-    <Navigator scrolled={scrolled} handleMenu={handleMenuActive} transparent={true}>
+    <Navigator transparent={true} scrolled={scrolled} handleMenu={handleMenuActive} handleStories={handleStoriesActive}>
 
-    </Navigator>
+            </Navigator>
 
         <div className={`h-170 w-full z-0 absolute flex flex-col items-center justify-center top-0 bg-stone-500 bg-blend-multiply ${sections[params.id-1].bgSettings} `} >
         <h1 className="font-extrabold text-white  px-8    text-center text-4xl  sm:text-6xl md:text-7xl tracking-wide mb-5 ">{sections[params.id-1].title}</h1>
@@ -63,7 +63,7 @@ export  function DetalleEnvironement(){
         </div>  
 
         <div className=" w-8/10 m-auto   md:grid md:grid-cols-4  divide-x-blue-950 divide-x-2 mb-15 border-x-2 border-x-blue-950">
-            <div className="col-span-1 flex flex-col h-40 md:h-70 sm:h-50">
+            <div className="col-span-1 flex flex-col  md:h-70 h-50">
                 <div className="w-full  flex justify-center h-15 sm:h-20 bg-blue-950 items-center">
                     <i class="fa-solid fa-pen text-white text-lg"></i>
                 </div>
@@ -71,7 +71,7 @@ export  function DetalleEnvironement(){
                     <p className="text-lg text-center font-semibold">{sections[params.id-1].author}</p>
                 </div>
             </div>
-            <div className="col-span-1 flex flex-col h-40 md:h-70 sm:h-50">
+            <div className="col-span-1 flex flex-col  md:h-70 h-50">
                 <div className="w-full  flex justify-center h-15 sm:h-20 bg-blue-950 items-center">
                     <i class="fa-solid fa-globe text-white text-lg"></i>
                 </div>
@@ -79,7 +79,7 @@ export  function DetalleEnvironement(){
                     <p className="text-lg text-center font-semibold">{sections[params.id-1].ods}</p>
                 </div>
             </div>
-            <div className="col-span-2 flex flex-col h-40 md:h-70 sm:h-50">
+            <div className="col-span-2 flex flex-col  md:h-70 h-50">
                 <div className="w-full flex justify-center h-15 sm:h-20 bg-blue-950 items-center">
                     <i class="fa-solid fa-comment text-white text-lg"></i>
                 </div>
@@ -89,7 +89,7 @@ export  function DetalleEnvironement(){
             </div>
         </div>
 
-        {sections[params.id-1].video && <div className="w-full mb-15 bg-red-500 m-auto text-center h-100 object-cover">
+        {sections[params.id-1].video && <div className="w-full mb-15 m-auto text-center h-100 object-cover">
             {sections[params.id-1].video}
             </div>}
 
@@ -143,7 +143,7 @@ export  function DetalleEnvironement(){
 
 
     </Footer>
-    {menuActive && <Menu handleMenuActive={handleMenuActive}/>}
+            {(menuActive || storiesActive) && <Menu handleMenuActive={handleMenuActive} handleStoriesActive ={handleStoriesActive} storiesActive={storiesActive} menuActive={menuActive}/>}
 
    
 
