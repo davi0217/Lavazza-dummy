@@ -32,7 +32,7 @@ El hook personalizado nos ofrece estados y handlers:
                 <Navigator scrolled={scrolled} transparent={false} handleMenu={handleMenuActive} handleStories={handleStoriesActive}/>
 
                 <div className="h-30 w-full border-b-2 border-b-blue-950 border pb-4 items-center text-blue-950 pl-10 mt-20 flex justify-center sm:justify-start">
-                    <h1 className="text-6xl font-extrabold tracking-widest ">Tu carrito</h1>
+                    <h1 className="text-6xl font-extrabold text-left tracking-widest ">Tu carrito</h1>
                 </div>
 
                 <div className="w-full mb-30  flex sm:flex-row flex-col items-center md:items-start   sm:justify-start   text-blue-950">
